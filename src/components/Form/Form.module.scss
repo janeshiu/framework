@@ -1,10 +1,46 @@
 .wrapper {
 	&-- {
 		&row {
-			@apply flex p-4 items-start;
+			@apply relative flex p-4 items-start;
+
+			input {
+				@apply mx-2 w-[calc(100%-1rem)];
+			}
+
+			small {
+				@apply mx-2;
+			}
 		}
 		&column {
-			@apply flex p-4 flex-col;
+			@apply relative flex p-4 flex-col;
+		}
+
+		&icon-left {
+			input {
+				@apply pl-9;
+			}
+
+			label {
+				@apply absolute w-5 h-5 top-1/2 -translate-y-1/2 left-0 ml-6;
+			}
+
+			span {
+				@apply top-0 translate-y-0 ml-0;
+			}
+		}
+
+		&icon-right {
+			input {
+				@apply pr-9;
+			}
+
+			label {
+				@apply absolute w-5 h-5 top-1/2 -translate-y-1/2 right-0 mr-6;
+			}
+
+			span {
+				@apply top-0 translate-y-0 mr-0;
+			}
 		}
 	}
 }
@@ -12,13 +48,36 @@
 .label {
 	&-- {
 		&row {
-			@apply pr-2;
+			@apply flex;
+		}
+
+		&column {
+			@apply flex flex-col;
+		}
+	}
+}
+
+.icon {
+	@apply absolute top-1/2 -translate-y-1/2;
+
+	&-- {
+		&left {
+			@apply ml-2;
+			+ input {
+				@apply pl-9;
+			}
+		}
+		&right {
+			@apply right-0 mr-2;
+			+ input {
+				@apply pr-9;
+			}
 		}
 	}
 }
 
 .message {
-	@apply pl-2 py-1;
+	@apply pl-2 py-0.5 leading-normal;
 	&-- {
 		&success {
 			@apply text-success;
