@@ -75,20 +75,3 @@
 		}
 	}
 }
-
-.message {
-	@apply pl-2 py-0.5 leading-normal;
-	&-- {
-		&success {
-			@apply text-success;
-		}
-
-		&error {
-			@apply text-error;
-		}
-
-		&helper {
-			@apply text-helper;
-		}
-	}
-}
