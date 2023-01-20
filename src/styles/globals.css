@@ -112,5 +112,11 @@ a {
 }
 
 input {
-	@apply border;
+	@apply border h-8 px-2 w-full focus:outline outline-1 outline-secondary;
+
+	/* @apply read-only:outline-0; */
+}
+
+label {
+	@apply leading-8;
 }

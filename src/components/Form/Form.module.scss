@@ -1,0 +1,35 @@
+.wrapper {
+	&-- {
+		&row {
+			@apply flex p-4 items-start;
+		}
+		&column {
+			@apply flex p-4 flex-col;
+		}
+	}
+}
+
+.label {
+	&-- {
+		&row {
+			@apply pr-2;
+		}
+	}
+}
+
+.message {
+	@apply pl-2 py-1;
+	&-- {
+		&success {
+			@apply text-success;
+		}
+
+		&error {
+			@apply text-error;
+		}
+
+		&helper {
+			@apply text-helper;
+		}
+	}
+}
