@@ -1,0 +1,92 @@
+.button {
+	@apply flex items-center justify-center space-x-2 px-5 py-2 min-w-[6rem] w-auto h-10;
+	@apply border-2 border-transparent transition-all;
+
+	svg {
+		@apply inline-block;
+	}
+
+	div {
+		@apply space-x-2;
+	}
+
+	&-- {
+		// pattern
+		&primary {
+			@apply bg-primary text-white;
+			@apply hover:bg-secondary;
+		}
+
+		&secondary {
+			@apply bg-tertiary text-white;
+			@apply hover:bg-quaternary hover:text-primary;
+		}
+
+		&outline {
+			@apply bg-white text-secondary border-secondary border-2;
+			@apply hover:bg-quaternary;
+		}
+
+		&ghost {
+			@apply bg-white text-primary;
+			@apply hover:text-tertiary;
+		}
+
+		// shape
+		&square {
+			@apply rounded-none;
+		}
+
+		&round {
+			@apply rounded;
+		}
+
+		&circle {
+			@apply rounded-full;
+		}
+
+		// size
+		&full {
+			@apply text-base min-w-full;
+		}
+
+		&large {
+			@apply text-lg min-w-[8rem] px-6 h-11;
+
+			div {
+				@apply space-x-2.5;
+			}
+		}
+
+		&normal {
+			@apply text-base min-w-[7rem];
+		}
+
+		&small {
+			@apply text-sm min-w-[6rem] px-4 h-9;
+		}
+
+		&left {
+		}
+
+		&right {
+			@apply space-x-reverse;
+		}
+
+		&iconOnly {
+			@apply w-10 min-w-0 p-0;
+
+			&.button--full {
+				@apply w-full;
+			}
+
+			&.button--large {
+				@apply w-11;
+			}
+
+			&.button--small {
+				@apply w-9;
+			}
+		}
+	}
+}
