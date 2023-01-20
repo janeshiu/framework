@@ -118,5 +118,9 @@ input {
 }
 
 label {
-	@apply leading-8;
+	@apply leading-8 relative;
+
+	sup {
+		@apply text-error;
+	}
 }
