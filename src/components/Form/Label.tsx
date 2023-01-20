@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { MouseEvent, ReactElement, ReactNode } from 'react';
 import styles from './Form.module.scss';
 
@@ -35,6 +36,21 @@ const Label: React.FC<LabelProps> = ({
 			size: '20',
 		});
 
+	const locationClass = classNames({
+		'order-last':
+			(childPosition === 'inside' && childLocation !== 'bottom') ||
+			(childPosition === 'outside' && childLocation !== 'bottom'),
+	});
+
+	function renderContent(className?: string) {
+		return (
+			<span className={className}>
+				{content}
+				{required && <sup className='text-error'>*</sup>}
+			</span>
+		);
+	}
+
 	if (childPosition === 'inside') {
 		return (
 			<div className={styles[`wrapper--${labelStyle}`]}>
@@ -44,19 +60,17 @@ const Label: React.FC<LabelProps> = ({
 						className ?? ''
 					}`}
 					onClick={onClick}>
-					{childLocation === 'top' && children}
-
 					{clonedIcon ? (
 						<span
-							className={`${styles.icon} ${styles[`icon--${iconPosition}`]}`}>
+							className={`${styles.icon} ${locationClass} ${
+								styles[`icon--${iconPosition}`]
+							}`}>
 							{clonedIcon}
 						</span>
 					) : (
-						content
+						renderContent(locationClass)
 					)}
-
-					{required && !clonedIcon && <sup className='text-error'>*</sup>}
-					{childLocation === 'bottom' && children}
+					{children}
 				</label>
 			</div>
 		);
@@ -67,21 +81,21 @@ const Label: React.FC<LabelProps> = ({
 			className={`${
 				clonedIcon ? styles[`wrapper--icon-${iconPosition}`] : ''
 			} ${styles[`wrapper--${labelStyle}`]}`}>
-			{childLocation === 'top' && children}
 			<label
 				id={forName}
-				className={`${styles[`label--${labelStyle}`]} ${className ?? ''}`}
+				className={`${styles[`label--${labelStyle}`]} ${locationClass} ${
+					className ?? ''
+				}`}
 				onClick={onClick}>
 				{clonedIcon ? (
 					<span className={`${styles.icon} ${styles[`icon--${iconPosition}`]}`}>
 						{clonedIcon}
 					</span>
 				) : (
-					content
+					renderContent()
 				)}
-				{required && !clonedIcon && <sup className='text-error'>*</sup>}
 			</label>
-			{childLocation === 'bottom' && children}
+			{children}
 		</div>
 	);
 };
