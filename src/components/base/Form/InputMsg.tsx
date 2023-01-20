@@ -1,6 +1,6 @@
 import Input, { InputProps } from './Input';
 import styles from './Form.module.scss';
-import Message from './Message';
+import Message from '../Message/Message';
 
 interface InputMsgProps {
 	inputProps: InputProps;
