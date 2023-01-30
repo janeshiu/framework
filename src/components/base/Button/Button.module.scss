@@ -14,17 +14,17 @@
 		// pattern
 		&primary {
 			@apply bg-primary text-white;
-			@apply hover:bg-secondary;
+			@apply hover:bg-primary-light;
 		}
 
 		&secondary {
-			@apply bg-tertiary text-white;
-			@apply hover:bg-quaternary hover:text-primary;
+			@apply bg-secondary text-white;
+			@apply hover:bg-secondary-dark hover:text-white;
 		}
 
 		&outline {
 			@apply bg-white text-secondary border-secondary border-2;
-			@apply hover:bg-quaternary;
+			@apply hover:bg-secondary hover:text-white hover:border-secondary;
 		}
 
 		&ghost {
