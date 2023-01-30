@@ -1,5 +1,5 @@
 .message {
-	@apply pl-2 py-0.5 leading-normal;
+	@apply pl-1 pt-1 leading-normal;
 	&-- {
 		&success {
 			@apply text-success;

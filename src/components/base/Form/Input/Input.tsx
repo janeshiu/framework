@@ -5,10 +5,15 @@ interface InputProps {
 	inputProps: InputBaseProps;
 
 	className?: string;
+	success?: boolean;
 	successMsg?: string;
 	successClass?: string;
+
+	error?: boolean;
 	errorMsg?: string;
 	errorClass?: string;
+
+	helper?: boolean;
 	helperMsg?: string;
 	helperClass?: string;
 }
@@ -16,23 +21,29 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
 	inputProps,
 	className,
+
+	success,
 	successMsg,
 	successClass,
+
+	error,
 	errorMsg,
 	errorClass,
+
+	helper,
 	helperMsg,
 	helperClass,
 }) => {
 	return (
 		<div className={`flex flex-col w-full ${className ?? ''}`}>
 			<InputBase {...inputProps} />
-			{successMsg && (
+			{success && successMsg && (
 				<Message type='success' msg={successMsg} className={successClass} />
 			)}
-			{errorMsg && (
+			{error && errorMsg && (
 				<Message type='error' msg={errorMsg} className={errorClass} />
 			)}
-			{helperMsg && (
+			{helper && helperMsg && (
 				<Message type='helper' msg={helperMsg} className={helperClass} />
 			)}
 		</div>
