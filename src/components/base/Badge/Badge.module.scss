@@ -1,0 +1,75 @@
+.badge {
+	@apply inline-flex items-center justify-center space-x-1 px-2 h-7 text-base;
+	@apply border-2 border-transparent transition-all;
+
+	svg {
+		@apply inline-block;
+	}
+
+	&-- {
+		// pattern
+		&primary {
+			@apply bg-[var(--badgeColor)] text-white border-transparent border;
+		}
+
+		&outline {
+			@apply bg-white text-[var(--badgeColor)] border-[var(--badgeColor)] border;
+		}
+
+		&ghost {
+			@apply bg-white text-[var(--badgeColor)];
+		}
+
+		// shape
+		&square {
+			@apply rounded-none;
+		}
+
+		&round {
+			@apply rounded;
+		}
+
+		&circle {
+			@apply rounded-full;
+		}
+
+		// size
+		&large {
+			@apply text-lg px-3 h-8 space-x-1.5;
+		}
+
+		&normal {
+		}
+
+		&small {
+			@apply text-sm h-6;
+		}
+
+		&left {
+		}
+
+		&right {
+			@apply space-x-reverse;
+		}
+
+		// color
+		&primary {
+			--badgeColor: var(--primary);
+		}
+		&secondary {
+			--badgeColor: var(--secondary);
+		}
+		&success {
+			--badgeColor: var(--success);
+		}
+		&error {
+			--badgeColor: var(--error);
+		}
+		&warning {
+			--badgeColor: var(--warning);
+		}
+		&info {
+			--badgeColor: var(--info);
+		}
+	}
+}
