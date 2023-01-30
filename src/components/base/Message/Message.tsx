@@ -1,4 +1,4 @@
-import styles from './Form.module.scss';
+import styles from './Message.module.scss';
 
 interface MessageProps {
 	msg: string;
