@@ -3,7 +3,6 @@ import {
 	OrderStatus,
 	OrderStatusKey,
 } from '@/enums/order';
-import { BadgeColor } from '@/enums/style';
 import React from 'react';
 import { BsCheckCircleFill, BsXCircleFill } from 'react-icons/bs';
 import Badge from './Badge';
