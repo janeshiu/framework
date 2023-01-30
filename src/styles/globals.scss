@@ -43,11 +43,17 @@
 	--card-rgb: 180, 185, 188;
 	--card-border-rgb: 131, 134, 135;
 
-	--primary: #1e293b;
+	--primary: #1473e6;
 	--secondary: #475569;
 	--tertiary: #94a3b8;
 	--quaternary: #e2e8f0;
 	--white: #ffffff;
+
+	--success: #20c997;
+	--error: #d63384;
+	--helper: #1e293b;
+	--info: #0d6efd;
+	--warning: #ff6653;
 }
 
 @media (prefers-color-scheme: dark) {

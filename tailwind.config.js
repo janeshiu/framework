@@ -4,9 +4,11 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				success: '#10b981',
-				error: '#ef4444',
-				helper: '#1e293b',
+				success: 'var(--success)',
+				error: 'var(--error)',
+				helper: 'var(--helper)',
+				info: 'var(--info)',
+				warning: 'var(--warning)',
 
 				primary: 'var(--primary)',
 				secondary: 'var(--secondary)',
