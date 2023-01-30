@@ -1,0 +1,50 @@
+.wrapper {
+	@apply p-2;
+}
+
+.label {
+	@apply flex w-full text-sm;
+
+	&-- {
+		// labelStyle
+		&row {
+			@apply flex-row flex-nowrap;
+		}
+
+		&column {
+			@apply flex-col;
+
+			.label--name {
+				@apply pl-1;
+			}
+		}
+
+		// label content
+		&name {
+			@apply block whitespace-nowrap h-8 leading-8;
+		}
+	}
+}
+
+.icon {
+	@apply absolute h-8 flex items-center p-2;
+
+	&-- {
+		&left {
+			+ div input {
+				@apply pl-9;
+			}
+		}
+
+		&right {
+			@apply right-0;
+			+ div input {
+				@apply pr-9;
+			}
+		}
+
+		&clickable {
+			@apply cursor-pointer;
+		}
+	}
+}
