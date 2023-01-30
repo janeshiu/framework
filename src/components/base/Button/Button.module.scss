@@ -1,5 +1,5 @@
 .button {
-	@apply flex items-center justify-center space-x-2 px-5 py-2 min-w-[6rem] w-auto h-10;
+	@apply flex items-center justify-center space-x-2 px-5 py-2 min-w-[6rem] w-auto h-9 text-sm;
 	@apply border-2 border-transparent transition-all;
 
 	svg {
@@ -47,11 +47,11 @@
 
 		// size
 		&full {
-			@apply text-base min-w-full;
+			@apply min-w-full;
 		}
 
 		&large {
-			@apply text-lg min-w-[8rem] px-6 h-11;
+			@apply text-base min-w-[8rem] px-6 h-10;
 
 			div {
 				@apply space-x-2.5;
@@ -59,11 +59,11 @@
 		}
 
 		&normal {
-			@apply text-base min-w-[7rem];
+			@apply min-w-[7rem];
 		}
 
 		&small {
-			@apply text-sm min-w-[6rem] px-4 h-9;
+			@apply text-xs min-w-[5rem] px-4 h-7;
 		}
 
 		&left {
@@ -74,18 +74,18 @@
 		}
 
 		&iconOnly {
-			@apply w-10 min-w-0 p-0;
+			@apply w-9 min-w-0 p-0;
 
 			&.button--full {
 				@apply w-full;
 			}
 
 			&.button--large {
-				@apply w-11;
+				@apply w-10;
 			}
 
 			&.button--small {
-				@apply w-9;
+				@apply w-7;
 			}
 		}
 	}

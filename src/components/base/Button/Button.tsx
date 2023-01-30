@@ -32,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({
 	const clonedIcon =
 		iconReactObject &&
 		React.cloneElement(iconReactObject, {
-			size: size === 'large' ? 24 : size === 'small' ? 16 : 20,
+			size: size === 'large' ? 20 : size === 'small' ? 14 : 16,
 		});
 	const toggleClass = classNames({
 		'flex-row-reverse': iconPosition === 'right',
