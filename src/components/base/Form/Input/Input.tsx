@@ -1,9 +1,8 @@
-import Input, { InputProps } from './Input';
-import styles from './Form.module.scss';
-import Message from '../Message/Message';
+import Message from '../../Message/Message';
+import InputBase, { InputBaseProps } from './InputBase';
 
-interface InputMsgProps {
-	inputProps: InputProps;
+interface InputProps {
+	inputProps: InputBaseProps;
 
 	className?: string;
 	successMsg?: string;
@@ -14,7 +13,7 @@ interface InputMsgProps {
 	helperClass?: string;
 }
 
-const InputMsg: React.FC<InputMsgProps> = ({
+const Input: React.FC<InputProps> = ({
 	inputProps,
 	className,
 	successMsg,
@@ -26,7 +25,7 @@ const InputMsg: React.FC<InputMsgProps> = ({
 }) => {
 	return (
 		<div className={`flex flex-col w-full ${className ?? ''}`}>
-			<Input {...inputProps} />
+			<InputBase {...inputProps} />
 			{successMsg && (
 				<Message type='success' msg={successMsg} className={successClass} />
 			)}
@@ -40,4 +39,4 @@ const InputMsg: React.FC<InputMsgProps> = ({
 	);
 };
 
-export default InputMsg;
+export default Input;

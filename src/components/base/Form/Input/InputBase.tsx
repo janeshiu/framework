@@ -1,6 +1,6 @@
 import { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 
-export interface InputProps {
+export interface InputBaseProps {
 	name: string;
 	innerRef?: (el: HTMLInputElement) => void;
 	type?: HTMLInputTypeAttribute;
@@ -18,7 +18,7 @@ export interface InputProps {
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputProps> = ({
+const InputBase: React.FC<InputBaseProps> = ({
 	name,
 	innerRef,
 	type = 'text',
@@ -57,4 +57,4 @@ const Input: React.FC<InputProps> = ({
 	);
 };
 
-export default Input;
+export default InputBase;
