@@ -1,6 +1,6 @@
 import { BadgeColor } from '@/enums/style';
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styles from './Badge.module.scss';
 
 interface BadgeProps {
