@@ -5,12 +5,13 @@ import styles from './Button.module.scss';
 interface ButtonProps {
 	type?: 'button' | 'submit' | 'reset';
 	className?: string;
-	content?: string;
+	content?: string | number;
 	icon?: JSX.Element;
 	iconPosition?: 'left' | 'right';
 	pattern?: 'primary' | 'secondary' | 'outline' | 'ghost';
 	shape?: 'square' | 'round' | 'circle';
 	size?: 'small' | 'normal' | 'large' | 'full';
+	disabled?: boolean;
 	onClick?: () => void;
 }
 
@@ -23,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
 	pattern = 'primary',
 	shape = 'round',
 	size = 'normal',
+	disabled = false,
 	onClick,
 }) => {
 	if (!icon && !content)
@@ -34,6 +36,13 @@ const Button: React.FC<ButtonProps> = ({
 		React.cloneElement(iconReactObject, {
 			size: size === 'large' ? 20 : size === 'small' ? 14 : 16,
 		});
+	const baseClass = classNames({
+		[styles[`button`]]: true,
+		[styles[`button--${pattern}`]]: true,
+		[styles[`button--${shape}`]]: true,
+		[styles[`button--${size}`]]: true,
+		[styles[`button--${iconPosition}`]]: true,
+	});
 	const toggleClass = classNames({
 		'flex-row-reverse': iconPosition === 'right',
 		[styles['button--iconOnly']]: clonedIcon && !content,
@@ -51,12 +60,9 @@ const Button: React.FC<ButtonProps> = ({
 	return (
 		<button
 			type={type}
-			className={` ${styles.button} ${styles[`button--${pattern}`]} ${
-				styles[`button--${shape}`]
-			}  ${styles[`button--${size}`]} ${
-				styles[`button--${iconPosition}`]
-			} ${toggleClass} ${className ?? ''}`}
-			onClick={onClick}>
+			className={`${baseClass} ${toggleClass} ${className ?? ''}`}
+			onClick={onClick}
+			disabled={disabled}>
 			{renderContent()}
 		</button>
 	);

@@ -14,22 +14,26 @@
 		// pattern
 		&primary {
 			@apply bg-primary text-white;
-			@apply hover:bg-primary-light;
+			@apply hover:bg-primary-dark;
+			@apply disabled:bg-primary-light disabled:hover:bg-primary-light;
 		}
 
 		&secondary {
 			@apply bg-secondary text-white;
 			@apply hover:bg-secondary-dark hover:text-white;
+			@apply disabled:bg-secondary-light disabled:hover:bg-secondary-light;
 		}
 
 		&outline {
 			@apply bg-white text-secondary border-secondary border-2;
 			@apply hover:bg-secondary hover:text-white hover:border-secondary;
+			@apply disabled:bg-white disabled:hover:bg-white disabled:border-secondary-light disabled:hover:border-secondary-light disabled:text-secondary-light disabled:hover:text-secondary-light;
 		}
 
 		&ghost {
 			@apply bg-white text-primary;
 			@apply hover:text-tertiary;
+			@apply disabled:text-tertiary disabled:hover:text-tertiary;
 		}
 
 		// shape
