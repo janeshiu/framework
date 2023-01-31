@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
 import styles from './Message.module.scss';
 
 interface MessageProps {
-	msg: string;
+	msg: ReactNode;
 	type?: 'success' | 'error' | 'helper';
 	className?: string;
 }

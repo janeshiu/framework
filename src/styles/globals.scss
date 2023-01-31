@@ -57,9 +57,11 @@
 
 	--success: #20c997;
 	--error: #d63384;
-	--helper: #1e293b;
+	--helper: #8897aa;
 	--info: #0d6efd;
 	--warning: #ff6653;
+
+	--font-color: #09043c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -108,14 +110,13 @@ body {
 }
 
 body {
-	@apply text-primary
-	/* color: rgb(var(--foreground-rgb)); */
+	color: var(--font-color);
 	/* background: linear-gradient(
 			to bottom,
 			transparent,
 			rgb(var(--background-end-rgb))
 		)
-		rgb(var(--background-start-rgb)); */;
+		rgb(var(--background-start-rgb)); */
 }
 
 a {

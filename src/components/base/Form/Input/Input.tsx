@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import Message from '../../Message/Message';
 import InputBase, { InputBaseProps } from './InputBase';
 
@@ -6,15 +7,15 @@ interface InputProps {
 
 	className?: string;
 	success?: boolean;
-	successMsg?: string;
+	successMsg?: ReactNode;
 	successClass?: string;
 
 	error?: boolean;
-	errorMsg?: string;
+	errorMsg?: ReactNode;
 	errorClass?: string;
 
 	helper?: boolean;
-	helperMsg?: string;
+	helperMsg?: ReactNode;
 	helperClass?: string;
 }
 
