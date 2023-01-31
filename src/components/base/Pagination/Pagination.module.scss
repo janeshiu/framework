@@ -1,0 +1,28 @@
+.pagination {
+	@apply relative w-auto max-w-full h-8;
+}
+
+.item {
+	@apply float-left;
+
+	button {
+		@apply min-w-[32px] px-2 text-tertiary;
+		@apply hover:text-secondary-dark;
+		@apply disabled:opacity-0;
+	}
+
+	&-- {
+		&active {
+			button {
+				@apply text-primary bg-quaternary;
+				@apply hover:text-primary;
+			}
+		}
+
+		&none {
+			button {
+				@apply disabled:opacity-100;
+			}
+		}
+	}
+}
