@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { MouseEvent } from 'react';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
@@ -12,7 +12,7 @@ interface ButtonProps {
 	shape?: 'square' | 'round' | 'circle';
 	size?: 'small' | 'normal' | 'large' | 'full';
 	disabled?: boolean;
-	onClick?: () => void;
+	onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
