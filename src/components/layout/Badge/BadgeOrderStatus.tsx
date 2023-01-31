@@ -5,7 +5,7 @@ import {
 } from '@/enums/order';
 import React from 'react';
 import { BsCheckCircleFill, BsXCircleFill } from 'react-icons/bs';
-import Badge from './Badge';
+import Badge from '../../base/Badge/Badge';
 
 interface BadgeOrderStatusProps {
 	className?: string;
