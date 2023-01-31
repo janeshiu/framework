@@ -105,8 +105,6 @@ const Pagination: React.FC<PaginationProps> = ({
 				currentChunk.push(pageNumber);
 			}
 		});
-		console.log('paginationNumbers', paginationNumbers);
-		console.log('paginationChunks', paginationChunks);
 		const paginationList = paginationChunks.map((pageItems) => {
 			return pageItems.map((pageNumber) =>
 				getPaginationItem({
