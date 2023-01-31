@@ -1,0 +1,33 @@
+.heading {
+	@apply font-bold text-secondary;
+}
+
+// type
+.primary {
+	@apply text-3xl;
+}
+
+.secondary {
+	@apply text-2xl;
+}
+
+.tertiary {
+	@apply text-xl;
+}
+
+.quaternary {
+	@apply text-lg;
+}
+
+// align
+.left {
+	@apply text-left;
+}
+
+.center {
+	@apply text-center;
+}
+
+.right {
+	@apply text-right;
+}

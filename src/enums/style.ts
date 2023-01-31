@@ -18,3 +18,16 @@ export type BadgeColor =
 	| Colors.WARNING
 	| Colors.INFO
 	| Colors.SECONDARY;
+
+export const enum TypeSize {
+	PRIMARY = 'primary',
+	SECONDARY = 'secondary',
+	TERTIARY = 'tertiary',
+	QUATERNARY = 'quaternary',
+}
+
+export const enum Align {
+	LEFT = 'left',
+	CENTER = 'center',
+	RIGHT = 'right',
+}
