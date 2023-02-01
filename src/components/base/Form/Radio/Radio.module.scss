@@ -1,0 +1,36 @@
+// radio
+.radio {
+	@apply rounded inline-block text-center p-0 transition-all;
+	@apply border-2 border-secondary text-secondary;
+
+	label {
+		@apply cursor-pointer w-full h-full px-6 py-1;
+	}
+
+	input[type='radio'] {
+		@apply hidden;
+	}
+
+	span {
+		@apply p-0;
+	}
+}
+
+.active {
+	@apply border-warning text-warning bg-warning bg-opacity-5 #{!important};
+}
+
+.disabled {
+	@apply border-tertiary text-tertiary;
+
+	label {
+		@apply cursor-default pointer-events-none;
+	}
+}
+
+// radioList
+.lockAll {
+	label {
+		@apply cursor-default pointer-events-none;
+	}
+}

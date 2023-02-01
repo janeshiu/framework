@@ -15,6 +15,7 @@ export interface InputBaseProps {
 	className?: string;
 	readonly?: boolean;
 	required?: boolean;
+	checked?: boolean;
 	shape?: ShapeType;
 	onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onFocus?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -34,6 +35,7 @@ const InputBase: React.FC<InputBaseProps> = ({
 	className,
 	readonly,
 	required,
+	checked,
 	shape = 'round',
 	onBlur,
 	onFocus,
@@ -57,6 +59,7 @@ const InputBase: React.FC<InputBaseProps> = ({
 			accept={accept}
 			readOnly={readonly}
 			required={required}
+			checked={checked}
 		/>
 	);
 };
