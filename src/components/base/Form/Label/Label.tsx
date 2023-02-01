@@ -4,7 +4,6 @@ import React, { MouseEvent, ReactElement, ReactNode } from 'react';
 import styles from './Label.module.scss';
 
 interface LabelProps {
-	forName: string;
 	content?: ReactNode | string;
 	required?: boolean;
 	children: ReactNode;
@@ -23,7 +22,6 @@ interface LabelProps {
 }
 
 const Label: React.FC<LabelProps> = ({
-	forName,
 	content,
 	required = false,
 	children,
@@ -67,7 +65,7 @@ const Label: React.FC<LabelProps> = ({
 
 		return (
 			<aside>
-				<span className={`${styles['label--name']} ${locationClass}`}>
+				<span className={` ${locationClass} ${styles['label--name']}`}>
 					{content}
 					{required && <sup className='text-error font-bold'>*</sup>}
 				</span>
@@ -91,12 +89,9 @@ const Label: React.FC<LabelProps> = ({
 	}
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={`${styles.wrapper} ${className ?? ''}`}>
 			<label
-				id={forName}
-				className={`${styles.label} ${styles[`label--${labelStyle}`]} ${
-					className ?? ''
-				}`}
+				className={`${styles.label} ${styles[`label--${labelStyle}`]}`}
 				onClick={onClick}>
 				{icon ? renderIcon() : renderLabel()}
 				{children}

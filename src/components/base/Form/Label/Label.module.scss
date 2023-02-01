@@ -3,7 +3,7 @@
 }
 
 .label {
-	@apply flex w-full text-base;
+	@apply inline-flex w-full text-base;
 
 	a {
 		@apply no-underline text-sm;
