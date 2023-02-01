@@ -1,5 +1,13 @@
-import { OrderStatusColor } from '../types/order';
 import { Colors } from './style';
+
+enum OrderStatusColor {
+	PRIMARY = Colors.PRIMARY,
+	SUCCESS = Colors.SUCCESS,
+	ERROR = Colors.ERROR,
+	WARNING = Colors.WARNING,
+	INFO = Colors.INFO,
+	DARK = Colors.SECONDARY,
+}
 
 export enum OrderStatus {
 	ORDER_UNDER_AUDITING = '訂單審核中',

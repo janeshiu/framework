@@ -11,14 +11,6 @@ export const enum Colors {
 	WARNING = 'warning',
 }
 
-export type BadgeColor =
-	| Colors.PRIMARY
-	| Colors.SUCCESS
-	| Colors.ERROR
-	| Colors.WARNING
-	| Colors.INFO
-	| Colors.SECONDARY;
-
 export const enum TypeSize {
 	PRIMARY = 'primary',
 	SECONDARY = 'secondary',
@@ -31,8 +23,6 @@ export const enum Shape {
 	ROUND = 'round',
 	SQUARE = 'square',
 }
-
-export type ShapeType = `${Shape}`;
 
 export const enum Align {
 	LEFT = 'left',

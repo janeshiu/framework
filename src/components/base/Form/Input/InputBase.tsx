@@ -1,4 +1,4 @@
-import { ShapeType } from '@/enums/style';
+import { ShapeType } from '@/types/style';
 import { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 import styles from './Input.module.scss';
 

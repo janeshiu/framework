@@ -1,4 +1,4 @@
-import { BadgeColor } from '@/enums/style';
+import { BadgeColor } from '@/types/style';
 import classNames from 'classnames';
 import React from 'react';
 import styles from './Badge.module.scss';
