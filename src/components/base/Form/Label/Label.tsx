@@ -1,36 +1,47 @@
 import classNames from 'classnames';
+import Link from 'next/link';
 import React, { MouseEvent, ReactElement, ReactNode } from 'react';
 import styles from './Label.module.scss';
 
 interface LabelProps {
-	content?: ReactNode | string;
 	forName: string;
+	content?: ReactNode | string;
+	required?: boolean;
+	children: ReactNode;
+
+	href?: string;
+	linkContent?: ReactNode;
+
 	icon?: JSX.Element;
 	iconPosition?: 'left' | 'right';
-	required?: boolean;
+
 	labelStyle?: 'row' | 'column';
 	childLocation?: 'top' | 'bottom';
 	className?: string;
-	children: ReactNode;
 	onClick?: (event: MouseEvent<HTMLLabelElement>) => void;
 	onClickIcon?: (event: MouseEvent<HTMLLabelElement>) => void;
 }
 
 const Label: React.FC<LabelProps> = ({
-	content,
 	forName,
+	content,
+	required = false,
+	children,
+	href,
+	linkContent,
 	icon,
 	iconPosition = 'left',
-	required = false,
 	labelStyle = 'column',
 	childLocation = 'bottom',
 	className,
-	children,
 	onClick,
 	onClickIcon,
 }) => {
 	if (!icon && !content)
 		throw '<Label> : Please provide icon or content either.';
+
+	if ((!href && linkContent) || (href && !linkContent))
+		throw `<Label> : Please provide ${!href ? 'href' : 'linkContent'}.`;
 
 	const iconReactObject = icon && React.Children.only(icon);
 	const clonedIcon =
@@ -51,14 +62,17 @@ const Label: React.FC<LabelProps> = ({
 		onClickIcon && onClickIcon(event);
 	}
 
-	function renderContent() {
+	function renderLabel() {
 		if (!content) return;
 
 		return (
-			<span className={`${styles['label--name']} ${locationClass}`}>
-				{content}
-				{required && <sup className='text-error font-bold'>*</sup>}
-			</span>
+			<aside>
+				<span className={`${styles['label--name']} ${locationClass}`}>
+					{content}
+					{required && <sup className='text-error font-bold'>*</sup>}
+				</span>
+				{href && <Link href={href}>{linkContent}</Link>}
+			</aside>
 		);
 	}
 
@@ -84,9 +98,7 @@ const Label: React.FC<LabelProps> = ({
 					className ?? ''
 				}`}
 				onClick={onClick}>
-				{renderIcon()}
-				{!icon && renderContent()}
-
+				{icon ? renderIcon() : renderLabel()}
 				{children}
 			</label>
 		</div>

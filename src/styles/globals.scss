@@ -120,8 +120,7 @@ body {
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+	@apply text-primary underline decoration-2 underline-offset-2;
 }
 
 @media (prefers-color-scheme: dark) {

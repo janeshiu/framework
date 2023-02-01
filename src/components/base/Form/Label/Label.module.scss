@@ -3,7 +3,11 @@
 }
 
 .label {
-	@apply flex w-full text-sm;
+	@apply flex w-full text-base;
+
+	a {
+		@apply no-underline text-sm;
+	}
 
 	&-- {
 		// labelStyle
@@ -14,8 +18,8 @@
 		&column {
 			@apply flex-col;
 
-			.label--name {
-				@apply pl-1;
+			aside {
+				@apply flex justify-between items-center px-1;
 			}
 		}
 
