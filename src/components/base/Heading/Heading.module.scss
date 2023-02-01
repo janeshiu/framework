@@ -1,5 +1,9 @@
 .heading {
-	@apply font-bold text-secondary;
+	@apply font-bold text-secondary relative flex items-center;
+
+	button {
+		@apply font-normal;
+	}
 }
 
 // type
@@ -21,13 +25,17 @@
 
 // align
 .left {
-	@apply text-left;
+	@apply justify-between;
 }
 
 .center {
-	@apply text-center;
+	@apply justify-center;
+
+	button:last-child {
+		@apply ml-auto;
+	}
 }
 
 .right {
-	@apply text-right;
+	@apply justify-between flex-row-reverse;
 }

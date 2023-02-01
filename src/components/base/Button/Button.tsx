@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { MouseEvent } from 'react';
 import styles from './Button.module.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
 	type?: 'button' | 'submit' | 'reset';
 	className?: string;
 	content?: string | number;
