@@ -43,23 +43,23 @@
 	--card-rgb: 180, 185, 188;
 	--card-border-rgb: 131, 134, 135;
 
-	--primary-light: #3387ed;
-	--primary: #1473e6;
-	--primary-dark: #1267cf;
+	--primary-light: 51, 135, 237; // #3387ed;
+	--primary: 20, 115, 230; // #1473e6;
+	--primary-dark: 18, 103, 207; // #1267cf;
 
-	--secondary-light: #606b76;
-	--secondary: #343a40;
-	--secondary-dark: #272b30;
+	--secondary-light: 96, 107, 118; // #606b76;
+	--secondary: 52, 58, 64; // #343a40;
+	--secondary-dark: 39, 43, 48; // #272b30;
 
-	--tertiary: #94a3b8;
-	--quaternary: #e2e8f0;
+	--tertiary: 148, 163, 184; // #94a3b8;
+	--quaternary: 226, 232, 240; // #e2e8f0;
 	--white: #ffffff;
 
-	--success: #20c997;
-	--error: #d63384;
-	--helper: #8897aa;
-	--info: #0d6efd;
-	--warning: #ff6653;
+	--success: 32, 201, 151; // #20c997;
+	--error: 214, 51, 132; // #d63384;
+	--helper: 136, 151, 170; // #8897aa;
+	--info: 13, 110, 253; // #0d6efd;
+	--warning: 255, 102, 83; // #ff6653;
 
 	--font-color: #09043c;
 }

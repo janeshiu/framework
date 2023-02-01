@@ -1,28 +1,43 @@
 /** @type {import('tailwindcss').Config} */
+
+function withOpacity(variableName) {
+	return ({ opacityValue }) => {
+		if (opacityValue !== undefined) {
+			return `rgba(var(${variableName}), ${opacityValue})`;
+		}
+		return `rgb(var(${variableName}))`;
+	};
+}
+
 module.exports = {
 	content: ['./src/**/*.{html,js,jsx,tsx}'],
 	theme: {
 		extend: {
 			colors: {
-				success: 'var(--success)',
-				error: 'var(--error)',
-				helper: 'var(--helper)',
-				info: 'var(--info)',
-				warning: 'var(--warning)',
+				success: withOpacity('--success'),
+				error: withOpacity('--error'),
+				helper: withOpacity('--helper'),
+				info: withOpacity('--info'),
+				warning: withOpacity('--warning'),
 
 				primary: {
-					light: 'var(--primary-light)',
-					DEFAULT: 'var(--primary)',
-					dark: 'var(--primary-dark)',
+					light: withOpacity('--primary-light'),
+					DEFAULT: withOpacity('--primary'),
+					dark: withOpacity('--primary-dark'),
 				},
 				secondary: {
-					light: 'var(--secondary-light)',
-					DEFAULT: 'var(--secondary)',
-					dark: 'var(--secondary-dark)',
+					light: withOpacity('--secondary-light'),
+					DEFAULT: withOpacity('--secondary'),
+					dark: withOpacity('--secondary-dark'),
 				},
-				tertiary: 'var(--tertiary)',
-				quaternary: 'var(--quaternary)',
+				tertiary: withOpacity('--tertiary'),
+				quaternary: withOpacity('--quaternary'),
 			},
+		},
+	},
+	variants: {
+		extend: {
+			backgroundOpacity: ['active'],
 		},
 	},
 	plugins: [],
