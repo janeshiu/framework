@@ -1,0 +1,32 @@
+// inputBase
+.inputBase {
+	@apply transition-all;
+}
+
+// shape
+.circle {
+	@apply rounded-full px-4;
+}
+
+.round {
+	@apply rounded;
+}
+
+.square {
+	@apply rounded-none;
+}
+
+// input
+.inputWrapper {
+	@apply flex flex-col w-full;
+}
+
+.input {
+	&-- {
+		&circle {
+			small {
+				@apply px-4;
+			}
+		}
+	}
+}

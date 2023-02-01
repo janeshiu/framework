@@ -1,6 +1,9 @@
 import { ReactNode } from 'react';
 import Message from '../../Message/Message';
 import InputBase, { InputBaseProps } from './InputBase';
+import styles from './Input.module.scss';
+import { Shape, ShapeType } from '@/enums/style';
+import classNames from 'classnames';
 
 interface InputProps {
 	inputProps: InputBaseProps;
@@ -35,8 +38,12 @@ const Input: React.FC<InputProps> = ({
 	helperMsg,
 	helperClass,
 }) => {
+	const shape: ShapeType = inputProps.shape || 'round';
+	const baseClass = classNames({
+		[styles[`input--${shape}`]]: true,
+	});
 	return (
-		<div className={`flex flex-col w-full ${className ?? ''}`}>
+		<div className={`${styles.inputWrapper} ${baseClass} ${className ?? ''}`}>
 			<InputBase {...inputProps} />
 			{success && successMsg && (
 				<Message type='success' msg={successMsg} className={successClass} />

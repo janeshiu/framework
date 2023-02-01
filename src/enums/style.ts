@@ -26,6 +26,14 @@ export const enum TypeSize {
 	QUATERNARY = 'quaternary',
 }
 
+export const enum Shape {
+	CIRCLE = 'circle',
+	ROUND = 'round',
+	SQUARE = 'square',
+}
+
+export type ShapeType = `${Shape}`;
+
 export const enum Align {
 	LEFT = 'left',
 	CENTER = 'center',
