@@ -2,7 +2,9 @@ import { ReactNode } from 'react';
 import Message from '../../Message/Message';
 import InputBase, { InputBaseProps } from './InputBase';
 import styles from './Input.module.scss';
-import { Shape, ShapeType } from '@/enums/style';
+import { Shape } from '@/enums/style';
+import { ShapeType } from '@/types/style';
+
 import classNames from 'classnames';
 
 interface InputProps {
