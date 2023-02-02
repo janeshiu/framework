@@ -1,0 +1,22 @@
+.checkbox {
+	span {
+		@apply flex justify-center items-center space-x-2;
+	}
+}
+
+.icon {
+	@apply transition-all cursor-pointer;
+	&-- {
+		&check {
+			@apply text-primary;
+		}
+
+		&stroke {
+			@apply text-tertiary;
+		}
+
+		&disabled {
+			@apply text-tertiary cursor-default;
+		}
+	}
+}

@@ -11,6 +11,10 @@ const BsCheckSquare = dynamic(() =>
 	)
 );
 
+const BsSquareFill = dynamic(() =>
+	import('react-icons/bs').then((bootstrapIcons) => bootstrapIcons.BsSquareFill)
+);
+
 const BsCheckSquareFill = dynamic(() =>
 	import('react-icons/bs').then(
 		(bootstrapIcons) => bootstrapIcons.BsCheckSquareFill
@@ -27,6 +31,12 @@ const BsCheckCircle = dynamic(() =>
 	)
 );
 
+const BsCircleFill = dynamic(() =>
+	import('react-icons/bs').then(
+		(bootstrapIcons) => bootstrapIcons.BsCheckCircleFill
+	)
+);
+
 const BsCheckCircleFill = dynamic(() =>
 	import('react-icons/bs').then(
 		(bootstrapIcons) => bootstrapIcons.BsCheckCircleFill
@@ -36,12 +46,12 @@ const BsCheckCircleFill = dynamic(() =>
 export const inputIcon = {
 	BsSquare: <BsSquare />,
 	BsCheckSquare: <BsCheckSquare />,
-	BsSquareFill: <BsSquare />,
+	BsSquareFill: <BsSquareFill />,
 	BsCheckSquareFill: <BsCheckSquareFill />,
 
 	BsCircle: <BsCircle />,
 	BsCheckCircle: <BsCheckCircle />,
-	BsCircleFill: <BsCircle />,
+	BsCircleFill: <BsCircleFill />,
 	BsCheckCircleFill: <BsCheckCircleFill />,
 };
 
