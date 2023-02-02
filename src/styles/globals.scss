@@ -132,6 +132,10 @@ a {
 input {
 	@apply border h-8 px-2 w-full focus:outline outline-1 outline-secondary;
 
+	&[type='checkbox'],
+	&[type='radio'] {
+		@apply hidden;
+	}
 	/* @apply read-only:outline-0; */
 }
 

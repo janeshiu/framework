@@ -1,4 +1,4 @@
-import { Colors, Shape, TypeSize } from '@/enums/style';
+import { Colors, Filling, Shape, HeadingSize, Size } from '@/enums/style';
 
 export type BadgeColor =
 	| Colors.PRIMARY
@@ -10,4 +10,8 @@ export type BadgeColor =
 
 export type ShapeType = `${Shape}`;
 
-export type SizeType = `${TypeSize}`;
+export type HeadingSizeType = `${HeadingSize}`;
+
+export type FillingType = `${Filling}`;
+
+export type SizeType = `${Size}`;

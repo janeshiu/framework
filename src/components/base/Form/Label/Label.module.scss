@@ -3,7 +3,7 @@
 }
 
 .label {
-	@apply inline-flex w-full text-base;
+	@apply inline-flex w-full;
 
 	a {
 		@apply no-underline text-sm;
@@ -26,6 +26,23 @@
 		// label content
 		&name {
 			@apply block whitespace-nowrap h-8 leading-8;
+		}
+
+		// size
+		&large {
+			@apply text-lg;
+			a {
+				@apply text-base;
+			}
+		}
+		&normal {
+			@apply text-base;
+		}
+		&small {
+			@apply text-sm;
+			a {
+				@apply text-xs;
+			}
 		}
 	}
 }

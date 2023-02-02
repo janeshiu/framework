@@ -1,11 +1,11 @@
-import { Align, TypeSize } from '@/enums/style';
-import { SizeType } from '@/types/style';
+import { Align, HeadingSize } from '@/enums/style';
+import { HeadingSizeType } from '@/types/style';
 import { ReactNode } from 'react';
 import Button, { ButtonProps } from '../Button/Button';
 import styles from './Heading.module.scss';
 
 interface HeadingProps {
-	type?: SizeType;
+	type?: HeadingSizeType;
 	className?: string;
 	align?: `${Align}`;
 	buttonProps?: Omit<ButtonProps, 'size' | 'pattern'>;
@@ -15,7 +15,7 @@ interface HeadingProps {
 }
 
 const Heading: React.FC<HeadingProps> = ({
-	type = TypeSize.SECONDARY,
+	type = HeadingSize.SECONDARY,
 	className,
 	align = type === 'primary' ? 'center' : 'left',
 	buttonProps,
@@ -49,15 +49,15 @@ const Heading: React.FC<HeadingProps> = ({
 	);
 };
 
-function getHeadingTag(type: SizeType) {
+function getHeadingTag(type: HeadingSizeType) {
 	switch (type) {
-		case TypeSize.PRIMARY:
+		case HeadingSize.PRIMARY:
 			return 'h1';
-		case TypeSize.SECONDARY:
+		case HeadingSize.SECONDARY:
 			return 'h2';
-		case TypeSize.TERTIARY:
+		case HeadingSize.TERTIARY:
 			return 'h3';
-		case TypeSize.QUATERNARY:
+		case HeadingSize.QUATERNARY:
 			return 'h4';
 		default:
 			return 'h4';

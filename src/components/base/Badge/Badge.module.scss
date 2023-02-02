@@ -7,69 +7,67 @@
 	}
 
 	&-- {
-		// pattern
-		&primary {
-			@apply bg-[var(--badgeColor)] text-white border-transparent border;
-		}
-
-		&outline {
-			@apply bg-white text-[var(--badgeColor)] border-[var(--badgeColor)] border;
-		}
-
-		&ghost {
-			@apply bg-white text-[var(--badgeColor)];
-		}
-
-		// shape
-		&square {
-			@apply rounded-none;
-		}
-
-		&round {
-			@apply rounded;
-		}
-
-		&circle {
-			@apply rounded-full;
-		}
-
-		// size
-		&large {
-			@apply text-lg px-4 h-8 space-x-1.5;
-		}
-
-		&normal {
-		}
-
-		&small {
-			@apply text-sm h-6;
-		}
-
-		&left {
-		}
-
-		&right {
-			@apply space-x-reverse;
-		}
-
 		// color
 		&primary {
-			--badgeColor: var(--primary);
+			--badgeColor: rgb(var(--primary));
 		}
 		&secondary {
-			--badgeColor: var(--secondary);
+			--badgeColor: rgb(var(--secondary));
 		}
 		&success {
-			--badgeColor: var(--success);
+			--badgeColor: rgb(var(--success));
 		}
 		&error {
-			--badgeColor: var(--error);
+			--badgeColor: rgb(var(--error));
 		}
 		&warning {
-			--badgeColor: var(--warning);
+			--badgeColor: rgb(var(--warning));
 		}
 		&info {
-			--badgeColor: var(--info);
+			--badgeColor: rgb(var(--info));
 		}
 	}
+}
+
+// pattern
+.primary {
+	@apply bg-[var(--badgeColor)] text-white border-transparent border;
+}
+
+.outline {
+	@apply bg-white text-[var(--badgeColor)] border-[var(--badgeColor)] border;
+}
+
+// shape
+.square {
+	@apply rounded-none;
+}
+
+.round {
+	@apply rounded;
+}
+
+.circle {
+	@apply rounded-full;
+}
+
+// size
+.large {
+	@apply text-lg px-4 h-8 space-x-1.5;
+}
+
+.normal {
+}
+
+.small {
+	@apply text-sm h-6;
+}
+
+// iconPosition
+.left {
+	@apply flex-row;
+}
+
+.right {
+	@apply space-x-reverse flex-row-reverse;
 }

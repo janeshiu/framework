@@ -1,3 +1,4 @@
+import { SizeType } from '@/types/style';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React, { MouseEvent, ReactElement, ReactNode } from 'react';
@@ -7,6 +8,7 @@ interface LabelProps {
 	content?: ReactNode | string;
 	required?: boolean;
 	children: ReactNode;
+	size?: SizeType;
 
 	href?: string;
 	linkContent?: ReactNode;
@@ -25,6 +27,7 @@ const Label: React.FC<LabelProps> = ({
 	content,
 	required = false,
 	children,
+	size = 'normal',
 	href,
 	linkContent,
 	icon,
@@ -64,7 +67,7 @@ const Label: React.FC<LabelProps> = ({
 		if (!content) return;
 
 		return (
-			<aside>
+			<aside className={styles[size]}>
 				<span className={` ${locationClass} ${styles['label--name']}`}>
 					{content}
 					{required && <sup className='text-error font-bold'>*</sup>}

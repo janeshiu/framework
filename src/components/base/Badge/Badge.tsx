@@ -1,4 +1,6 @@
+import { IconSize } from '@/enums/style';
 import { BadgeColor } from '@/types/style';
+import { transformElement } from '@/utils/element';
 import classNames from 'classnames';
 import React from 'react';
 import styles from './Badge.module.scss';
@@ -24,28 +26,21 @@ const Badge: React.FC<BadgeProps> = ({
 	size = 'normal',
 	color = 'primary',
 }) => {
-	const iconReactObject = icon && React.Children.only(icon);
-	const clonedIcon =
-		iconReactObject &&
-		React.cloneElement(iconReactObject, {
-			size: size === 'large' ? 16 : size === 'small' ? 12 : 14,
-		});
+	const clonedIcon = transformElement(icon, {
+		size: IconSize[size.toUpperCase() as keyof typeof IconSize],
+	});
 
 	const baseClass = classNames({
 		[styles[`badge`]]: true,
-		[styles[`badge--${pattern}`]]: true,
-		[styles[`badge--${shape}`]]: true,
-		[styles[`badge--${size}`]]: true,
+		[styles[pattern]]: true,
+		[styles[shape]]: true,
+		[styles[size]]: true,
 		[styles[`badge--${color}`]]: true,
-		[styles[`badge--${iconPosition}`]]: true,
+		[styles[iconPosition]]: true,
 	});
-	const toggleClass = classNames({
-		'flex-row-reverse': iconPosition === 'right',
-	});
-
 	return (
-		<div className={`${baseClass} ${toggleClass} ${className ?? ''}`}>
-			{clonedIcon ?? ''}
+		<div className={`${baseClass} ${className ?? ''}`}>
+			{clonedIcon}
 			{content && <span>{content}</span>}
 		</div>
 	);
