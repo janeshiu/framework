@@ -1,4 +1,5 @@
 import { SizeType } from '@/types/style';
+import { transformElement } from '@/utils/element';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React, { MouseEvent, ReactElement, ReactNode } from 'react';
@@ -44,12 +45,9 @@ const Label: React.FC<LabelProps> = ({
 	if ((!href && linkContent) || (href && !linkContent))
 		throw `<Label> : Please provide ${!href ? 'href' : 'linkContent'}.`;
 
-	const iconReactObject = icon && React.Children.only(icon);
-	const clonedIcon =
-		iconReactObject &&
-		React.cloneElement(iconReactObject, {
-			size: '20',
-		});
+	const clonedIcon = transformElement(icon, {
+		size: 20,
+	});
 
 	const locationClass = classNames({
 		'order-last': childLocation !== 'bottom',

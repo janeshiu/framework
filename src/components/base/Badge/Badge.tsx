@@ -1,6 +1,6 @@
 import { IconSize } from '@/enums/style';
 import { BadgeColor } from '@/types/style';
-import { transformElement } from '@/utils/element';
+import { toIconSizeKey, transformElement } from '@/utils/element';
 import classNames from 'classnames';
 import React from 'react';
 import styles from './Badge.module.scss';
@@ -27,7 +27,7 @@ const Badge: React.FC<BadgeProps> = ({
 	color = 'primary',
 }) => {
 	const clonedIcon = transformElement(icon, {
-		size: IconSize[size.toUpperCase() as keyof typeof IconSize],
+		size: IconSize[toIconSizeKey(size)],
 	});
 
 	const baseClass = classNames({

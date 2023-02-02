@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { FillingType, ShapeType, SizeType } from '@/types/style';
 import { upperCaseFirstLetter } from '@/utils/base';
 import { IconSize } from '@/enums/style';
-import { inputIcon, transformElement } from '@/utils/element';
+import { inputIcon, toIconSizeKey, transformElement } from '@/utils/element';
 import { InputIconNameType } from '@/types/element';
 
 interface CheckboxProps {
@@ -53,7 +53,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 	});
 
 	const clonedIcon = transformElement(inputIcon[iconName], {
-		size: IconSize[size.toUpperCase() as keyof typeof IconSize] + 2,
+		size: IconSize[toIconSizeKey(size)] + 2,
 	});
 
 	function renderContent() {
