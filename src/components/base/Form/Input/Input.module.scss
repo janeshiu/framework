@@ -20,19 +20,33 @@
 	@apply text-lg h-input-lg;
 
 	+ button {
-		@apply px-4;
+		@apply px-4 h-input-lg;
+
+		svg {
+			@apply min-w-[1.25rem];
+		}
 	}
 }
 
 .normal {
 	@apply text-base h-input-base;
 	+ button {
-		@apply px-2;
+		@apply px-3 h-input-base;
+
+		svg {
+			@apply min-w-[1rem];
+		}
 	}
 }
 
 .small {
 	@apply text-sm h-input-sm;
+	+ button {
+		@apply px-2 h-input-sm;
+		svg {
+			@apply min-w-[0.75rem];
+		}
+	}
 }
 
 // input
@@ -54,36 +68,12 @@
 	@apply flex;
 
 	button {
-		@apply space-x-1.5 min-w-0 px-3.5;
+		@apply min-w-0;
 	}
 }
 
 .button {
 	&-- {
-		// size
-		&large {
-			@apply h-input-lg;
-
-			svg {
-				@apply min-w-[1.25rem];
-			}
-		}
-
-		&normal {
-			@apply h-input-base;
-
-			svg {
-				@apply min-w-[1rem];
-			}
-		}
-
-		&small {
-			@apply h-input-sm space-x-1 px-2;
-			svg {
-				@apply min-w-[0.75rem];
-			}
-		}
-
 		// pattern
 		&outline {
 			button {

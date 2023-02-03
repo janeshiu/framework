@@ -70,14 +70,7 @@ const Input: React.FC<InputProps> = ({
 						: ''
 				}`}>
 				<InputBase {...inputProps} size={size} shape={shape} />
-				{hasButton && (
-					<Button
-						{...buttonProps}
-						className={`${styles.button} ${styles[`button--${size}`]} `}
-						shape={shape}
-						size={size}
-					/>
-				)}
+				{hasButton && <Button {...buttonProps} shape={shape} size={size} />}
 			</div>
 			{success && successMsg && (
 				<Message
