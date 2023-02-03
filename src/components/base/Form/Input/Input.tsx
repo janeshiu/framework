@@ -3,12 +3,14 @@ import Message from '../../Message/Message';
 import InputBase, { InputBaseProps } from './InputBase';
 import styles from './Input.module.scss';
 import { Shape } from '@/enums/style';
-import { ShapeType } from '@/types/style';
+import { ShapeType, SizeType } from '@/types/style';
 
 import classNames from 'classnames';
 
 interface InputProps {
-	inputProps: InputBaseProps;
+	inputProps: Omit<InputBaseProps, 'size'>;
+
+	size?: SizeType;
 
 	className?: string;
 	success?: boolean;
@@ -27,6 +29,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
 	inputProps,
 	className,
+	size = 'normal',
 
 	success,
 	successMsg,
@@ -46,15 +49,30 @@ const Input: React.FC<InputProps> = ({
 	});
 	return (
 		<div className={`${styles.inputWrapper} ${baseClass} ${className ?? ''}`}>
-			<InputBase {...inputProps} />
+			<InputBase {...inputProps} size={size} />
 			{success && successMsg && (
-				<Message type='success' msg={successMsg} className={successClass} />
+				<Message
+					type='success'
+					size={size}
+					msg={successMsg}
+					className={successClass}
+				/>
 			)}
 			{error && errorMsg && (
-				<Message type='error' msg={errorMsg} className={errorClass} />
+				<Message
+					type='error'
+					size={size}
+					msg={errorMsg}
+					className={errorClass}
+				/>
 			)}
 			{helper && helperMsg && (
-				<Message type='helper' msg={helperMsg} className={helperClass} />
+				<Message
+					type='helper'
+					size={size}
+					msg={helperMsg}
+					className={helperClass}
+				/>
 			)}
 		</div>
 	);

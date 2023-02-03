@@ -1,16 +1,27 @@
 .message {
-	@apply pl-1 pt-1 leading-normal;
-	&-- {
-		&success {
-			@apply text-success;
-		}
+	@apply pl-2.5 pt-1 leading-normal;
+}
 
-		&error {
-			@apply text-error;
-		}
+.success {
+	@apply text-success;
+}
 
-		&helper {
-			@apply text-helper;
-		}
-	}
+.error {
+	@apply text-error;
+}
+
+.helper {
+	@apply text-helper;
+}
+
+.large {
+	@apply text-base;
+}
+
+.normal {
+	@apply text-sm;
+}
+
+.small {
+	@apply text-xs;
 }
