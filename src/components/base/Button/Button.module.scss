@@ -2,10 +2,6 @@
 	@apply flex items-center justify-center space-x-2 px-5 py-2 min-w-[6rem] w-auto h-9 text-sm;
 	@apply border-2 border-transparent transition-all;
 
-	svg {
-		@apply inline-block;
-	}
-
 	div {
 		@apply space-x-2;
 	}

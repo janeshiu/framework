@@ -13,7 +13,7 @@ export interface ButtonProps {
 	iconPosition?: 'left' | 'right';
 	pattern?: 'primary' | 'secondary' | 'outline' | 'ghost';
 	shape?: 'square' | 'round' | 'circle';
-	size?: Record<SizeType, 'full'>;
+	size?: SizeType | 'full';
 
 	disabled?: boolean;
 	onClick?: (event: MouseEvent<HTMLButtonElement>) => void;

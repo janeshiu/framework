@@ -33,6 +33,11 @@ module.exports = {
 				tertiary: withOpacity('--tertiary'),
 				quaternary: withOpacity('--quaternary'),
 			},
+			height: {
+				'input-lg': '2.5rem',
+				'input-base': '2rem',
+				'input-sm': '1.5rem',
+			},
 		},
 	},
 	variants: {

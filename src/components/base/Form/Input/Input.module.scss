@@ -1,6 +1,6 @@
 // inputBase
 .inputBase {
-	@apply transition-all;
+	@apply transition-all z-[1];
 }
 
 // shape
@@ -17,19 +17,26 @@
 }
 
 .large {
-	@apply text-lg h-10;
+	@apply text-lg h-input-lg;
+
+	+ button {
+		@apply px-4;
+	}
 }
 
 .normal {
-	@apply text-base h-9;
+	@apply text-base h-input-base;
+	+ button {
+		@apply px-2;
+	}
 }
 
 .small {
-	@apply text-sm h-8;
+	@apply text-sm h-input-sm;
 }
 
 // input
-.inputWrapper {
+.container {
 	@apply flex flex-col w-full;
 }
 
@@ -38,6 +45,98 @@
 		&circle {
 			small {
 				@apply px-4;
+			}
+		}
+	}
+}
+
+.wrapper {
+	@apply flex;
+
+	button {
+		@apply space-x-1.5 min-w-0 px-3.5;
+	}
+}
+
+.button {
+	&-- {
+		// size
+		&large {
+			@apply h-input-lg;
+
+			svg {
+				@apply min-w-[1.25rem];
+			}
+		}
+
+		&normal {
+			@apply h-input-base;
+
+			svg {
+				@apply min-w-[1rem];
+			}
+		}
+
+		&small {
+			@apply h-input-sm space-x-1 px-2;
+			svg {
+				@apply min-w-[0.75rem];
+			}
+		}
+
+		// pattern
+		&outline {
+			button {
+				@apply border border-quaternary;
+			}
+		}
+
+		&ghost {
+			button {
+				@apply border border-quaternary text-secondary hover:text-secondary;
+			}
+
+			.buttonPosition--left {
+				input {
+					@apply border-l-0;
+				}
+			}
+		}
+	}
+}
+
+.buttonPosition {
+	&-- {
+		&left {
+			@apply flex-row-reverse;
+
+			input {
+				@apply rounded-tl-none rounded-bl-none;
+			}
+			&.button--ghost {
+				input {
+					@apply border-l-0;
+				}
+			}
+
+			button {
+				@apply rounded-tr-none rounded-br-none border-r-0;
+			}
+		}
+		&right {
+			@apply flex-row;
+
+			input {
+				@apply rounded-tr-none rounded-br-none;
+			}
+			&.button--ghost {
+				input {
+					@apply border-r-0;
+				}
+			}
+
+			button {
+				@apply rounded-tl-none rounded-bl-none border-l-0;
 			}
 		}
 	}

@@ -2,15 +2,21 @@ import { ReactNode } from 'react';
 import Message from '../../Message/Message';
 import InputBase, { InputBaseProps } from './InputBase';
 import styles from './Input.module.scss';
-import { Shape } from '@/enums/style';
-import { ShapeType, SizeType } from '@/types/style';
+import { HorizontalType, ShapeType, SizeType } from '@/types/style';
 
 import classNames from 'classnames';
+import Button, { ButtonProps } from '../../Button/Button';
+import { Size } from '@/enums/style';
 
 interface InputProps {
-	inputProps: Omit<InputBaseProps, 'size'>;
+	inputProps: Omit<InputBaseProps, 'size' | 'shape'>;
+
+	showButton?: boolean;
+	buttonPosition?: Exclude<HorizontalType, 'center'>;
+	buttonProps?: Omit<ButtonProps, 'size' | 'shape'>;
 
 	size?: SizeType;
+	shape?: ShapeType;
 
 	className?: string;
 	success?: boolean;
@@ -28,9 +34,15 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({
 	inputProps,
-	className,
-	size = 'normal',
 
+	showButton = true,
+	buttonPosition = 'right',
+	buttonProps,
+
+	size = 'normal',
+	shape = 'round',
+
+	className,
 	success,
 	successMsg,
 	successClass,
@@ -43,13 +55,30 @@ const Input: React.FC<InputProps> = ({
 	helperMsg,
 	helperClass,
 }) => {
-	const shape: ShapeType = inputProps.shape || 'round';
+	const hasButton = showButton && buttonProps;
 	const baseClass = classNames({
 		[styles[`input--${shape}`]]: true,
 	});
 	return (
-		<div className={`${styles.inputWrapper} ${baseClass} ${className ?? ''}`}>
-			<InputBase {...inputProps} size={size} />
+		<div className={`${styles.container} ${baseClass} ${className ?? ''}`}>
+			<div
+				className={`${styles.wrapper} ${
+					styles[`buttonPosition--${buttonPosition}`]
+				} ${
+					buttonProps
+						? styles[`button--${buttonProps.pattern || 'primary'}`]
+						: ''
+				}`}>
+				<InputBase {...inputProps} size={size} shape={shape} />
+				{hasButton && (
+					<Button
+						{...buttonProps}
+						className={`${styles.button} ${styles[`button--${size}`]} `}
+						shape={shape}
+						size={size}
+					/>
+				)}
+			</div>
 			{success && successMsg && (
 				<Message
 					type='success'

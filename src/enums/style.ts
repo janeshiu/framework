@@ -42,6 +42,18 @@ export const enum Align {
 	RIGHT = 'right',
 }
 
+export const enum Horizontal {
+	LEFT = 'left',
+	CENTER = 'center',
+	RIGHT = 'right',
+}
+
+export const enum Vertical {
+	TOP = 'top',
+	MIDDLE = 'middle',
+	BOTTOM = 'bottom',
+}
+
 export const enum Filling {
 	FILL = 'fill',
 	EMPTY = '',
