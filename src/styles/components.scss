@@ -1,0 +1,67 @@
+@tailwind components;
+
+@layer components {
+	// shape
+	.circle {
+		@apply rounded-full;
+	}
+
+	.round {
+		@apply rounded;
+	}
+
+	.square {
+		@apply rounded-none;
+	}
+
+	// fontSize
+	.text {
+		&- {
+			&large {
+				&-- {
+					&lg {
+						@apply text-xl;
+					}
+					&base {
+						@apply text-lg;
+					}
+					&sm {
+						@apply text-base;
+					}
+				}
+			}
+			&normal {
+				&-- {
+					&lg {
+						@apply text-lg;
+					}
+					&base {
+						@apply text-base;
+					}
+					&sm {
+						@apply text-sm;
+					}
+				}
+			}
+			&small {
+				&-- {
+					&lg {
+						@apply text-base;
+					}
+					&base {
+						@apply text-sm;
+					}
+					&sm {
+						@apply text-xs;
+					}
+				}
+			}
+		}
+	}
+
+	// compoments/base
+	.heading {
+		@apply flex items-center relative;
+		@apply text-secondary font-bold;
+	}
+}
