@@ -1,66 +1,19 @@
 .badge {
-	@apply inline-flex items-center justify-center space-x-1 px-3 h-7 text-base;
-	@apply border-2 border-transparent transition-all;
-
-	svg {
-		@apply inline-block;
-	}
-
-	&-- {
-		// color
-		&primary {
-			--badgeColor: rgb(var(--primary));
-		}
-		&secondary {
-			--badgeColor: rgb(var(--secondary));
-		}
-		&success {
-			--badgeColor: rgb(var(--success));
-		}
-		&error {
-			--badgeColor: rgb(var(--error));
-		}
-		&warning {
-			--badgeColor: rgb(var(--warning));
-		}
-		&info {
-			--badgeColor: rgb(var(--info));
-		}
-	}
-}
-
-// pattern
-.primary {
-	@apply bg-[var(--badgeColor)] text-white border-transparent border;
-}
-
-.outline {
-	@apply bg-white text-[var(--badgeColor)] border-[var(--badgeColor)] border;
-}
-
-// shape
-.square {
-	@apply rounded-none;
-}
-
-.round {
-	@apply rounded;
-}
-
-.circle {
-	@apply rounded-full;
+	@apply inline-flex items-center justify-center space-x-1;
+	@apply transition-all;
 }
 
 // size
 .large {
-	@apply text-lg px-4 h-8 space-x-1.5;
+	@apply h-8 px-4 space-x-1.5;
 }
 
 .normal {
+	@apply h-7 px-3 space-x-1;
 }
 
 .small {
-	@apply text-sm h-6;
+	@apply h-6 px-2 space-x-0.5;
 }
 
 // iconPosition
@@ -69,5 +22,5 @@
 }
 
 .right {
-	@apply space-x-reverse flex-row-reverse;
+	@apply flex-row-reverse space-x-reverse;
 }

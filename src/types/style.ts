@@ -9,14 +9,6 @@ import {
 	Pattern,
 } from '@/enums/style';
 
-export type BadgeColor =
-	| Colors.PRIMARY
-	| Colors.SUCCESS
-	| Colors.ERROR
-	| Colors.WARNING
-	| Colors.INFO
-	| Colors.SECONDARY;
-
 export type ColorType = `${Colors}`;
 
 export type ShapeType = `${Shape}`;

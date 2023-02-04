@@ -1,5 +1,5 @@
 import { IconSize } from '@/enums/style';
-import { BadgeColor } from '@/types/style';
+import { ColorType, PatternType } from '@/types/style';
 import { toIconSizeKey, transformElement } from '@/utils/element';
 import classNames from 'classnames';
 import React from 'react';
@@ -10,10 +10,10 @@ interface BadgeProps {
 	content: string;
 	icon?: JSX.Element;
 	iconPosition?: 'left' | 'right';
-	pattern?: 'primary' | 'outline';
+	pattern?: Exclude<PatternType, 'ghost'>;
 	shape?: 'square' | 'round' | 'circle';
 	size?: 'small' | 'normal' | 'large';
-	color?: BadgeColor;
+	color?: Exclude<ColorType, 'helper'>;
 }
 
 const Badge: React.FC<BadgeProps> = ({
@@ -31,13 +31,16 @@ const Badge: React.FC<BadgeProps> = ({
 	});
 
 	const baseClass = classNames({
-		[styles[`badge`]]: true,
-		[styles[pattern]]: true,
-		[styles[shape]]: true,
+		[`color--${color}`]: true,
+		[`pattern--${pattern}`]: true,
+		[`shape--${shape}`]: true,
+		[`text-normal--${size}`]: true,
+
+		[styles.badge]: true,
 		[styles[size]]: true,
-		[styles[`badge--${color}`]]: true,
 		[styles[iconPosition]]: true,
 	});
+
 	return (
 		<div className={`${baseClass} ${className ?? ''}`}>
 			{clonedIcon}
