@@ -19,39 +19,39 @@
 		&- {
 			&large {
 				&-- {
-					&lg {
+					&large {
 						@apply text-xl;
 					}
-					&base {
+					&normal {
 						@apply text-lg;
 					}
-					&sm {
+					&small {
 						@apply text-base;
 					}
 				}
 			}
 			&normal {
 				&-- {
-					&lg {
+					&large {
 						@apply text-lg;
 					}
-					&base {
+					&normal {
 						@apply text-base;
 					}
-					&sm {
+					&small {
 						@apply text-sm;
 					}
 				}
 			}
 			&small {
 				&-- {
-					&lg {
+					&large {
 						@apply text-base;
 					}
-					&base {
+					&normal {
 						@apply text-sm;
 					}
-					&sm {
+					&small {
 						@apply text-xs;
 					}
 				}
