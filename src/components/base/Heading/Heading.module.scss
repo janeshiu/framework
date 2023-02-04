@@ -1,26 +1,7 @@
 .heading {
-	@apply font-bold text-secondary relative flex items-center;
-
 	button {
 		@apply font-normal;
 	}
-}
-
-// type
-.primary {
-	@apply text-3xl;
-}
-
-.secondary {
-	@apply text-2xl;
-}
-
-.tertiary {
-	@apply text-xl;
-}
-
-.quaternary {
-	@apply text-lg;
 }
 
 // align

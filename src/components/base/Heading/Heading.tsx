@@ -28,10 +28,7 @@ const Heading: React.FC<HeadingProps> = ({
 	const hasButton = !!buttonProps;
 
 	return (
-		<HeadingTag
-			className={`${styles.heading} ${styles[type]} ${styles[align]} ${
-				className ?? ''
-			}`}>
+		<HeadingTag className={`heading ${styles[align]} ${className ?? ''}`}>
 			{/* 僅供置中用 */}
 			{isCenter && hasButton && (
 				<Button
@@ -58,7 +55,6 @@ function getHeadingTag(type: HeadingSizeType) {
 		case HeadingSize.TERTIARY:
 			return 'h3';
 		case HeadingSize.QUATERNARY:
-			return 'h4';
 		default:
 			return 'h4';
 	}
