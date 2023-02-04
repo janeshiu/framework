@@ -1,9 +1,6 @@
 export const enum Colors {
 	PRIMARY = 'primary',
 	SECONDARY = 'secondary',
-	TERTIARY = 'tertiary',
-	QUATERNARY = 'quaternary',
-
 	SUCCESS = 'success',
 	ERROR = 'error',
 	HELPER = 'helper',
@@ -22,6 +19,12 @@ export const enum Size {
 	LARGE = 'large',
 	NORMAL = 'normal',
 	SMALL = 'small',
+}
+
+export const enum Pattern {
+	FILL = 'fill',
+	OUTLINE = 'outline',
+	GHOST = 'ghost',
 }
 
 export enum IconSize {

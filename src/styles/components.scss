@@ -1,65 +1,119 @@
 @tailwind components;
 
-@layer components {
-	// shape
-	.circle {
-		@apply rounded-full;
+// 不使用也會編譯進 CSS
+.color {
+	&-- {
+		&primary {
+			--color: rgb(var(--primary));
+			--active: rgb(var(--primary-dark));
+			--disabled: rgb(var(--primary-light));
+		}
+		&secondary {
+			--color: rgb(var(--secondary));
+			--active: rgb(var(--secondary-dark));
+			--disabled: rgb(var(--secondary-light));
+		}
+		&success {
+			--color: rgb(var(--success));
+			--active: rgb(var(--success-dark));
+			--disabled: rgb(var(--success-light));
+		}
+		&error {
+			--color: rgb(var(--error));
+			--active: rgb(var(--error-dark));
+			--disabled: rgb(var(--error-light));
+		}
+		&warning {
+			--color: rgb(var(--warning));
+			--active: rgb(var(--warning-dark));
+			--disabled: rgb(var(--warning-light));
+		}
+		&info {
+			--color: rgb(var(--info));
+			--active: rgb(var(--info-dark));
+			--disabled: rgb(var(--info-light));
+		}
 	}
+}
 
-	.round {
-		@apply rounded;
+.pattern {
+	&-- {
+		&fill {
+			@apply border border-[var(--color)] bg-[var(--color)] text-white;
+		}
+		&outline {
+			@apply border border-[var(--color)] text-[var(--color)];
+		}
+		&ghost {
+			@apply text-[var(--color)];
+		}
 	}
+}
 
-	.square {
-		@apply rounded-none;
+.shape {
+	&-- {
+		&circle {
+			@apply rounded-full;
+		}
+
+		&round {
+			@apply rounded;
+		}
+
+		&square {
+			@apply rounded-none;
+		}
 	}
+}
 
-	// fontSize
-	.text {
-		&- {
-			&large {
-				&-- {
-					&large {
-						@apply text-xl;
-					}
-					&normal {
-						@apply text-lg;
-					}
-					&small {
-						@apply text-base;
-					}
+// fontSize
+.text {
+	&- {
+		&large {
+			&-- {
+				&large {
+					@apply text-xl;
+				}
+				&normal {
+					@apply text-lg;
+				}
+				&small {
+					@apply text-base;
 				}
 			}
-			&normal {
-				&-- {
-					&large {
-						@apply text-lg;
-					}
-					&normal {
-						@apply text-base;
-					}
-					&small {
-						@apply text-sm;
-					}
+		}
+		&normal {
+			&-- {
+				&large {
+					@apply text-lg;
+				}
+				&normal {
+					@apply text-base;
+				}
+				&small {
+					@apply text-sm;
 				}
 			}
-			&small {
-				&-- {
-					&large {
-						@apply text-base;
-					}
-					&normal {
-						@apply text-sm;
-					}
-					&small {
-						@apply text-xs;
-					}
+		}
+		&small {
+			&-- {
+				&large {
+					@apply text-base;
+				}
+				&normal {
+					@apply text-sm;
+				}
+				&small {
+					@apply text-xs;
 				}
 			}
 		}
 	}
+}
 
-	// compoments/base
+// 有使用到才會編譯進 CSS
+@layer components {
+	// compoments/base/heading
 	.heading {
 		@apply flex items-center relative;
 		@apply text-secondary font-bold;
