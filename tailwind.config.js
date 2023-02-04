@@ -14,12 +14,6 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				success: withOpacity('--success'),
-				error: withOpacity('--error'),
-				helper: withOpacity('--helper'),
-				info: withOpacity('--info'),
-				warning: withOpacity('--warning'),
-
 				primary: {
 					light: withOpacity('--primary-light'),
 					DEFAULT: withOpacity('--primary'),
@@ -32,6 +26,36 @@ module.exports = {
 				},
 				tertiary: withOpacity('--tertiary'),
 				quaternary: withOpacity('--quaternary'),
+
+				success: {
+					light: withOpacity('--success-light'),
+					DEFAULT: withOpacity('--success'),
+					dark: withOpacity('--success-dark'),
+				},
+
+				error: {
+					light: withOpacity('--error-light'),
+					DEFAULT: withOpacity('--error'),
+					dark: withOpacity('--error-dark'),
+				},
+
+				helper: {
+					light: withOpacity('--helper-light'),
+					DEFAULT: withOpacity('--helper'),
+					dark: withOpacity('--helper-dark'),
+				},
+
+				info: {
+					light: withOpacity('--info-light'),
+					DEFAULT: withOpacity('--info'),
+					dark: withOpacity('--info-dark'),
+				},
+
+				warning: {
+					light: withOpacity('--warning-light'),
+					DEFAULT: withOpacity('--warning'),
+					dark: withOpacity('--warning-dark'),
+				},
 			},
 			height: {
 				'input-lg': '2.5rem',
