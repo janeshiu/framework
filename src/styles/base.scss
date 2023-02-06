@@ -1,5 +1,9 @@
 @tailwind base;
 
+.body {
+	@apply text-common;
+}
+
 @layer base {
 	h1 {
 		@apply text-3xl;
@@ -15,5 +19,18 @@
 
 	h4 {
 		@apply text-lg;
+	}
+
+	a {
+		@apply text-info underline decoration-2 underline-offset-2;
+	}
+
+	input {
+		@apply w-full border;
+
+		&[type='checkbox'],
+		&[type='radio'] {
+			@apply hidden;
+		}
 	}
 }
