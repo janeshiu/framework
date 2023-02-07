@@ -6,7 +6,7 @@ import {
 	Size,
 	Horizontal,
 	Vertical,
-	Pattern,
+	PatternBase,
 } from '@/enums/style';
 
 export type ColorType = `${Colors}`;
@@ -19,7 +19,7 @@ export type FillingType = `${Filling}`;
 
 export type SizeType = `${Size}`;
 
-export type PatternType = `${Pattern}`;
+export type PatternBaseType = `${PatternBase}`;
 
 export type HorizontalType = `${Horizontal}`;
 

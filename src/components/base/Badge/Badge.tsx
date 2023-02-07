@@ -1,5 +1,5 @@
 import { IconSize } from '@/enums/style';
-import { ColorType, PatternType } from '@/types/style';
+import { ColorType, PatternBaseType } from '@/types/style';
 import { toIconSizeKey, transformElement } from '@/utils/element';
 import classNames from 'classnames';
 import React from 'react';
@@ -10,7 +10,7 @@ interface BadgeProps {
 	content: string;
 	icon?: JSX.Element;
 	iconPosition?: 'left' | 'right';
-	pattern?: Exclude<PatternType, 'ghost'>;
+	pattern?: PatternBaseType;
 	shape?: 'square' | 'round' | 'circle';
 	size?: 'small' | 'normal' | 'large';
 	color?: Exclude<ColorType, 'helper'>;

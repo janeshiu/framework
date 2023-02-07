@@ -1,5 +1,5 @@
 import { IconSize } from '@/enums/style';
-import { SizeType } from '@/types/style';
+import { PatternBaseType, SizeType } from '@/types/style';
 import { toIconSizeKey, transformElement } from '@/utils/element';
 import classNames from 'classnames';
 import React, { MouseEvent } from 'react';
@@ -11,7 +11,7 @@ export interface ButtonProps {
 	content?: string | number;
 	icon?: JSX.Element;
 	iconPosition?: 'left' | 'right';
-	pattern?: 'primary' | 'secondary' | 'outline' | 'ghost';
+	pattern?: PatternBaseType | 'fog' | 'ghost';
 	shape?: 'square' | 'round' | 'circle';
 	size?: SizeType | 'full';
 

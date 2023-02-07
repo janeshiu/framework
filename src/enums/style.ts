@@ -21,10 +21,9 @@ export const enum Size {
 	SMALL = 'small',
 }
 
-export const enum Pattern {
+export const enum PatternBase {
 	FILL = 'fill',
 	OUTLINE = 'outline',
-	GHOST = 'ghost',
 }
 
 export enum IconSize {
