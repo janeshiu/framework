@@ -12,6 +12,10 @@
 		}
 		&square {
 		}
+
+		&hideClear {
+			@apply opacity-0;
+		}
 	}
 }
 

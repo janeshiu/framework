@@ -49,3 +49,20 @@
 		}
 	}
 }
+
+.buttonClear {
+	@apply absolute top-1/2 right-1 -translate-y-1/2;
+	@apply hover:bg-pattern hover:bg-opacity-light;
+
+	&-- {
+		&large {
+			@apply h-8 w-8 #{!important};
+		}
+		&normal {
+			@apply h-7 w-7 #{!important};
+		}
+		&small {
+			@apply h-6 w-6 #{!important};
+		}
+	}
+}

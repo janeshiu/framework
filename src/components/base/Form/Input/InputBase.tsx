@@ -1,11 +1,18 @@
 import { ShapeType, SizeType } from '@/types/style';
 import classNames from 'classnames';
-import { ChangeEvent, HTMLInputTypeAttribute } from 'react';
+import {
+	ChangeEvent,
+	HTMLInputTypeAttribute,
+	MouseEvent,
+	MutableRefObject,
+	useRef,
+} from 'react';
+import ButtonClear from '../../Button/ButtonClear';
 import styles from './Input.module.scss';
 
 export interface InputBaseProps {
 	name: string;
-	innerRef?: (el: HTMLInputElement) => void;
+	innerRef?: MutableRefObject<{ [name: string]: HTMLInputElement }>;
 	type?: HTMLInputTypeAttribute;
 	defaultValue?: string | number;
 	value?: string | number;
@@ -23,12 +30,12 @@ export interface InputBaseProps {
 	onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onFocus?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-	handleClear?: () => void;
+	onClear?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const InputBase: React.FC<InputBaseProps> = ({
 	name,
-	innerRef,
+	innerRef = useRef({}),
 	type = 'text',
 	defaultValue,
 	value,
@@ -40,13 +47,13 @@ const InputBase: React.FC<InputBaseProps> = ({
 	readonly,
 	required,
 	checked,
-	shape = 'round',
+	shape = 'circle',
 	size = 'normal',
 	showClearButton = false,
 	onBlur,
 	onFocus,
 	onChange,
-	handleClear,
+	onClear,
 }) => {
 	const baseClass = classNames({
 		[`shape--${shape}`]: true,
@@ -57,26 +64,52 @@ const InputBase: React.FC<InputBaseProps> = ({
 		[styles[`inputBase--${shape}`]]: true,
 	});
 
+	const buttonClearClass = classNames({
+		[styles[`inputBase--hideClear`]]: !(value || innerRef.current[name].value),
+	});
+
+	const handleClear = (e: MouseEvent<HTMLButtonElement>) => {
+		if (value) {
+			onClear && onClear(e);
+			return;
+		}
+
+		innerRef.current[name].value = '';
+	};
+
 	return (
-		<input
-			ref={innerRef}
-			className={`${baseClass} ${className ?? ''}`}
-			name={name}
-			aria-labelledby={name}
-			type={type}
-			defaultValue={defaultValue}
-			value={value}
-			placeholder={placeholder}
-			onBlur={onBlur}
-			onFocus={onFocus}
-			onChange={onChange}
-			disabled={disabled}
-			autoComplete={autoComplete}
-			accept={accept}
-			readOnly={readonly}
-			required={required}
-			checked={checked}
-		/>
+		<div className='relative'>
+			<input
+				ref={(e: HTMLInputElement) => {
+					if (!innerRef) return;
+
+					innerRef.current[name] = e;
+				}}
+				className={`${baseClass} ${className ?? ''}`}
+				name={name}
+				aria-labelledby={name}
+				type={type}
+				defaultValue={defaultValue}
+				value={value}
+				placeholder={placeholder}
+				disabled={disabled}
+				autoComplete={autoComplete}
+				accept={accept}
+				readOnly={readonly}
+				required={required}
+				checked={checked}
+				onBlur={onBlur}
+				onFocus={onFocus}
+				onChange={onChange}
+			/>
+			{showClearButton && (
+				<ButtonClear
+					className={buttonClearClass}
+					size={size}
+					onClick={handleClear}
+				/>
+			)}
+		</div>
 	);
 };
 
