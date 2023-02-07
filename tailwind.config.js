@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const { text, fontFamily } = require('tailwindcss/defaultTheme');
 
 function withOpacity(variableName) {
 	return ({ opacityValue }) => {
@@ -13,6 +14,9 @@ module.exports = {
 	content: ['./src/**/*.{html,js,jsx,tsx}'],
 	theme: {
 		extend: {
+			fontFamily: {
+				sans: ['Noto Sans TC', ...fontFamily.sans],
+			},
 			opacity: {
 				8: '.08',
 				12: '.12',
@@ -33,6 +37,20 @@ module.exports = {
 					800: withOpacity('--gray-800'),
 					900: withOpacity('--font-900'),
 				},
+
+				common: {
+					DEFAULT: withOpacity('--font-common'),
+					'primary-light': withOpacity('--font-light'),
+					primary: withOpacity('--font-primary'),
+					secondary: withOpacity('--font-secondary'),
+					disabled: withOpacity('--font-disabled'),
+				},
+
+				bg: {
+					primary: withOpacity('--bg-primary'),
+					secondary: withOpacity('--bg-secondary'),
+				},
+
 				primary: {
 					lighter: withOpacity('--primary-lighter'),
 					light: withOpacity('--primary-light'),
@@ -40,6 +58,7 @@ module.exports = {
 					dark: withOpacity('--primary-dark'),
 					darker: withOpacity('--primary-darker'),
 				},
+
 				secondary: {
 					lighter: withOpacity('--secondary-lighter'),
 					light: withOpacity('--secondary-light'),
@@ -47,9 +66,6 @@ module.exports = {
 					dark: withOpacity('--secondary-dark'),
 					darker: withOpacity('--secondary-darker'),
 				},
-				tertiary: withOpacity('--tertiary'),
-				quaternary: withOpacity('--quaternary'),
-				helper: withOpacity('--helper'),
 
 				success: {
 					lighter: withOpacity('--success-lighter'),
@@ -81,13 +97,6 @@ module.exports = {
 					DEFAULT: withOpacity('--warning'),
 					dark: withOpacity('--warning-dark'),
 					darker: withOpacity('--warning-darker'),
-				},
-
-				common: {
-					DEFAULT: withOpacity('--font-common'),
-					primary: withOpacity('--font-primary'),
-					secondary: withOpacity('--font-secondary'),
-					disabled: withOpacity('--font-disabled'),
 				},
 			},
 		},

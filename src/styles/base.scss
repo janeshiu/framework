@@ -1,7 +1,25 @@
 @tailwind base;
 
-.body {
-	@apply text-common;
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+html,
+body {
+	max-width: 100vw;
+	overflow-x: hidden;
+}
+
+body {
+	@apply text-common font-sans;
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		color-scheme: dark;
+	}
 }
 
 @layer base {

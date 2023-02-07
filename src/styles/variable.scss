@@ -55,10 +55,17 @@
 	--warning-dark: 255, 56, 32; // #ff3820;
 	--warning-light: 219, 24, 0; // #db1800;
 
-	--helper: 136, 151, 170; // #8897aa;
-
 	--font-common: 9, 4, 60; // #09043c
+	--font-primary-light: var(--gray-100);
 	--font-primary: var(--gray-800);
 	--font-secondary: var(--gray-600);
 	--font-disabled: var(--gray-500);
+
+	--bg-primary: 255, 255, 255;
+	--bg-secondary: var(--gray-100);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+	}
 }
