@@ -5,19 +5,19 @@ import styles from './Message.module.scss';
 interface MessageProps {
 	msg: ReactNode;
 	size?: SizeType;
-	type?: 'success' | 'error' | 'helper';
+	type?: 'success' | 'error' | 'normal';
 	className?: string;
 }
 
 const Message: React.FC<MessageProps> = ({
 	msg,
 	size = 'normal',
-	type = 'helper',
+	type = 'normal',
 	className,
 }) => {
 	return (
 		<small
-			className={`${styles.message} ${styles[`${size}`]} ${styles[`${type}`]} ${
+			className={`text-small--${size} ${styles.message} ${styles[`${type}`]} ${
 				className ?? ''
 			}`}>
 			{msg}

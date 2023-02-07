@@ -1,5 +1,9 @@
 .message {
-	@apply pl-2.5 pt-1 leading-normal;
+	@apply leading-tight break-normal;
+}
+
+.normal {
+	@apply text-common-secondary;
 }
 
 .success {
@@ -8,20 +12,4 @@
 
 .error {
 	@apply text-error;
-}
-
-.helper {
-	@apply text-helper;
-}
-
-.large {
-	@apply text-base;
-}
-
-.normal {
-	@apply text-sm;
-}
-
-.small {
-	@apply text-xs;
 }
