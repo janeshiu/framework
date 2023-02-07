@@ -1,4 +1,5 @@
 import { ShapeType, SizeType } from '@/types/style';
+import classNames from 'classnames';
 import { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 import styles from './Input.module.scss';
 
@@ -18,9 +19,11 @@ export interface InputBaseProps {
 	checked?: boolean;
 	shape?: ShapeType;
 	size?: SizeType;
+	showClearButton?: boolean;
 	onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onFocus?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+	handleClear?: () => void;
 }
 
 const InputBase: React.FC<InputBaseProps> = ({
@@ -39,16 +42,25 @@ const InputBase: React.FC<InputBaseProps> = ({
 	checked,
 	shape = 'round',
 	size = 'normal',
+	showClearButton = false,
 	onBlur,
 	onFocus,
 	onChange,
+	handleClear,
 }) => {
+	const baseClass = classNames({
+		[`shape--${shape}`]: true,
+		[`text-normal--${[size]}`]: true,
+		[`btn--${[size]}`]: true,
+
+		[styles[`inputBase`]]: true,
+		[styles[`inputBase--${shape}`]]: true,
+	});
+
 	return (
 		<input
 			ref={innerRef}
-			className={`${styles.inputBase} ${styles[size]} ${styles[shape]} ${
-				className ?? ''
-			}`}
+			className={`${baseClass} ${className ?? ''}`}
 			name={name}
 			aria-labelledby={name}
 			type={type}

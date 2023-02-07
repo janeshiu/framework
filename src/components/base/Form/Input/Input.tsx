@@ -9,11 +9,11 @@ import Button, { ButtonProps } from '../../Button/Button';
 import { Size } from '@/enums/style';
 
 interface InputProps {
-	inputProps: Omit<InputBaseProps, 'size' | 'shape'>;
+	inputProps: Exclude<InputBaseProps, 'size' | 'shape'>;
 
 	showButton?: boolean;
 	buttonPosition?: Exclude<HorizontalType, 'center'>;
-	buttonProps?: Omit<ButtonProps, 'size' | 'shape'>;
+	buttonProps?: Exclude<ButtonProps, 'size' | 'shape'>;
 
 	size?: SizeType;
 	shape?: ShapeType;
@@ -36,11 +36,11 @@ const Input: React.FC<InputProps> = ({
 	inputProps,
 
 	showButton = true,
-	buttonPosition = 'right',
+	buttonPosition = 'left',
 	buttonProps,
 
 	size = 'normal',
-	shape = 'round',
+	shape = 'circle',
 
 	className,
 	success,
@@ -56,46 +56,57 @@ const Input: React.FC<InputProps> = ({
 	helperClass,
 }) => {
 	const hasButton = showButton && buttonProps;
-	const baseClass = classNames({
-		[styles[`input--${shape}`]]: true,
+
+	const inputWrapperClass = classNames({
+		[styles[`input--wrapper`]]: true,
+		[styles[`input--hasButton`]]: hasButton,
+		[styles[buttonPosition]]: true,
+	});
+
+	const messageWrapperClass = classNames({
+		[styles[`message--wrapper`]]: true,
+		[styles[`message--isCircle`]]: shape === 'circle',
 	});
 	return (
-		<div className={`${styles.container} ${baseClass} ${className ?? ''}`}>
+		<div className={`${className ?? ''}`}>
 			<div
-				className={`${styles.wrapper} ${
-					styles[`buttonPosition--${buttonPosition}`]
-				} ${
+				className={`${inputWrapperClass} ${
 					buttonProps
 						? styles[`button--${buttonProps.pattern || 'primary'}`]
 						: ''
 				}`}>
 				<InputBase {...inputProps} size={size} shape={shape} />
-				{hasButton && <Button {...buttonProps} shape={shape} size={size} />}
+				{hasButton && (
+					<Button
+						{...buttonProps}
+						shape={shape}
+						size={size}
+						pattern={buttonProps.pattern ?? 'outline'}
+						color={buttonProps.color ?? 'secondary'}
+					/>
+				)}
 			</div>
-			{success && successMsg && (
-				<Message
-					type='success'
-					size={size}
-					msg={successMsg}
-					className={successClass}
-				/>
-			)}
-			{error && errorMsg && (
-				<Message
-					type='error'
-					size={size}
-					msg={errorMsg}
-					className={errorClass}
-				/>
-			)}
-			{helper && helperMsg && (
-				<Message
-					type='helper'
-					size={size}
-					msg={helperMsg}
-					className={helperClass}
-				/>
-			)}
+			<div className={messageWrapperClass}>
+				{helper && helperMsg && (
+					<Message size={size} msg={helperMsg} className={helperClass} />
+				)}
+				{error && errorMsg && (
+					<Message
+						type='error'
+						size={size}
+						msg={errorMsg}
+						className={errorClass}
+					/>
+				)}
+				{success && successMsg && (
+					<Message
+						type='success'
+						size={size}
+						msg={successMsg}
+						className={successClass}
+					/>
+				)}
+			</div>
 		</div>
 	);
 };

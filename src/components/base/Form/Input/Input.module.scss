@@ -1,133 +1,154 @@
 // inputBase
 .inputBase {
+	@apply border border-gray-300 px-2;
 	@apply transition-all z-[1];
-}
+	@apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-dark;
 
-// shape
-.circle {
-	@apply rounded-full px-4;
-}
-
-.round {
-	@apply rounded;
-}
-
-.square {
-	@apply rounded-none;
-}
-
-.large {
-	@apply text-lg h-input-lg;
-
-	+ button {
-		@apply px-4 h-input-lg;
-
-		svg {
-			@apply min-w-[1.25rem];
+	&-- {
+		&circle {
+			@apply px-3;
+		}
+		&round {
+		}
+		&square {
 		}
 	}
 }
 
-.normal {
-	@apply text-base h-input-base;
-	+ button {
-		@apply px-3 h-input-base;
-
-		svg {
-			@apply min-w-[1rem];
+.message {
+	&-- {
+		&wrapper {
+			@apply flex flex-col px-2 py-1;
+		}
+		&isCircle {
+			@apply px-4;
 		}
 	}
-}
-
-.small {
-	@apply text-sm h-input-sm;
-	+ button {
-		@apply px-2 h-input-sm;
-		svg {
-			@apply min-w-[0.75rem];
-		}
-	}
-}
-
-// input
-.container {
-	@apply flex flex-col w-full;
 }
 
 .input {
 	&-- {
-		&circle {
-			small {
-				@apply px-4;
-			}
-		}
-	}
-}
-
-.wrapper {
-	@apply flex;
-
-	button {
-		@apply min-w-0;
-	}
-}
-
-.button {
-	&-- {
-		// pattern
-		&outline {
-			button {
-				@apply border border-quaternary;
-			}
+		&container {
+			@apply flex flex-col w-full;
 		}
 
-		&ghost {
-			button {
-				@apply border border-quaternary text-secondary hover:text-secondary;
+		&wrapper {
+			@apply flex;
+		}
+
+		&hasButton {
+			&.left {
+				@apply flex-row-reverse;
+
+				.inputBase {
+					@apply rounded-l-none;
+				}
+				button {
+					@apply rounded-r-none;
+				}
 			}
 
-			.buttonPosition--left {
-				input {
-					@apply border-l-0;
+			&.right {
+				.inputBase {
+					@apply rounded-r-none;
+				}
+				button {
+					@apply rounded-l-none;
 				}
 			}
 		}
 	}
 }
 
-.buttonPosition {
-	&-- {
-		&left {
-			@apply flex-row-reverse;
+// .large {
+// 	@apply text-lg h-input-lg;
 
-			input {
-				@apply rounded-tl-none rounded-bl-none;
-			}
-			&.button--ghost {
-				input {
-					@apply border-l-0;
-				}
-			}
+// 	+ button {
+// 		@apply px-4 h-input-lg;
 
-			button {
-				@apply rounded-tr-none rounded-br-none border-r-0;
-			}
-		}
-		&right {
-			@apply flex-row;
+// 		svg {
+// 			@apply min-w-[1.25rem];
+// 		}
+// 	}
+// }
 
-			input {
-				@apply rounded-tr-none rounded-br-none;
-			}
-			&.button--ghost {
-				input {
-					@apply border-r-0;
-				}
-			}
+// .normal {
+// 	@apply text-base h-input-base;
+// 	+ button {
+// 		@apply px-3 h-input-base;
 
-			button {
-				@apply rounded-tl-none rounded-bl-none border-l-0;
-			}
-		}
-	}
-}
+// 		svg {
+// 			@apply min-w-[1rem];
+// 		}
+// 	}
+// }
+
+// .small {
+// 	@apply text-sm h-input-sm;
+// 	+ button {
+// 		@apply px-2 h-input-sm;
+// 		svg {
+// 			@apply min-w-[0.75rem];
+// 		}
+// 	}
+// }
+
+// .button {
+// 	&-- {
+// 		// pattern
+// 		&outline {
+// 			button {
+// 				@apply border border-quaternary;
+// 			}
+// 		}
+
+// 		&ghost {
+// 			button {
+// 				@apply border border-quaternary text-secondary hover:text-secondary;
+// 			}
+
+// 			.buttonPosition--left {
+// 				input {
+// 					@apply border-l-0;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// .buttonPosition {
+// 	&-- {
+// 		&left {
+// 			@apply flex-row-reverse;
+
+// 			input {
+// 				@apply rounded-tl-none rounded-bl-none;
+// 			}
+// 			&.button--ghost {
+// 				input {
+// 					@apply border-l-0;
+// 				}
+// 			}
+
+// 			button {
+// 				@apply rounded-tr-none rounded-br-none border-r-0;
+// 			}
+// 		}
+// 		&right {
+// 			@apply flex-row;
+
+// 			input {
+// 				@apply rounded-tr-none rounded-br-none;
+// 			}
+// 			&.button--ghost {
+// 				input {
+// 					@apply border-r-0;
+// 				}
+// 			}
+
+// 			button {
+// 				@apply rounded-tl-none rounded-bl-none border-l-0;
+// 			}
+// 		}
+// 	}
+// }
