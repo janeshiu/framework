@@ -62,6 +62,7 @@ const InputBase: React.FC<InputBaseProps> = ({
 
 		[styles[`inputBase`]]: true,
 		[styles[`inputBase--${shape}`]]: true,
+		[styles[`inputBase--showClear`]]: showClearButton,
 	});
 
 	const buttonClearClass = classNames({
