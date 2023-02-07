@@ -34,7 +34,7 @@ const Badge: React.FC<BadgeProps> = ({
 		[`color--${color}`]: true,
 		[`pattern--${pattern}`]: true,
 		[`shape--${shape}`]: true,
-		[`text-normal--${size}`]: true,
+		[`text-small--${size}`]: true,
 
 		[styles.badge]: true,
 		[styles[size]]: true,
