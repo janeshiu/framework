@@ -24,12 +24,12 @@ module.exports = {
 				heading4: ['1.5rem', 1.5],
 			},
 			opacity: {
-				8: '.08',
-				12: '.12',
-				16: '.16',
-				24: '.24',
-				32: '.32',
-				48: '.48',
+				lighter: '.08',
+				light: '.12',
+				'normal-light': '.16',
+				'normal-dark': '.24',
+				dark: '.32',
+				darker: '.48',
 			},
 			colors: {
 				gray: {
@@ -42,6 +42,11 @@ module.exports = {
 					700: withOpacity('--gray-700'),
 					800: withOpacity('--gray-800'),
 					900: withOpacity('--font-900'),
+				},
+
+				pattern: {
+					DEFAULT: withOpacity('--pattern-color'),
+					active: withOpacity('--pattern-active'),
 				},
 
 				common: {

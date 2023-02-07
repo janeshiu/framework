@@ -1,5 +1,5 @@
 import { IconSize } from '@/enums/style';
-import { PatternBaseType, SizeType } from '@/types/style';
+import { ColorType, PatternBaseType, SizeType } from '@/types/style';
 import { toIconSizeKey, transformElement } from '@/utils/element';
 import classNames from 'classnames';
 import React, { MouseEvent } from 'react';
@@ -14,6 +14,7 @@ export interface ButtonProps {
 	pattern?: PatternBaseType | 'fog' | 'ghost';
 	shape?: 'square' | 'round' | 'circle';
 	size?: SizeType | 'full';
+	color?: ColorType;
 
 	disabled?: boolean;
 	onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -25,30 +26,39 @@ const Button: React.FC<ButtonProps> = ({
 	content,
 	icon,
 	iconPosition = 'left',
-	pattern = 'primary',
+	pattern = 'fill',
 	shape = 'round',
 	size = 'normal',
+	color = pattern === 'ghost' ? 'secondary' : 'primary',
 	disabled = false,
 	onClick,
 }) => {
 	if (!icon && !content)
 		throw '<Button> : Please provide icon or content either.';
 
-	const iconSize = (size === 'full' ? 'normal' : size) as SizeType;
+	const generalSize = (size === 'full' ? 'normal' : size) as SizeType;
 	const clonedIcon = transformElement(icon, {
-		size: IconSize[toIconSizeKey(iconSize)] + (size === 'normal' ? 0 : 2),
+		size: IconSize[toIconSizeKey(generalSize)] + (size === 'normal' ? 0 : 2),
 	});
 
 	const baseClass = classNames({
+		[`btn`]: true,
+
 		[styles[`button`]]: true,
-		[styles[`button--${pattern}`]]: true,
-		[styles[`button--${shape}`]]: true,
+
+		[`pattern--${pattern}`]: true,
+		[`shape--${shape}`]: true,
+		[`color--${color}`]: true,
+		[`text-small--${generalSize}`]: true,
+
+		[`btn--${size}`]: true,
 		[styles[`button--${size}`]]: true,
-		[styles[`button--${iconPosition}`]]: true,
+		[styles[`iconPosition--${iconPosition}`]]: true,
 	});
 	const toggleClass = classNames({
-		'flex-row-reverse': iconPosition === 'right',
-		[styles['button--iconOnly']]: clonedIcon && !content,
+		[styles['iconOnly']]: clonedIcon && !content,
+		[`pattern--clickable`]: !disabled,
+		[`pattern--disabled`]: disabled,
 	});
 
 	function renderContent() {

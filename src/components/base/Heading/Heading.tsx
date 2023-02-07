@@ -20,7 +20,7 @@ const Heading: React.FC<HeadingProps> = ({
 	align = type === 'primary' ? 'center' : 'left',
 	buttonProps,
 	buttonSize = 'normal',
-	buttonPattern = 'primary',
+	buttonPattern = 'fill',
 	children,
 }) => {
 	const HeadingTag = getHeadingTag(type);

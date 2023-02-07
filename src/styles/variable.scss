@@ -32,28 +32,28 @@
 	--success-light: 63, 224, 177; // #3fe0b1;
 	--success: 32, 201, 151; // #20c997;
 	--success-dark: 24, 150, 113; // #189671;
-	--success-lighter: 19, 120, 90; // #13785a;
+	--success-darker: 19, 120, 90; // #13785a;
 
 	// error
-	--error-light: 228, 122, 175; // #e47aaf;
+	--error-lighter: 228, 122, 175; // #e47aaf;
 	--error-light: 222, 91, 156; // #de5b9c;
 	--error: 214, 51, 132; // #d63384;
 	--error-dark: 187, 37, 112; // #bb2570;
-	--error-light: 143, 28, 85; // #8f1c55;
+	--error-darker: 143, 28, 85; // #8f1c55;
 
 	// info
-	--info-light: 85, 153, 253; // #5599fd;
+	--info-lighter: 85, 153, 253; // #5599fd;
 	--info-light: 54, 134, 253; // #3686fd;
 	--info: 13, 110, 253; // #0d6efd;
 	--info-dark: 1, 86, 211; // #0156d3;
-	--info-light: 1, 70, 171; // #0146ab;
+	--info-darker: 1, 70, 171; // #0146ab;
 
 	// warning
-	--warning-light: 255, 155, 143; // #ff9b8f;
+	--warning-lighter: 255, 155, 143; // #ff9b8f;
 	--warning-light: 255, 128, 112; // #ff8070;
 	--warning: 255, 102, 83; // #ff6653;
 	--warning-dark: 255, 56, 32; // #ff3820;
-	--warning-light: 219, 24, 0; // #db1800;
+	--warning-darker: 219, 24, 0; // #db1800;
 
 	--font-common: 9, 4, 60; // #09043c
 	--font-primary-light: var(--gray-100);
