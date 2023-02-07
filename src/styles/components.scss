@@ -113,9 +113,7 @@
 
 // 有使用到才會編譯進 CSS
 @layer components {
-	// compoments/base/heading
 	.heading {
-		@apply flex items-center relative;
-		@apply text-secondary font-bold;
+		@apply font-bold text-common-primary;
 	}
 }

@@ -17,6 +17,12 @@ module.exports = {
 			fontFamily: {
 				sans: ['Noto Sans TC', ...fontFamily.sans],
 			},
+			fontSize: {
+				heading1: ['2.5rem', 1.5],
+				heading2: ['2rem', 1.5],
+				heading3: ['1.75rem', 1.5],
+				heading4: ['1.5rem', 1.5],
+			},
 			opacity: {
 				8: '.08',
 				12: '.12',

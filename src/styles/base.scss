@@ -24,19 +24,19 @@ body {
 
 @layer base {
 	h1 {
-		@apply text-3xl;
+		@apply text-heading1;
 	}
 
 	h2 {
-		@apply text-2xl;
+		@apply text-heading2;
 	}
 
 	h3 {
-		@apply text-xl;
+		@apply text-heading3;
 	}
 
 	h4 {
-		@apply text-lg;
+		@apply text-heading4;
 	}
 
 	a {

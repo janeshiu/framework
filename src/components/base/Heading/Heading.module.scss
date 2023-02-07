@@ -1,4 +1,5 @@
 .heading {
+	@apply flex items-center relative;
 	button {
 		@apply font-normal;
 	}

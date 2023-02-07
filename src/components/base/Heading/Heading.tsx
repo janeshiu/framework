@@ -28,7 +28,10 @@ const Heading: React.FC<HeadingProps> = ({
 	const hasButton = !!buttonProps;
 
 	return (
-		<HeadingTag className={`heading ${styles[align]} ${className ?? ''}`}>
+		<HeadingTag
+			className={`heading ${styles.heading} ${styles[align]} ${
+				className ?? ''
+			}`}>
 			{/* 僅供置中用 */}
 			{isCenter && hasButton && (
 				<Button
