@@ -72,7 +72,7 @@
 		&large {
 			&-- {
 				&large {
-					@apply text-xl;
+					@apply text-2xl;
 				}
 				&normal {
 					@apply text-lg;
@@ -85,7 +85,7 @@
 		&normal {
 			&-- {
 				&large {
-					@apply text-lg;
+					@apply text-xl;
 				}
 				&normal {
 					@apply text-base;
@@ -98,7 +98,7 @@
 		&small {
 			&-- {
 				&large {
-					@apply text-base;
+					@apply text-lg;
 				}
 				&normal {
 					@apply text-sm;
