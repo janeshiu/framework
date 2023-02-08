@@ -107,7 +107,7 @@ const InputBase: React.FC<InputBaseProps> = ({
 	}, [value]);
 
 	return (
-		<div className='relative'>
+		<div className='relative w-full'>
 			{showClearButton && !isEmpty && (
 				<ButtonClear
 					className={buttonClearClass}
