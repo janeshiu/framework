@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 
 interface FormProps {
 	className?: string;
-	onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+	onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 	onReset?: (event: React.FormEvent<HTMLFormElement>) => void;
 	children: ReactNode;
 }
@@ -13,8 +13,13 @@ const Form: React.FC<FormProps> = ({
 	onReset,
 	children,
 }) => {
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		onSubmit(event);
+	};
+
 	return (
-		<form className={className} onSubmit={onSubmit} onReset={onReset}>
+		<form className={className} onSubmit={handleSubmit} onReset={onReset}>
 			{children}
 		</form>
 	);
