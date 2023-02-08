@@ -1,25 +1,26 @@
 .label {
-	@apply flex;
+	@apply flex flex-col;
 
-	&-- {
-		// labelStyle
-		&row {
-			@apply flex-row flex-nowrap;
-		}
+	&.reverse {
+		@apply flex-col-reverse;
+	}
 
-		&column {
-			@apply flex-col;
+	&.row {
+		@apply flex-row flex-nowrap;
+		&.reverse {
+			@apply flex-row-reverse;
 		}
 	}
 }
 
 // labelTitle
 .labelTitle {
-	@apply flex justify-between items-end mb-1;
+	@apply flex justify-between items-end my-1;
 
 	span {
 		@apply block whitespace-nowrap;
 	}
+
 	a {
 		@apply no-underline;
 	}
