@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-interface FormProps {
+export interface FormProps {
 	className?: string;
 	onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 	onReset?: (event: React.FormEvent<HTMLFormElement>) => void;

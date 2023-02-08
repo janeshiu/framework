@@ -75,6 +75,7 @@
 
 		// iconClickable
 		&disabled {
+			@apply cursor-default;
 			@apply text-pattern #{!important};
 		}
 	}

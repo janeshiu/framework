@@ -56,7 +56,6 @@ const InputIcon: React.FC<InputIconProps> = ({
 		className: buttonClass,
 		pattern: 'ghost',
 		color: 'secondary',
-		disabled: !iconClickable,
 	};
 
 	return (
