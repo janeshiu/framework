@@ -107,7 +107,7 @@ const InputBase: React.FC<InputBaseProps> = ({
 	}, [value]);
 
 	return (
-		<div className='relative w-full'>
+		<div className={`relative w-full ${className ?? ''}`}>
 			{showClearButton && !isEmpty && (
 				<ButtonClear
 					className={buttonClearClass}
@@ -122,7 +122,7 @@ const InputBase: React.FC<InputBaseProps> = ({
 					if (!innerRef) return;
 					innerRef.current[name] = inputRef.current;
 				}}
-				className={`${baseClass} ${className ?? ''}`}
+				className={`${baseClass}`}
 				name={name}
 				aria-labelledby={name}
 				type={type}

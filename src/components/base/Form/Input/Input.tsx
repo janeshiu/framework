@@ -6,7 +6,6 @@ import { HorizontalType, ShapeType, SizeType } from '@/types/style';
 
 import classNames from 'classnames';
 import Button, { ButtonProps } from '../../Button/Button';
-import { Size } from '@/enums/style';
 
 interface InputProps {
 	inputProps: Exclude<InputBaseProps, 'size' | 'shape'>;
@@ -36,7 +35,7 @@ const Input: React.FC<InputProps> = ({
 	inputProps,
 
 	showButton = true,
-	buttonPosition = 'left',
+	buttonPosition = 'right',
 	buttonProps,
 
 	size = 'normal',
@@ -56,10 +55,19 @@ const Input: React.FC<InputProps> = ({
 	helperClass,
 }) => {
 	const hasButton = showButton && buttonProps;
+	const BUTTON_PROPS: ButtonProps = {
+		...buttonProps,
+		shape,
+		size,
+		pattern: buttonProps?.pattern ?? 'ghost',
+		color: buttonProps?.color ?? 'secondary',
+	};
 
 	const inputWrapperClass = classNames({
 		[styles[`input--wrapper`]]: true,
 		[styles[`input--hasButton`]]: hasButton,
+		[styles[`pattern--${BUTTON_PROPS.pattern}`]]: true,
+
 		[styles[buttonPosition]]: true,
 	});
 
@@ -67,6 +75,7 @@ const Input: React.FC<InputProps> = ({
 		[styles[`message--wrapper`]]: true,
 		[styles[`message--isCircle`]]: shape === 'circle',
 	});
+
 	return (
 		<div className={`${className ?? ''}`}>
 			<div
@@ -76,15 +85,7 @@ const Input: React.FC<InputProps> = ({
 						: ''
 				}`}>
 				<InputBase {...inputProps} size={size} shape={shape} />
-				{hasButton && (
-					<Button
-						{...buttonProps}
-						shape={shape}
-						size={size}
-						pattern={buttonProps.pattern ?? 'outline'}
-						color={buttonProps.color ?? 'secondary'}
-					/>
-				)}
+				{hasButton && <Button {...BUTTON_PROPS} />}
 			</div>
 			<div className={messageWrapperClass}>
 				{helper && helperMsg && (
