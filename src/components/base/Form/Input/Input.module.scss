@@ -55,3 +55,27 @@
 		}
 	}
 }
+
+.inputIcon {
+	&__ {
+		&button {
+			@apply px-3;
+			@apply w-auto #{!important};
+		}
+	}
+
+	&-- {
+		// iconPosition
+		&left {
+			@apply border-r-0 #{!important};
+		}
+		&right {
+			@apply border-l-0 #{!important};
+		}
+
+		// iconClickable
+		&disabled {
+			@apply text-pattern #{!important};
+		}
+	}
+}

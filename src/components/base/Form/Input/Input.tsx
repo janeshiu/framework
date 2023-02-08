@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Button, { ButtonProps } from '../../Button/Button';
 import MessageGroup, { MessageGroupProps } from '../../Message/MessageGroup';
 
-interface InputProps {
+export interface InputProps {
 	size?: SizeType;
 	shape?: ShapeType;
 	className?: string;
