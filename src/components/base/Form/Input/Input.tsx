@@ -1,5 +1,4 @@
-import { ReactNode } from 'react';
-import Message from '../../Message/Message';
+import { useRef } from 'react';
 import InputBase, { InputBaseProps } from './InputBase';
 import styles from './Input.module.scss';
 import { HorizontalType, ShapeType, SizeType } from '@/types/style';
@@ -13,17 +12,19 @@ interface InputProps {
 	shape?: ShapeType;
 	className?: string;
 
-	inputProps: Exclude<InputBaseProps, 'size' | 'shape'>;
+	inputProps: Exclude<InputBaseProps, 'size' | 'shape' | 'onSend'>;
+	onSend?: (currentValue: string | undefined) => void;
 
 	showButton?: boolean;
 	buttonPosition?: Exclude<HorizontalType, 'center'>;
-	buttonProps?: Exclude<ButtonProps, 'size' | 'shape'>;
+	buttonProps?: Exclude<ButtonProps, 'size' | 'shape' | 'onClick'>;
 
 	messagesProps?: MessageGroupProps;
 }
 
 const Input: React.FC<InputProps> = ({
 	inputProps,
+	onSend,
 
 	showButton = true,
 	buttonPosition = 'right',
@@ -36,6 +37,7 @@ const Input: React.FC<InputProps> = ({
 
 	messagesProps,
 }) => {
+	const inputRef = inputProps.innerRef || useRef({});
 	const hasButton = showButton && buttonProps;
 	const BUTTON_PROPS: ButtonProps = {
 		...buttonProps,
@@ -61,8 +63,23 @@ const Input: React.FC<InputProps> = ({
 						? styles[`button--${buttonProps.pattern || 'primary'}`]
 						: ''
 				}`}>
-				<InputBase {...inputProps} size={size} shape={shape} />
-				{hasButton && <Button {...BUTTON_PROPS} />}
+				<InputBase
+					{...inputProps}
+					innerRef={inputRef}
+					size={size}
+					shape={shape}
+					onSend={onSend}
+				/>
+				{hasButton && (
+					<Button
+						{...BUTTON_PROPS}
+						onClick={() => {
+							const currentValue =
+								inputProps.value ?? inputRef.current[inputProps.name].value;
+							onSend && onSend(currentValue);
+						}}
+					/>
+				)}
 			</div>
 			<MessageGroup
 				{...messagesProps}

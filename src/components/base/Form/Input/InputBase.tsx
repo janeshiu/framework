@@ -34,7 +34,7 @@ export interface InputBaseProps {
 	onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onFocus?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-	onSend?: (currentValue?: string) => void;
+	onSend?: (currentValue: string | undefined) => void;
 	onClear?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
