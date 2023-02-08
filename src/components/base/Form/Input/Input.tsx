@@ -13,11 +13,11 @@ export interface InputProps {
 	className?: string;
 
 	inputProps: Exclude<InputBaseProps, 'size' | 'shape' | 'onSend'>;
-	onSend?: (currentValue: string | undefined) => void;
+	onSend?: InputBaseProps['onSend'];
 
 	showButton?: boolean;
 	buttonPosition?: Exclude<HorizontalType, 'center'>;
-	buttonProps?: Exclude<ButtonProps, 'size' | 'shape' | 'onClick'>;
+	buttonProps?: Exclude<ButtonProps, 'size' | 'shape'>;
 
 	messagesProps?: MessageGroupProps;
 }
@@ -73,7 +73,11 @@ const Input: React.FC<InputProps> = ({
 				{hasButton && (
 					<Button
 						{...BUTTON_PROPS}
-						onClick={() => {
+						onClick={(e) => {
+							if (BUTTON_PROPS.onClick) {
+								BUTTON_PROPS.onClick(e);
+								return;
+							}
 							const currentValue =
 								inputProps.value ?? inputRef.current[inputProps.name].value;
 							onSend && onSend(currentValue);
