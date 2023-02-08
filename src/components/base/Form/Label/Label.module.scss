@@ -1,13 +1,5 @@
-.wrapper {
-	@apply p-2;
-}
-
 .label {
-	@apply inline-flex w-full;
-
-	a {
-		@apply no-underline text-sm;
-	}
+	@apply flex;
 
 	&-- {
 		// labelStyle
@@ -17,64 +9,16 @@
 
 		&column {
 			@apply flex-col;
-
-			aside {
-				@apply flex justify-between items-center px-1;
-			}
-		}
-
-		// label content
-		&name {
-			@apply block whitespace-nowrap h-8 leading-8;
-		}
-
-		// size
-		&large {
-			@apply text-lg;
-			a {
-				@apply text-base;
-			}
-		}
-		&normal {
-			@apply text-base;
-		}
-		&small {
-			@apply text-sm;
-			a {
-				@apply text-xs;
-			}
-		}
-	}
-}
-
-.icon {
-	@apply absolute h-8 flex items-center p-2;
-
-	&-- {
-		&left {
-			+ div input {
-				@apply pl-9;
-			}
-		}
-
-		&right {
-			@apply right-0;
-			+ div input {
-				@apply pr-9;
-			}
-		}
-
-		&clickable {
-			@apply cursor-pointer;
 		}
 	}
 }
 
 // labelTitle
 .labelTitle {
-	@apply flex justify-between items-center;
+	@apply flex justify-between items-end mb-1;
+
 	span {
-		@apply block whitespace-nowrap h-8 leading-8;
+		@apply block whitespace-nowrap;
 	}
 	a {
 		@apply no-underline;

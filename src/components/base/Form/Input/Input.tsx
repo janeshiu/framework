@@ -56,7 +56,7 @@ const Input: React.FC<InputProps> = ({
 	});
 
 	return (
-		<div className={`${className ?? ''}`}>
+		<div className={`w-full ${className ?? ''}`}>
 			<div
 				className={`${inputWrapperClass} ${
 					buttonProps
