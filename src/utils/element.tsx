@@ -45,6 +45,18 @@ const BsCheckCircleFill = dynamic(() =>
 	)
 );
 
+const BsCheckRadio = dynamic(() =>
+	import('react-icons/bs').then(
+		(bootstrapIcons) => bootstrapIcons.BsRecordCircle
+	)
+);
+
+const BsCheckRadioFill = dynamic(() =>
+	import('react-icons/bs').then(
+		(bootstrapIcons) => bootstrapIcons.BsRecordCircleFill
+	)
+);
+
 export const inputIcon = {
 	BsSquare: <BsSquare />,
 	BsCheckSquare: <BsCheckSquare />,
@@ -55,6 +67,10 @@ export const inputIcon = {
 	BsCheckCircle: <BsCheckCircle />,
 	BsCircleFill: <BsCircleFill />,
 	BsCheckCircleFill: <BsCheckCircleFill />,
+
+	BsRadio: <BsCircle />,
+	BsCheckRadio: <BsCheckRadio />,
+	BsCheckRadioFill: <BsCheckRadioFill />,
 };
 
 /**

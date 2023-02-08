@@ -1,0 +1,20 @@
+.inputToggleTitle {
+	> span {
+		@apply flex items-center space-x-1.5;
+	}
+}
+
+.icon {
+	@apply text-common-disabled;
+	@apply transition-all cursor-pointer;
+
+	&-- {
+		&check {
+			@apply text-pattern;
+		}
+
+		&disabled {
+			@apply text-common-disabled cursor-default;
+		}
+	}
+}

@@ -7,4 +7,8 @@ export const enum InputIconName {
 	BsCheckCircle = 'BsCheckCircle',
 	BsCircleFill = 'BsCircleFill',
 	BsCheckCircleFill = 'BsCheckCircleFill',
+
+	BsRadio = 'BsRadio',
+	BsCheckRadio = 'BsCheckRadio',
+	BsCheckRadioFill = 'BsCheckRadioFill',
 }
