@@ -5,7 +5,9 @@ import {
 	HTMLInputTypeAttribute,
 	MouseEvent,
 	MutableRefObject,
+	useEffect,
 	useRef,
+	useState,
 } from 'react';
 import ButtonClear from '../../Button/ButtonClear';
 import styles from './Input.module.scss';
@@ -14,8 +16,8 @@ export interface InputBaseProps {
 	name: string;
 	innerRef?: MutableRefObject<{ [name: string]: HTMLInputElement }>;
 	type?: HTMLInputTypeAttribute;
-	defaultValue?: string | number;
-	value?: string | number;
+	defaultValue?: string;
+	value?: string;
 	accept?: string;
 	placeholder?: string;
 	disabled?: boolean;
@@ -35,7 +37,7 @@ export interface InputBaseProps {
 
 const InputBase: React.FC<InputBaseProps> = ({
 	name,
-	innerRef = useRef({}),
+	innerRef,
 	type = 'text',
 	defaultValue,
 	value,
@@ -55,36 +57,70 @@ const InputBase: React.FC<InputBaseProps> = ({
 	onChange,
 	onClear,
 }) => {
+	const [isEmpty, setIsEmpty] = useState(false);
+	const inputRef = useRef<HTMLInputElement>();
+
 	const baseClass = classNames({
 		[`shape--${shape}`]: true,
+		[`shape--circle`]: true,
+
 		[`text-normal--${[size]}`]: true,
 		[`btn--${[size]}`]: true,
 
 		[styles[`inputBase`]]: true,
+		[styles[`shape--circle`]]: true,
 		[styles[`inputBase--${shape}`]]: true,
 		[styles[`inputBase--showClear`]]: showClearButton,
 	});
 
 	const buttonClearClass = classNames({
-		[styles[`inputBase--hideClear`]]: !(value || innerRef.current[name].value),
+		[styles[`clearButton`]]: true,
+		[styles[`clearButton--show`]]: !isEmpty,
 	});
 
+	const handleIsEmpty = () => {
+		const currentValue = value ?? inputRef.current?.value;
+		setIsEmpty(!currentValue);
+	};
+
 	const handleClear = (e: MouseEvent<HTMLButtonElement>) => {
-		if (value) {
+		if (value !== undefined) {
 			onClear && onClear(e);
 			return;
 		}
 
-		innerRef.current[name].value = '';
+		if (!inputRef.current) return;
+
+		inputRef.current.value = '';
+		handleIsEmpty();
 	};
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		onChange && onChange(e);
+
+		if (value !== undefined) return;
+		handleIsEmpty();
+	};
+
+	useEffect(() => {
+		handleIsEmpty();
+	}, [value]);
 
 	return (
 		<div className='relative'>
+			{showClearButton && !isEmpty && (
+				<ButtonClear
+					className={buttonClearClass}
+					size={size}
+					onClick={handleClear}
+				/>
+			)}
 			<input
 				ref={(e: HTMLInputElement) => {
-					if (!innerRef) return;
+					inputRef.current = e;
 
-					innerRef.current[name] = e;
+					if (!innerRef) return;
+					innerRef.current[name] = inputRef.current;
 				}}
 				className={`${baseClass} ${className ?? ''}`}
 				name={name}
@@ -101,15 +137,8 @@ const InputBase: React.FC<InputBaseProps> = ({
 				checked={checked}
 				onBlur={onBlur}
 				onFocus={onFocus}
-				onChange={onChange}
+				onChange={handleChange}
 			/>
-			{showClearButton && (
-				<ButtonClear
-					className={buttonClearClass}
-					size={size}
-					onClick={handleClear}
-				/>
-			)}
 		</div>
 	);
 };

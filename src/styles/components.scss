@@ -103,6 +103,24 @@
 	}
 }
 
+input {
+	&.shape {
+		&-- {
+			&circle {
+				@apply px-4;
+			}
+
+			&round {
+				@apply px-2;
+			}
+
+			&square {
+				@apply px-2;
+			}
+		}
+	}
+}
+
 // fontSize
 .text {
 	&- {
