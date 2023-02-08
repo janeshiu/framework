@@ -6,29 +6,20 @@ import { HorizontalType, ShapeType, SizeType } from '@/types/style';
 
 import classNames from 'classnames';
 import Button, { ButtonProps } from '../../Button/Button';
+import MessageGroup, { MessageGroupProps } from '../../Message/MessageGroup';
 
 interface InputProps {
+	size?: SizeType;
+	shape?: ShapeType;
+	className?: string;
+
 	inputProps: Exclude<InputBaseProps, 'size' | 'shape'>;
 
 	showButton?: boolean;
 	buttonPosition?: Exclude<HorizontalType, 'center'>;
 	buttonProps?: Exclude<ButtonProps, 'size' | 'shape'>;
 
-	size?: SizeType;
-	shape?: ShapeType;
-
-	className?: string;
-	success?: boolean;
-	successMsg?: ReactNode;
-	successClass?: string;
-
-	error?: boolean;
-	errorMsg?: ReactNode;
-	errorClass?: string;
-
-	helper?: boolean;
-	helperMsg?: ReactNode;
-	helperClass?: string;
+	messagesProps?: MessageGroupProps;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -39,20 +30,11 @@ const Input: React.FC<InputProps> = ({
 	buttonProps,
 
 	size = 'normal',
-	shape = 'circle',
+	shape = 'round',
 
 	className,
-	success,
-	successMsg,
-	successClass,
 
-	error,
-	errorMsg,
-	errorClass,
-
-	helper,
-	helperMsg,
-	helperClass,
+	messagesProps,
 }) => {
 	const hasButton = showButton && buttonProps;
 	const BUTTON_PROPS: ButtonProps = {
@@ -71,11 +53,6 @@ const Input: React.FC<InputProps> = ({
 		[styles[buttonPosition]]: true,
 	});
 
-	const messageWrapperClass = classNames({
-		[styles[`message--wrapper`]]: true,
-		[styles[`message--isCircle`]]: shape === 'circle',
-	});
-
 	return (
 		<div className={`${className ?? ''}`}>
 			<div
@@ -87,27 +64,11 @@ const Input: React.FC<InputProps> = ({
 				<InputBase {...inputProps} size={size} shape={shape} />
 				{hasButton && <Button {...BUTTON_PROPS} />}
 			</div>
-			<div className={messageWrapperClass}>
-				{helper && helperMsg && (
-					<Message size={size} msg={helperMsg} className={helperClass} />
-				)}
-				{error && errorMsg && (
-					<Message
-						type='error'
-						size={size}
-						msg={errorMsg}
-						className={errorClass}
-					/>
-				)}
-				{success && successMsg && (
-					<Message
-						type='success'
-						size={size}
-						msg={successMsg}
-						className={successClass}
-					/>
-				)}
-			</div>
+			<MessageGroup
+				{...messagesProps}
+				size={size}
+				className={shape === 'circle' ? 'px-4' : 'px-2'}
+			/>
 		</div>
 	);
 };

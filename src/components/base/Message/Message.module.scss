@@ -1,3 +1,4 @@
+// message
 .message {
 	@apply leading-tight break-normal;
 }
@@ -12,4 +13,9 @@
 
 .error {
 	@apply text-error;
+}
+
+// messageGroup
+.group {
+	@apply flex flex-col py-1;
 }

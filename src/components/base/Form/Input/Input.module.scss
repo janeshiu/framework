@@ -55,14 +55,3 @@
 		}
 	}
 }
-
-.message {
-	&-- {
-		&wrapper {
-			@apply flex flex-col px-2 py-1;
-		}
-		&isCircle {
-			@apply px-4;
-		}
-	}
-}
