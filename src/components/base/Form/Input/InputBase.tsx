@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {
 	ChangeEvent,
 	HTMLInputTypeAttribute,
+	KeyboardEvent,
 	MouseEvent,
 	MutableRefObject,
 	useEffect,
@@ -29,9 +30,11 @@ export interface InputBaseProps {
 	shape?: ShapeType;
 	size?: SizeType;
 	showClearButton?: boolean;
+	autoSendAfterChanged?: boolean;
 	onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onFocus?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+	onSend?: (currentValue?: string) => void;
 	onClear?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -52,9 +55,11 @@ const InputBase: React.FC<InputBaseProps> = ({
 	shape = 'circle',
 	size = 'normal',
 	showClearButton = false,
+	autoSendAfterChanged = false,
 	onBlur,
 	onFocus,
 	onChange,
+	onSend,
 	onClear,
 }) => {
 	const [isEmpty, setIsEmpty] = useState(false);
@@ -97,9 +102,21 @@ const InputBase: React.FC<InputBaseProps> = ({
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		onChange && onChange(e);
+		autoSendAfterChanged && handleSend(e.target.value);
 
 		if (value !== undefined) return;
 		handleIsEmpty();
+	};
+
+	const handleSend = (inputValue?: string) => {
+		if (!onSend) return;
+		const currentValue = inputValue ?? value ?? inputRef.current?.value;
+		onSend(currentValue);
+	};
+
+	const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key !== 'Enter') return;
+		handleSend();
 	};
 
 	useEffect(() => {
@@ -138,6 +155,7 @@ const InputBase: React.FC<InputBaseProps> = ({
 				onBlur={onBlur}
 				onFocus={onFocus}
 				onChange={handleChange}
+				onKeyUp={handleKeyUp}
 			/>
 		</div>
 	);
