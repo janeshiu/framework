@@ -69,3 +69,14 @@
 		}
 	}
 }
+
+// labelTitle
+.labelTitle {
+	@apply flex justify-between items-center;
+	span {
+		@apply block whitespace-nowrap h-8 leading-8;
+	}
+	a {
+		@apply no-underline;
+	}
+}
