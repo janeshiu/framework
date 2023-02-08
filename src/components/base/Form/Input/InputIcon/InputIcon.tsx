@@ -1,15 +1,16 @@
-import Input, { InputProps } from './Input';
-import styles from './Input.module.scss';
+import Input, { InputProps } from '../Input';
+import styles from '../Input.module.scss';
 import { ShapeType, SizeType } from '@/types/style';
 import classNames from 'classnames';
-import { ButtonProps } from '../../Button/Button';
+import { ButtonProps } from '../../../Button/Button';
 
-interface InputIconProps {
+export interface InputIconProps {
 	size?: SizeType;
 	shape?: ShapeType;
 	className?: string;
 
 	icon: JSX.Element;
+	iconType?: ButtonProps['type'];
 	iconClickable?: boolean;
 	iconPosition?: InputProps['buttonPosition'];
 
@@ -17,15 +18,21 @@ interface InputIconProps {
 
 	messagesProps?: InputProps['messagesProps'];
 
-	onSend: InputProps['onSend'];
+	onSend?: InputProps['onSend'];
 }
 
+/**
+ *
+ * @param onSend 若外層有包 Form 則不用設置 onSend
+ * @returns
+ */
 const InputIcon: React.FC<InputIconProps> = ({
 	size = 'normal',
 	shape = 'circle',
 	className,
 
 	icon,
+	iconType,
 	iconClickable = true,
 	iconPosition = 'right',
 
@@ -45,6 +52,7 @@ const InputIcon: React.FC<InputIconProps> = ({
 		shape,
 		size,
 		icon,
+		type: iconType,
 		className: buttonClass,
 		pattern: 'ghost',
 		color: 'secondary',
