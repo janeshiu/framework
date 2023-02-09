@@ -9,22 +9,42 @@ import { IconSize } from '@/enums/style';
 import { inputIcon, toIconSizeKey, transformElement } from '@/utils/element';
 import { InputIconNameType } from '@/types/element';
 
-interface InputToggleProps {
+type InputToggleProps = {
 	type: 'radio' | 'checkbox';
 	name: string;
 	content: string;
 	checked?: boolean;
 	disabled?: boolean;
+	value?: string;
+
 	className?: string;
-	shape?: Exclude<ShapeType, 'round'>;
 	size?: SizeType;
+	shape?: Exclude<ShapeType, 'round'>;
 	fill?: FillingType;
 	color?: ColorType;
-	value?: string;
+	hideIcon?: boolean;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 	afterChanged?: (isCheck: boolean) => void;
-}
+};
 
+/**
+ * Input Raddio & Checkbox 基礎元件，後續使用時請先以此為基礎新增元件後再使用
+ * @param type - radio or checkbox
+ * @param name - input name
+ * @param content - label content
+ * @param checked - is input checked?
+ * @param disabled - is disabled?
+ * @param value - input value
+ * @param className - className for component
+ * @param size - component size
+ * @param shape - input icon shape
+ * @param fill - input icon style of checked
+ * @param color - input icon color
+ * @param hideIcon - hideIcon
+ * @param onChange - callback of onChange event
+ * @param afterChange - callback after isChecked state is changed(useEffect)
+ * @returns
+ */
 const InputToggle: React.FC<InputToggleProps> = ({
 	type,
 	name,
@@ -37,7 +57,7 @@ const InputToggle: React.FC<InputToggleProps> = ({
 	color = 'primary',
 	className,
 	value,
-
+	hideIcon = false,
 	onChange,
 	afterChanged,
 }) => {
@@ -63,7 +83,7 @@ const InputToggle: React.FC<InputToggleProps> = ({
 	function renderContent() {
 		return (
 			<>
-				<span className={iconClass}>{clonedIcon}</span>
+				{!hideIcon && <span className={iconClass}>{clonedIcon}</span>}
 				<span>{content}</span>
 			</>
 		);
