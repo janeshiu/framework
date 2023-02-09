@@ -1,5 +1,11 @@
 import { IconSize } from '@/enums/style';
-import { ColorType, PatternBaseType, SizeType } from '@/types/style';
+import {
+	ColorType,
+	HorizontalType,
+	PatternBaseType,
+	ShapeType,
+	SizeType,
+} from '@/types/style';
 import { toIconSizeKey, transformElement } from '@/utils/element';
 import classNames from 'classnames';
 import React, { MouseEvent } from 'react';
@@ -8,11 +14,11 @@ import styles from './Button.module.scss';
 export interface ButtonProps {
 	type?: 'button' | 'submit' | 'reset';
 	className?: string;
-	content?: string | number;
+	content?: string;
 	icon?: JSX.Element;
-	iconPosition?: 'left' | 'right';
+	iconPosition?: Extract<HorizontalType, 'left' | 'right'>;
 	pattern?: PatternBaseType | 'fog' | 'ghost';
-	shape?: 'square' | 'round' | 'circle';
+	shape?: ShapeType;
 	size?: SizeType | 'full';
 	color?: ColorType;
 
@@ -20,6 +26,21 @@ export interface ButtonProps {
 	onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
+/**
+ * 按鈕 - icon & content 請至少擇一填寫
+ * @param type - button type
+ * @param className -
+ * @param content - 顯示文字
+ * @param icon - react-icons element
+ * @param iconPosition - icon 呈現位置
+ * @param pattern - 樣式(fill / outline / fog / ghost)
+ * @param shape - 形狀(square / round / circle)
+ * @param size - 尺寸
+ * @param color - 顏色
+ * @param disabled - disabled
+ * @param onClick - onClick
+ * @returns
+ */
 const Button: React.FC<ButtonProps> = ({
 	type = 'button',
 	className,
