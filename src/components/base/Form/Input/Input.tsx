@@ -29,7 +29,7 @@ export interface InputProps {
  * @param className - className
  *
  * @param inputProps - InputBase props，排除 'size' | 'shape' | 'onSend'
- * @param onSend - InputBase onSend，若有設置，按下 Enter 或 元件內按鈕執行
+ * @param onSend - InputBase onSend，若有設置，按下 Enter 或 元件內按鈕執行，若與 buttonProps.onClick 同時存在，點擊按鈕時只會執行 onClick
  *
  * @param showButton - 是否顯示按鈕
  * @param buttonPosition - 按鈕位置
