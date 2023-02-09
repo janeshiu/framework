@@ -34,9 +34,7 @@ const BsCheckCircle = dynamic(() =>
 );
 
 const BsCircleFill = dynamic(() =>
-	import('react-icons/bs').then(
-		(bootstrapIcons) => bootstrapIcons.BsCheckCircleFill
-	)
+	import('react-icons/bs').then((bootstrapIcons) => bootstrapIcons.BsCircleFill)
 );
 
 const BsCheckCircleFill = dynamic(() =>
@@ -69,6 +67,7 @@ export const inputIcon = {
 	BsCheckCircleFill: <BsCheckCircleFill />,
 
 	BsRadio: <BsCircle />,
+	BsRadioFill: <BsCircleFill />,
 	BsCheckRadio: <BsCheckRadio />,
 	BsCheckRadioFill: <BsCheckRadioFill />,
 };

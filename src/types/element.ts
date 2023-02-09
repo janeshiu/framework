@@ -1,3 +1,3 @@
-import { InputIconName } from '@/enums/element';
+import { inputIcon } from '@/utils/element';
 
-export type InputIconNameType = `${InputIconName}`;
+export type InputIconNameType = keyof typeof inputIcon;
