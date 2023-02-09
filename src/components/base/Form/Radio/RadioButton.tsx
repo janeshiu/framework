@@ -35,7 +35,6 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
 			disablededClassName={`pattern--disabled ${
 				styles[`radioButton--disabled`]
 			}`}
-			disabled
 		/>
 	);
 };
