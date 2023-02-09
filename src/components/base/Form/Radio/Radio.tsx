@@ -1,9 +1,9 @@
-import styles from './Radio.module.scss';
 import InputToggle, {
 	InputToggleProps,
 } from '../Input/InputToggle/InputToggle';
 
-interface RadioProps extends Omit<InputToggleProps, 'type' | 'shape' | 'fill'> {
+export interface RadioProps
+	extends Omit<InputToggleProps, 'type' | 'shape' | 'fill'> {
 	value: string;
 }
 

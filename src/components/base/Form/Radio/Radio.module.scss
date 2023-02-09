@@ -1,36 +1,57 @@
-// radio
-.radio {
-	@apply rounded inline-block text-center p-0 transition-all;
-	@apply border-2 border-secondary text-secondary;
+// // radio
+// .radio {
+// 	@apply rounded inline-block text-center p-0 transition-all;
+// 	@apply border-2 border-secondary text-secondary;
 
-	label {
-		@apply cursor-pointer w-full h-full px-6 py-1;
-	}
+// 	label {
+// 		@apply cursor-pointer w-full h-full px-6 py-1;
+// 	}
 
-	input[type='radio'] {
-		@apply hidden;
-	}
+// 	input[type='radio'] {
+// 		@apply hidden;
+// 	}
 
-	span {
-		@apply p-0;
+// 	span {
+// 		@apply p-0;
+// 	}
+// }
+
+// .active {
+// 	@apply border-warning text-warning bg-warning bg-opacity-5 #{!important};
+// }
+
+// .disabled {
+// 	@apply border-tertiary text-tertiary;
+
+// 	label {
+// 		@apply cursor-default pointer-events-none;
+// 	}
+// }
+
+.radioButton {
+	@apply inline-flex justify-center items-center h-12 px-4 cursor-pointer;
+	@apply border-2 border-pattern text-pattern;
+
+	&-- {
+		&checked {
+			@apply bg-pattern bg-opacity-lighter;
+			&.radioButton--disabled {
+				@apply border-common text-common bg-transparent;
+				@apply hover:bg-transparent;
+			}
+		}
+
+		&disabled {
+			@apply cursor-default;
+			@apply text-common-disabled border-common-disabled bg-common-disabled bg-opacity-normal-light;
+			@apply hover:bg-common-disabled hover:bg-opacity-normal-light;
+		}
 	}
 }
 
-.active {
-	@apply border-warning text-warning bg-warning bg-opacity-5 #{!important};
-}
-
-.disabled {
-	@apply border-tertiary text-tertiary;
-
-	label {
-		@apply cursor-default pointer-events-none;
-	}
-}
-
-// radioList
-.lockAll {
-	label {
-		@apply cursor-default pointer-events-none;
-	}
-}
+// // radioList
+// .lockAll {
+// 	label {
+// 		@apply cursor-default pointer-events-none;
+// 	}
+// }
