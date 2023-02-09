@@ -1,92 +1,32 @@
-import InputBase from '../Input/InputBase';
-import styles from './Checkbox.module.scss';
-import Label from '../Label/Label';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import classNames from 'classnames';
-import { FillingType, ShapeType, SizeType } from '@/types/style';
-import { upperCaseFirstLetter } from '@/utils/base';
-import { IconSize } from '@/enums/style';
-import { inputIcon, toIconSizeKey, transformElement } from '@/utils/element';
-import { InputIconNameType } from '@/types/element';
+import InputToggle, {
+	InputToggleProps,
+} from '../Input/InputToggle/InputToggle';
 
-interface CheckboxProps {
-	name: string;
-	content: string;
-	checked?: boolean;
-	disabled?: boolean;
-	className?: string;
-	shape?: Omit<ShapeType, 'round'>;
-	size?: SizeType;
-	fill?: FillingType;
-	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-	afterChanged?: (isCheck: boolean) => void;
-}
+export interface CheckboxProps extends Omit<InputToggleProps, 'type'> {}
 
-const Checkbox: React.FC<CheckboxProps> = ({
-	name,
-	content,
-	checked = false,
-	disabled = false,
-	shape = 'square',
-	fill = 'fill',
-	size = 'normal',
-	className,
-
-	onChange,
-	afterChanged,
-}) => {
-	const [isChecked, setIsChecked] = useState(checked);
-	const checkStatus = isChecked ? 'Check' : '';
-	const iconName = [
-		'Bs',
-		upperCaseFirstLetter(checkStatus),
-		upperCaseFirstLetter(shape as string),
-		upperCaseFirstLetter(disabled ? 'fill' : !isChecked ? '' : fill),
-	].join('') as InputIconNameType;
-
-	const iconClass = classNames({
-		[styles[`icon`]]: true,
-		[styles[`icon--check`]]: isChecked,
-		[styles[`icon--active`]]: isChecked,
-		[styles[`icon--stroke`]]: !isChecked,
-		[styles[`icon--disabled`]]: disabled,
-	});
-
-	const clonedIcon = transformElement(inputIcon[iconName], {
-		size: IconSize[toIconSizeKey(size)] + 2,
-	});
-
-	function renderContent() {
-		return (
-			<>
-				<span className={iconClass}>{clonedIcon}</span>
-				<span>{content}</span>
-			</>
-		);
-	}
-
-	useEffect(() => {
-		afterChanged && afterChanged(isChecked);
-	}, [isChecked]);
-
-	return (
-		<Label
-			content={renderContent()}
-			className={`${styles.checkbox} ${className ?? ''}`}
-			labelStyle='row'
-			size={size}>
-			<InputBase
-				type='checkbox'
-				name={name}
-				checked={isChecked}
-				disabled={disabled}
-				onChange={(event: ChangeEvent<HTMLInputElement>) => {
-					setIsChecked((prev) => !prev);
-					onChange && onChange(event);
-				}}
-			/>
-		</Label>
-	);
+/**
+ * Input Checkbox 基礎元件
+ * @param name - input name
+ * @param content - label content
+ * @param checked - is initial input checked?
+ * @param disabled - is disabled?
+ * @param value - input value
+ *
+ * @param className - className for component
+ * @param checkedClassName - className for checked component
+ * @param disablededClassName - className for disabled component
+ *
+ * @param size - component size
+ * @param shape - input icon shape
+ * @param fill - input icon style of checked
+ * @param color - input icon color
+ * @param hideIcon - hideIcon
+ * @param onChange - callback of onChange event
+ * @param afterChange - callback after isChecked state is changed(useEffect)
+ * @returns
+ */
+const Checkbox: React.FC<CheckboxProps> = (props) => {
+	return <InputToggle {...props} type='checkbox' fill={props.fill || true} />;
 };
 
 export default Checkbox;
