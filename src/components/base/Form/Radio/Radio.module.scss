@@ -30,11 +30,12 @@
 
 .radioButton {
 	@apply inline-flex justify-center items-center h-12 px-4 cursor-pointer;
-	@apply border-2 border-pattern text-pattern;
+	@apply border-2;
 
 	&-- {
 		&checked {
-			@apply bg-pattern bg-opacity-lighter;
+			@apply bg-pattern bg-opacity-light;
+
 			&.radioButton--disabled {
 				@apply border-common text-common bg-transparent;
 				@apply hover:bg-transparent;
@@ -43,8 +44,6 @@
 
 		&disabled {
 			@apply cursor-default;
-			@apply text-common-disabled border-common-disabled bg-common-disabled bg-opacity-normal-light;
-			@apply hover:bg-common-disabled hover:bg-opacity-normal-light;
 		}
 	}
 }

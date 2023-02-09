@@ -28,11 +28,14 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
 		<Radio
 			{...props}
 			hideIcon
-			className={`color--warning shape--round ${styles.radioButton} ${
-				className ?? ''
-			}`}
+			className={`color--warning pattern--outline shape--round ${
+				styles.radioButton
+			} ${className ?? ''}`}
 			checkedClassName={styles[`radioButton--checked`]}
-			disablededClassName={styles[`radioButton--disabled`]}
+			disablededClassName={`pattern--disabled ${
+				styles[`radioButton--disabled`]
+			}`}
+			disabled
 		/>
 	);
 };
