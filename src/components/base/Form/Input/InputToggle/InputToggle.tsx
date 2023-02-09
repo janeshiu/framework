@@ -35,7 +35,7 @@ export interface InputToggleProps {
  * @param type - radio or checkbox
  * @param name - input name
  * @param content - label content
- * @param checked - is initial input checked?
+ * @param checked - is input checked?
  * @param disabled - is disabled?
  * @param value - input value
  *

@@ -12,6 +12,16 @@ export interface LabelTitleProps {
 	className?: string;
 }
 
+/**
+ * LabelTitle - 使用於 Label 或 在 Form 內要呈現的標題...等
+ * @param content - label 呈現的文字
+ * @param size - 尺寸
+ * @param required - 必填
+ * @param href - 連結位置
+ * @param linkContent - 連結呈現文字
+ * @param className - className
+ * @returns
+ */
 const LabelTitle: React.FC<LabelTitleProps> = ({
 	required = false,
 	content,

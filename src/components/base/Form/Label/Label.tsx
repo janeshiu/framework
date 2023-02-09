@@ -15,9 +15,13 @@ interface LabelProps extends LabelTitleProps {
 }
 
 /**
- * @param row 控制 label & children 是否以一行顯示
- * @param reverse 控制 label & children 位置是否顛倒
- * @param children 請提供 input 元件
+ * Label - 使用時請包住 input element 或相關元件
+ * @param children - Label children
+ * @param row - 控制 label & children 是否以一行顯示
+ * @param reverse - 控制 label & children 位置是否顛倒
+ * @param labelTitleClassName - className for labelTitle
+ * @param className - className
+ * @param onClick - onClick
  * @returns
  */
 const Label: React.FC<LabelProps> = ({
