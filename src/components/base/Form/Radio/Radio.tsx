@@ -3,9 +3,7 @@ import InputToggle, {
 } from '../Input/InputToggle/InputToggle';
 
 export interface RadioProps
-	extends Omit<InputToggleProps, 'type' | 'shape' | 'fill'> {
-	value: string;
-}
+	extends Omit<InputToggleProps, 'type' | 'shape' | 'fill'> {}
 
 /**
  * Input Radio 基礎元件

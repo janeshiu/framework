@@ -15,7 +15,7 @@ export interface InputToggleProps {
 	content: string;
 	checked?: boolean;
 	disabled?: boolean;
-	value?: string;
+	value: string;
 
 	className?: string;
 	checkedClassName?: string;
@@ -126,7 +126,7 @@ const InputToggle: React.FC<InputToggleProps> = ({
 				name={name}
 				checked={isChecked}
 				disabled={disabled}
-				defaultValue={value || name}
+				defaultValue={value}
 				onChange={(event: ChangeEvent<HTMLInputElement>) => {
 					setIsChecked((prev) => !prev);
 					onChange && onChange(event);
