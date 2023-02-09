@@ -3,7 +3,6 @@ export const enum Colors {
 	SECONDARY = 'secondary',
 	SUCCESS = 'success',
 	ERROR = 'error',
-	HELPER = 'helper',
 	INFO = 'info',
 	WARNING = 'warning',
 }

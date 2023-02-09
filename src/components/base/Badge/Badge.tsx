@@ -13,9 +13,21 @@ interface BadgeProps {
 	pattern?: PatternBaseType;
 	shape?: 'square' | 'round' | 'circle';
 	size?: 'small' | 'normal' | 'large';
-	color?: Exclude<ColorType, 'helper'>;
+	color?: ColorType;
 }
 
+/**
+ * Badge
+ * @param className - className
+ * @param content - 要顯示的內容
+ * @param icon - react-icons element
+ * @param iconPosition - icon 位置
+ * @param pattern - 顯示型態(fill / outline)
+ * @param shape - 形狀(square / round / circle)
+ * @param size - 尺寸
+ * @param color - 顏色
+ * @returns
+ */
 const Badge: React.FC<BadgeProps> = ({
 	className,
 	content,
