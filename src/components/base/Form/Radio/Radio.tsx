@@ -1,47 +1,33 @@
-import InputBase, { InputBaseProps } from '../Input/InputBase';
 import styles from './Radio.module.scss';
-import Label from '../Label/Label';
-import { ChangeEvent, useEffect, useState } from 'react';
-import classNames from 'classnames';
+import InputToggle, {
+	InputToggleProps,
+} from '../Input/InputToggle/InputToggle';
 
-interface RadioProps {
-	name: string;
-	content: string;
-	value: string | number;
-	checked?: boolean;
-	disabled?: boolean;
-	className?: string;
-	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+interface RadioProps extends Omit<InputToggleProps, 'type' | 'shape' | 'fill'> {
+	value: string;
 }
 
-const Radio: React.FC<RadioProps> = ({
-	name,
-	content,
-	value,
-	checked = false,
-	disabled = false,
-	className,
-	onChange = () => {},
-}) => {
-	const toggleClass = classNames({
-		[styles.disabled]: disabled,
-		[styles.active]: checked,
-	});
-
-	return (
-		<Label
-			content={content}
-			className={`${styles.radio} ${toggleClass} ${className ?? ''}`}
-			labelStyle='row'>
-			<InputBase
-				type='radio'
-				name={name}
-				checked={checked}
-				defaultValue={value}
-				onChange={onChange}
-			/>
-		</Label>
-	);
+/**
+ * Input Radio 基礎元件
+ * @param name - input name
+ * @param content - label content
+ * @param checked - is initial input checked?
+ * @param disabled - is disabled?
+ * @param value - input value
+ *
+ * @param className - className for component
+ * @param checkedClassName - className for checked component
+ * @param disablededClassName - className for disabled component
+ *
+ * @param size - component size
+ * @param color - input icon color
+ * @param hideIcon - hideIcon
+ * @param onChange - callback of onChange event
+ * @param afterChange - callback after isChecked state is changed(useEffect)
+ * @returns
+ */
+const Radio: React.FC<RadioProps> = (props) => {
+	return <InputToggle {...props} type='radio' />;
 };
 
 export default Radio;
