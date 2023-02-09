@@ -61,7 +61,7 @@ const InputBase: React.FC<InputBaseProps> = ({
 
 	shape = 'circle',
 	size = 'normal',
-	hideInput = true,
+	hideInput = false,
 	showClearButton = false,
 	autoSendAfterChanged = false,
 	onBlur,
