@@ -9,7 +9,7 @@ import { IconSize } from '@/enums/style';
 import { inputIcon, toIconSizeKey, transformElement } from '@/utils/element';
 import { InputIconNameType } from '@/types/element';
 
-type InputToggleProps = {
+export interface InputToggleProps {
 	type: 'radio' | 'checkbox';
 	name: string;
 	content: string;
@@ -18,24 +18,31 @@ type InputToggleProps = {
 	value?: string;
 
 	className?: string;
+	checkedClassName?: string;
+	disablededClassName?: string;
+
 	size?: SizeType;
 	shape?: Exclude<ShapeType, 'round'>;
-	fill?: FillingType;
+	fill?: boolean;
 	color?: ColorType;
 	hideIcon?: boolean;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 	afterChanged?: (isCheck: boolean) => void;
-};
+}
 
 /**
- * Input Raddio & Checkbox 基礎元件，後續使用時請先以此為基礎新增元件後再使用
+ * Input Radio & Checkbox 基礎元件，後續使用時請先以此為基礎新增元件後再使用
  * @param type - radio or checkbox
  * @param name - input name
  * @param content - label content
- * @param checked - is input checked?
+ * @param checked - is initial input checked?
  * @param disabled - is disabled?
  * @param value - input value
+ *
  * @param className - className for component
+ * @param checkedClassName - className for checked component
+ * @param disablededClassName - className for disabled component
+ *
  * @param size - component size
  * @param shape - input icon shape
  * @param fill - input icon style of checked
@@ -52,10 +59,12 @@ const InputToggle: React.FC<InputToggleProps> = ({
 	checked = false,
 	disabled = false,
 	shape = 'square',
-	fill = 'fill',
+	fill = false,
 	size = 'normal',
 	color = 'primary',
 	className,
+	checkedClassName,
+	disablededClassName,
 	value,
 	hideIcon = false,
 	onChange,
@@ -63,12 +72,20 @@ const InputToggle: React.FC<InputToggleProps> = ({
 }) => {
 	const [isChecked, setIsChecked] = useState(checked);
 	const checkStatus = isChecked ? 'Check' : '';
+	const fillStatus = (disabled ? true : isChecked && fill) ? 'fill' : '';
 	const iconName = [
 		'Bs',
 		upperCaseFirstLetter(checkStatus),
 		upperCaseFirstLetter(type === 'radio' ? type : shape),
-		upperCaseFirstLetter(disabled ? 'fill' : !isChecked ? '' : fill),
+		upperCaseFirstLetter(fillStatus),
 	].join('') as InputIconNameType;
+
+	const baseClass = classNames({
+		[styles[`checkbox`]]: true,
+		[`color--${color}`]: true,
+		[checkedClassName ?? '']: isChecked,
+		[disablededClassName ?? '']: disabled,
+	});
 
 	const iconClass = classNames({
 		[styles[`icon`]]: true,
@@ -96,7 +113,7 @@ const InputToggle: React.FC<InputToggleProps> = ({
 	return (
 		<Label
 			content={renderContent()}
-			className={`${styles.checkbox} ${`color--${color}`} ${className ?? ''}`}
+			className={`${baseClass} ${className ?? ''}`}
 			labelTitleClassName={styles.inputToggleTitle}
 			row
 			size={size}>
