@@ -6,22 +6,23 @@
 	@apply float-left;
 
 	button {
-		@apply min-w-[32px] px-2 text-tertiary;
-		@apply hover:text-secondary-dark;
-		@apply disabled:opacity-0;
+		@apply min-w-[2.5rem] px-2;
+		@apply hover:bg-primary hover:bg-opacity-light;
+
+		@apply hover:bg-primary hover:bg-opacity-light;
 	}
 
 	&-- {
-		&active {
+		&disabled {
 			button {
-				@apply text-primary bg-quaternary;
-				@apply hover:text-primary;
+				@apply hover:bg-transparent;
 			}
 		}
 
-		&none {
+		&active {
 			button {
-				@apply disabled:opacity-100;
+				@apply bg-primary bg-opacity-dark;
+				@apply hover:bg-opacity-dark;
 			}
 		}
 	}

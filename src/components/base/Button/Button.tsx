@@ -14,7 +14,7 @@ import styles from './Button.module.scss';
 export interface ButtonProps {
 	type?: 'button' | 'submit' | 'reset';
 	className?: string;
-	content?: string;
+	content?: string | number;
 	icon?: JSX.Element;
 	iconPosition?: Extract<HorizontalType, 'left' | 'right'>;
 	pattern?: PatternBaseType | 'fog' | 'ghost';
