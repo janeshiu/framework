@@ -16,12 +16,28 @@ export interface InputProps {
 	onSend?: InputBaseProps['onSend'];
 
 	showButton?: boolean;
-	buttonPosition?: Exclude<HorizontalType, 'center'>;
+	buttonPosition?: Extract<HorizontalType, 'left' | 'right'>;
 	buttonProps?: Exclude<ButtonProps, 'size' | 'shape'>;
 
 	messagesProps?: MessageGroupProps;
 }
 
+/**
+ * Input 元件，可顯示按鈕
+ * @param size - 尺寸
+ * @param shape - 形狀
+ * @param className - className
+ *
+ * @param inputProps - InputBase props，排除 'size' | 'shape' | 'onSend'
+ * @param onSend - InputBase onSend，若有設置，按下 Enter 或 元件內按鈕執行
+ *
+ * @param showButton - 是否顯示按鈕
+ * @param buttonPosition - 按鈕位置
+ * @param buttonProps - Button props，排除 'size' | 'shape'
+ *
+ * @param messagesProps - Messages props，控制訊息顯示
+ * @returns
+ */
 const Input: React.FC<InputProps> = ({
 	inputProps,
 	onSend,
