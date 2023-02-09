@@ -7,6 +7,14 @@ export interface FormProps {
 	children: ReactNode;
 }
 
+/**
+ * Form 元件，照 form 使用
+ * @param className - className
+ * @param onSubmit - onSubmit
+ * @param onReset - onReset
+ * @param children - Form children
+ * @returns
+ */
 const Form: React.FC<FormProps> = ({
 	className,
 	onSubmit,
