@@ -110,6 +110,10 @@ const InputToggle: React.FC<InputToggleProps> = ({
 		afterChanged && afterChanged(isChecked);
 	}, [isChecked]);
 
+	useEffect(() => {
+		setIsChecked(checked);
+	}, [checked]);
+
 	return (
 		<Label
 			content={renderContent()}
