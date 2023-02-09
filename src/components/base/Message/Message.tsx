@@ -9,6 +9,14 @@ interface MessageProps {
 	className?: string;
 }
 
+/**
+ * 一般表單 / input 底下所顯示的訊息的基礎元件
+ * @param msg - 訊息內容
+ * @param size - 尺寸
+ * @param type - 訊息類型，'success' | 'error' | 'normal'
+ * @param className - className
+ * @returns
+ */
 const Message: React.FC<MessageProps> = ({
 	msg,
 	size = 'normal',
