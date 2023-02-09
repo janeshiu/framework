@@ -29,6 +29,7 @@ export interface InputBaseProps {
 	checked?: boolean;
 	shape?: ShapeType;
 	size?: SizeType;
+	hideInput?: boolean;
 	showClearButton?: boolean;
 	autoSendAfterChanged?: boolean;
 	onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -38,22 +39,29 @@ export interface InputBaseProps {
 	onClear?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
+/**
+ * InputBase - 原型 input 元件，後續 Input component 請以此進行調整
+ * @param innerRef - 請使用 useRef({})，後續 element 會放置進 useRef.current[name] 裏面
+ * @param className - className
+ * @param shape - input 外框形狀
+ * @param size - input 尺寸
+ * @param hideInput - 是否隱藏 input element
+ * @param showClearButton - input 欄位內是否要顯示清除按鈕 [x]
+ * @param autoSendAfterChanged - 是否在每次 onChange 後自動執行 onSend
+ * @param onBlur - onBlur
+ * @param onFocus - onFocus
+ * @param onChange - onChange
+ * @param onSend - 若 Input 欄位不存在在 Form 內，需要 Enter 執行送出時使用
+ * @param onClear - 點擊清除按鈕時所執行的 callback，若使用 value 時，請設置清除內容的 state
+ * @returns
+ */
 const InputBase: React.FC<InputBaseProps> = ({
-	name,
 	innerRef,
-	type = 'text',
-	defaultValue,
-	value,
-	accept,
-	placeholder,
-	disabled = false,
-	autoComplete = 'off',
 	className,
-	readonly,
-	required,
-	checked,
+
 	shape = 'circle',
 	size = 'normal',
+	hideInput = true,
 	showClearButton = false,
 	autoSendAfterChanged = false,
 	onBlur,
@@ -61,7 +69,21 @@ const InputBase: React.FC<InputBaseProps> = ({
 	onChange,
 	onSend,
 	onClear,
+
+	...restProps
+	// name,
+	// type = 'text',
+	// autoComplete = 'off',
+	// defaultValue,
+	// value,
+	// accept,
+	// placeholder,
+	// disabled = false,
+	// readonly,
+	// required,
+	// checked,
 }) => {
+	const { name, value } = restProps;
 	const [isEmpty, setIsEmpty] = useState(false);
 	const inputRef = useRef<HTMLInputElement>();
 
@@ -89,15 +111,11 @@ const InputBase: React.FC<InputBaseProps> = ({
 	};
 
 	const handleClear = (e: MouseEvent<HTMLButtonElement>) => {
-		if (value !== undefined) {
-			onClear && onClear(e);
-			return;
+		if (value === undefined && !!inputRef.current) {
+			inputRef.current.value = '';
+			handleIsEmpty();
 		}
-
-		if (!inputRef.current) return;
-
-		inputRef.current.value = '';
-		handleIsEmpty();
+		onClear && onClear(e);
 	};
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -124,7 +142,10 @@ const InputBase: React.FC<InputBaseProps> = ({
 	}, [value]);
 
 	return (
-		<div className={`relative w-full ${className ?? ''}`}>
+		<div
+			className={`relative w-full ${hideInput ? 'hidden' : ''} ${
+				className ?? ''
+			}`}>
 			{showClearButton && !isEmpty && (
 				<ButtonClear
 					className={buttonClearClass}
@@ -140,22 +161,23 @@ const InputBase: React.FC<InputBaseProps> = ({
 					innerRef.current[name] = inputRef.current;
 				}}
 				className={`${baseClass}`}
-				name={name}
 				aria-labelledby={name}
-				type={type}
-				defaultValue={defaultValue}
-				value={value}
-				placeholder={placeholder}
-				disabled={disabled}
-				autoComplete={autoComplete}
-				accept={accept}
-				readOnly={readonly}
-				required={required}
-				checked={checked}
 				onBlur={onBlur}
 				onFocus={onFocus}
 				onChange={handleChange}
 				onKeyUp={handleKeyUp}
+				{...restProps}
+				// name={name}
+				// type={type}
+				// defaultValue={defaultValue}
+				// value={value}
+				// placeholder={placeholder}
+				// disabled={disabled}
+				// autoComplete={autoComplete}
+				// accept={accept}
+				// readOnly={readonly}
+				// required={required}
+				// checked={checked}
 			/>
 		</div>
 	);
