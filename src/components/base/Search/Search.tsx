@@ -12,7 +12,7 @@ interface SearchProps {
 	iconClickable?: boolean;
 	iconPosition?: InputProps['buttonPosition'];
 
-	inputProps?: Exclude<
+	inputProps?: Omit<
 		InputIconProps['inputProps'],
 		'name' | 'placeholder' | 'onSend'
 	>;
@@ -24,6 +24,22 @@ interface SearchProps {
 	onSubmit: FormProps['onSubmit'];
 }
 
+/**
+ * 搜尋欄位
+ * @param size - 尺寸
+ * @param shape - 形狀
+ * @param className - className
+ *
+ * @param iconClickable - icon 是否可被點擊
+ * @param iconPosition - icon 位置
+ *
+ * @param inputProps - InputBase props，排除 'name' | 'placeholder' | 'onSend' | 'content' | 'size' | 'shape'
+ * @param name - input name
+ * @param placeholder - input placeholder
+ * @param messagesProps - Messages props，控制訊息顯示
+ * @param onSubmit - onSubmit
+ * @returns
+ */
 const Search: React.FC<SearchProps> = ({
 	size = 'normal',
 	shape = 'circle',
@@ -34,7 +50,7 @@ const Search: React.FC<SearchProps> = ({
 
 	inputProps,
 	name = 'search',
-	placeholder,
+	placeholder = '請輸入要搜尋的關鍵字',
 
 	messagesProps,
 

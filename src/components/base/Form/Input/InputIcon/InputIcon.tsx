@@ -15,7 +15,7 @@ export interface InputIconProps {
 	iconClickable?: boolean;
 	iconPosition?: InputProps['buttonPosition'];
 
-	inputProps: Exclude<InputProps['inputProps'], 'content'>;
+	inputProps: Omit<InputProps['inputProps'], 'content'>;
 
 	messagesProps?: InputProps['messagesProps'];
 
