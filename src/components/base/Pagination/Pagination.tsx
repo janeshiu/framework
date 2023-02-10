@@ -1,28 +1,36 @@
+import useBreakpoints from '@/hooks/useBreakpoint';
 import { SizeType } from '@/types/style';
-import classNames from 'classnames';
 import React, { useState, MouseEvent, useEffect } from 'react';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import Button from '../Button/Button';
 import styles from './Pagination.module.scss';
 import PaginationItem, { Action, ActionType } from './PaginationItem';
 
 interface PaginationProps {
 	totalPages: number;
 	initialPage?: number;
-	pageLength?: 7 | 9 | 11;
+	MAX_LENGTH?: 7 | 9 | 11; // 奇數，不可小於 7
+	showFirstLastButton?: boolean;
+	hideDisabledButton?: boolean;
 	size?: SizeType;
 	onPageChanged: (currentPage: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
 	totalPages,
-	pageLength = 7,
+	MAX_LENGTH = 7,
 	initialPage = 1,
+	showFirstLastButton = false,
+	hideDisabledButton = false,
 	size = 'normal',
 	onPageChanged,
 }) => {
-	const MAX_LENGTH = pageLength; // 奇數，不可小於 7
+	const { isMobile } = useBreakpoints();
 	const [currentPage, setCurrentPage] = useState<number>(initialPage);
+
+	if (isMobile) {
+		MAX_LENGTH = 7;
+		size = 'small';
+		showFirstLastButton = false;
+	}
 
 	const handleChangePage = (
 		event: MouseEvent<HTMLButtonElement>,
@@ -147,6 +155,11 @@ const Pagination: React.FC<PaginationProps> = ({
 		disabled?: boolean;
 	}) => {
 		const { content, disabled } = options;
+		const actionValues: ActionType[] = Object.values(Action);
+		const isButton =
+			typeof content === 'string' &&
+			actionValues.includes(`${content}`) &&
+			content !== Action.NONE;
 
 		return (
 			<PaginationItem
@@ -154,6 +167,7 @@ const Pagination: React.FC<PaginationProps> = ({
 				size={size}
 				content={content}
 				disabled={disabled}
+				hidden={hideDisabledButton && disabled && isButton}
 				isActive={content === currentPage}
 				onClick={handleChangePage}
 			/>
@@ -169,15 +183,27 @@ const Pagination: React.FC<PaginationProps> = ({
 	return (
 		<div className='flex justify-center w-full p-2'>
 			<ul className={styles.pagination}>
+				{showFirstLastButton &&
+					renderPaginationItem({
+						content: Action.FIRST,
+						disabled: currentPage === 1,
+					})}
 				{renderPaginationItem({
 					content: Action.PREV,
 					disabled: currentPage === 1,
 				})}
+
 				{renderPaginationList()}
+
 				{renderPaginationItem({
 					content: Action.NEXT,
 					disabled: currentPage === totalPages,
 				})}
+				{showFirstLastButton &&
+					renderPaginationItem({
+						content: Action.LAST,
+						disabled: currentPage === totalPages,
+					})}
 			</ul>
 		</div>
 	);

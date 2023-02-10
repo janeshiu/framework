@@ -41,6 +41,7 @@ interface PaginationItemProps<T = number | ActionType> {
 	content: T;
 	isActive?: boolean;
 	disabled?: boolean;
+	hidden?: boolean;
 	onClick: (event: MouseEvent<HTMLButtonElement>, action: T) => void;
 }
 
@@ -49,6 +50,7 @@ const PaginationItem: React.FC<PaginationItemProps> = ({
 	content,
 	isActive = false,
 	disabled = false,
+	hidden,
 	onClick,
 }) => {
 	const actionValues: ActionType[] = Object.values(Action);
@@ -57,14 +59,15 @@ const PaginationItem: React.FC<PaginationItemProps> = ({
 
 	const icon = isAction ? getPaginationIcon(content) : undefined;
 
-	const classes = classNames({
+	const baseClass = classNames({
 		[styles.item]: true,
 		[styles[`item--active`]]: isActive,
 		[styles[`item--disabled`]]: disabled || content === Action.NONE,
+		[`invisible`]: hidden,
 	});
 
 	return (
-		<li key={content} className={classes}>
+		<li key={content} className={baseClass}>
 			<Button
 				pattern='ghost'
 				icon={icon}
