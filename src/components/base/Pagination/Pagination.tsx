@@ -11,9 +11,20 @@ interface PaginationProps {
 	showFirstLastButton?: boolean;
 	hideDisabledButton?: boolean;
 	size?: SizeType;
-	onPageChanged: (currentPage: number) => void;
+	afterPageChanged: (currentPage: number) => void;
 }
 
+/**
+ * Pagination
+ * @param totalPages - 總頁數
+ * @param initialPage - 當前頁碼
+ * @param MAX_LENGTH - 元件中間顯示的按鈕數量
+ * @param showFirstLastButton - 是否顯示頁首/頁尾按鈕
+ * @param hideDisabledButton - 是否隱藏無法被點擊之按鈕（前一頁、後一頁、頁首、頁尾）
+ * @param size - 尺寸
+ * @param afterPageChanged - callback after currentPage changed(useEffect)
+ * @returns
+ */
 const Pagination: React.FC<PaginationProps> = ({
 	totalPages,
 	MAX_LENGTH = 7,
@@ -21,7 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({
 	showFirstLastButton = false,
 	hideDisabledButton = false,
 	size = 'normal',
-	onPageChanged,
+	afterPageChanged,
 }) => {
 	const { isMobile } = useBreakpoints();
 	const [currentPage, setCurrentPage] = useState<number>(initialPage);
@@ -175,7 +186,7 @@ const Pagination: React.FC<PaginationProps> = ({
 	};
 
 	useEffect(() => {
-		onPageChanged(currentPage);
+		afterPageChanged(currentPage);
 	}, [currentPage]);
 
 	if (totalPages <= 0) return <></>;

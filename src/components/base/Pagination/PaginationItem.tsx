@@ -45,6 +45,16 @@ interface PaginationItemProps<T = number | ActionType> {
 	onClick: (event: MouseEvent<HTMLButtonElement>, action: T) => void;
 }
 
+/**
+ * Pagination item
+ * @param size - 尺寸
+ * @param content - 顯示內容
+ * @param isActive - 是否被選取
+ * @param disabled - disabled
+ * @param hidden - 是否要隱藏按鈕
+ * @param onClick - onClick (event, action: number | ActionType)
+ * @returns
+ */
 const PaginationItem: React.FC<PaginationItemProps> = ({
 	size = 'normal',
 	content,
