@@ -1,16 +1,16 @@
-import InputBase from '../InputBase';
+import InputBase, { InputBaseProps } from '../InputBase';
 import styles from './InputToggle.module.scss';
 import Label from '../../Label/Label';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { ColorType, FillingType, ShapeType, SizeType } from '@/types/style';
+import { ColorType, ShapeType, SizeType } from '@/types/style';
 import { upperCaseFirstLetter } from '@/utils/base';
 import { IconSize } from '@/enums/style';
 import { inputIcon, toIconSizeKey, transformElement } from '@/utils/element';
 import { InputIconNameType } from '@/types/element';
 
 export interface InputToggleProps {
-	type: 'radio' | 'checkbox';
+	type: Extract<InputBaseProps['type'], 'radio' | 'checkbox'>;
 	name: string;
 	content: string;
 	checked?: boolean;
@@ -49,7 +49,7 @@ export interface InputToggleProps {
  * @param color - input icon color
  * @param hideIcon - hideIcon
  * @param onChange - callback of onChange event
- * @param afterChange - callback after isChecked state is changed(useEffect)
+ * @param afterChanged - callback after isChecked state is changed(useEffect)
  * @returns
  */
 const InputToggle: React.FC<InputToggleProps> = ({
@@ -127,6 +127,7 @@ const InputToggle: React.FC<InputToggleProps> = ({
 				checked={isChecked}
 				disabled={disabled}
 				defaultValue={value}
+				hideInput
 				onChange={(event: ChangeEvent<HTMLInputElement>) => {
 					setIsChecked((prev) => !prev);
 					onChange && onChange(event);

@@ -12,7 +12,7 @@ export interface InputProps {
 	shape?: ShapeType;
 	className?: string;
 
-	inputProps: Omit<InputBaseProps, 'size' | 'shape' | 'onSend'>;
+	inputProps: Omit<InputBaseProps, 'size' | 'shape' | 'onSend' | 'hideInput'>;
 	onSend?: InputBaseProps['onSend'];
 
 	showButton?: boolean;
