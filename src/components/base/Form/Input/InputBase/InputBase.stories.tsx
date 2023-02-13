@@ -1,13 +1,12 @@
 import React from 'react';
-import InputBase from './InputBase';
-
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { default as StorybookComponent } from './InputBase';
 
-type ComponentType = typeof InputBase;
+type ComponentType = typeof StorybookComponent;
 
 export default {
-	title: 'base/Input/InputBase',
-	component: InputBase,
+	title: 'base/InputBase/InputBase',
+	component: StorybookComponent,
 	argTypes: {
 		type: { control: 'text' },
 		innerRef: { control: 'string' },
@@ -16,7 +15,7 @@ export default {
 } as ComponentMeta<ComponentType>;
 
 const Template: ComponentStory<ComponentType> = (args) => (
-	<InputBase {...args} />
+	<StorybookComponent {...args} />
 );
 
 export const Default = Template.bind({});

@@ -6,15 +6,17 @@ import { transformElement } from '@/utils/element';
 
 export interface InputOutlineProps {
 	className?: string;
+	/** size of outline component */
 	size?: SizeType;
+	/** shape of outline component */
 	shape?: ShapeType;
 	children: ReactNode;
 }
 
 /**
  * Input 外框輪廓樣式，請配合 InputBase 系列使用
- * @param size - input size
- * @param shape - input shape
+ * @param size - size of outline component
+ * @param shape - shape of outline component
  * @param className - className
  * @param children - please provide input component
 
@@ -31,7 +33,6 @@ const InputOutline: React.FC<InputOutlineProps> = ({
 		[styles[`inputOutline--circle`]]: shape === 'circle',
 		[`btn--${size}`]: true,
 		[`shape--${shape}`]: true,
-		[`text-normal--${size}`]: true,
 	});
 
 	return <div className={`${baseClass} ${className ?? ''}`}>{children}</div>;

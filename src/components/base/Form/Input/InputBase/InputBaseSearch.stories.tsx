@@ -5,7 +5,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 type ComponentType = typeof StorybookComponent;
 
 export default {
-	title: 'base/Input/InputBaseSearch',
+	title: 'base/InputBase/InputBaseSearch',
 	component: StorybookComponent,
 	argTypes: {
 		innerRef: { control: 'string' },

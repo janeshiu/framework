@@ -11,7 +11,7 @@ export interface InputBaseSearchProps extends Omit<InputBaseProps, 'type'> {
 }
 
 /**
- * InputBase - 原型 input 元件，後續 Input component 請以此進行調整
+ * InputBaseSearch - input[type='search'] 使用，後續 Input component 請以此進行調整
  * @param size - size of ButtonClear
  * @param onClear - 點擊清除按鈕時所執行的 callback，若使用 value 時，請設置清除 state 用的函式
  * @returns
