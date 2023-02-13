@@ -45,7 +45,7 @@ body {
 
 	input {
 		@apply w-full h-full px-2 transition-all;
-		@apply border-0 outline-none bg-transparent placeholder-common-secondary;
+		@apply border-0 outline-none bg-transparent placeholder-common-primary placeholder-opacity-darker;
 
 		&[type='checkbox'],
 		&[type='radio'] {

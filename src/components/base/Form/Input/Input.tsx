@@ -37,14 +37,9 @@ const Input: React.FC<InputProps> = ({
 	return (
 		<InputOutline size={size} shape={shape} className={className}>
 			{type === 'search' ? (
-				<InputBaseSearch
-					{...props}
-					onClear={onClear}
-					size={size}
-					shape={shape}
-				/>
+				<InputBaseSearch {...props} onClear={onClear} size={size} />
 			) : (
-				<InputBase {...props} size={size} shape={shape} />
+				<InputBase {...props} size={size} />
 			)}
 			{children}
 		</InputOutline>

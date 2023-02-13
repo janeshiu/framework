@@ -8,17 +8,15 @@ export interface InputOutlineProps {
 	className?: string;
 	size?: SizeType;
 	shape?: ShapeType;
-	focus?: boolean;
-	disabled?: boolean;
 	children: ReactNode;
 }
 
 /**
- * Input 外框輪廓
- * @param size - 尺寸
- * @param shape - 形狀
+ * Input 外框輪廓樣式，請配合 InputBase 系列使用
+ * @param size - input size
+ * @param shape - input shape
  * @param className - className
- * @param children - input's component
+ * @param children - please provide input component
 
  * @returns
  */

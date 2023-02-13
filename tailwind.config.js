@@ -51,7 +51,7 @@ module.exports = {
 
 				common: {
 					DEFAULT: withOpacity('--font-common'),
-					'primary-light': withOpacity('--font-light'),
+					'primary-light': withOpacity('--font-primary-light'),
 					primary: withOpacity('--font-primary'),
 					secondary: withOpacity('--font-secondary'),
 					disabled: withOpacity('--font-disabled'),
