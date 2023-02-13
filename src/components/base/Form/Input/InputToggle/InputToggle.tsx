@@ -1,4 +1,4 @@
-import InputBase, { InputBaseProps } from '../InputBase';
+import InputBase, { InputBaseProps } from '../InputBase/InputBase';
 import styles from './InputToggle.module.scss';
 import Label from '../../Label/Label';
 import React, { ChangeEvent, useEffect, useState } from 'react';

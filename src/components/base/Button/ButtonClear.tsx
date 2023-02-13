@@ -25,7 +25,6 @@ const ButtonClear: React.FC<ButtonClearProps> = ({
 }) => {
 	const baseClass = classNames({
 		[styles[`buttonClear`]]: true,
-		[styles[`buttonClear--${size}`]]: true,
 	});
 
 	return (

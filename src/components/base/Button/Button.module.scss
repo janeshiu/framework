@@ -51,7 +51,6 @@
 }
 
 .buttonClear {
-	@apply absolute top-1/2 right-0 -translate-y-1/2;
 	@apply hover:bg-pattern hover:bg-opacity-light;
 
 	&-- {

@@ -1,57 +1,18 @@
-// inputBase
-.inputBase {
-	@apply border border-gray-300 placeholder-common-secondary;
-	@apply transition-all;
-	@apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-dark;
-}
+.inputOutline {
+	@apply flex flex-nowrap w-full space-x-2 justify-between items-center transition-all;
+	@apply border border-gray-300;
 
-.clearButton {
-	+ input {
-		@apply pr-8;
+	&:has(input:focus:not(:read-only)) {
+		@apply border-common border-opacity-darker;
 	}
-}
 
-// input
-.pattern {
-	&-- {
-		&ghost {
-			> button {
-				@apply border border-gray-300;
-			}
-		}
+	&:has(input:disabled) {
+		@apply bg-common-disabled bg-opacity-lighter;
 	}
-}
 
-.input {
 	&-- {
-		&wrapper {
-			@apply flex;
-
-			> button {
-				@apply z-0;
-			}
-		}
-
-		&hasButton {
-			&.left {
-				@apply flex-row-reverse;
-
-				.inputBase {
-					@apply rounded-l-none border-l-0;
-				}
-				> button {
-					@apply rounded-r-none;
-				}
-			}
-
-			&.right {
-				.inputBase {
-					@apply rounded-r-none border-r-0;
-				}
-				> button {
-					@apply rounded-l-none;
-				}
-			}
+		&circle {
+			@apply px-2;
 		}
 	}
 }
