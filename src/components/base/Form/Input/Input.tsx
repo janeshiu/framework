@@ -9,19 +9,22 @@ import InputBaseSearch, {
 } from './InputBase/InputBaseSearch';
 
 export interface InputProps extends InputBaseProps, InputBaseSearchProps {
+	/** size of compoment */
 	size?: SizeType;
+
+	/** shape of compoment */
 	shape?: ShapeType;
+
 	className?: string;
 	children?: ReactNode;
 }
 
 /**
  * Input 元件
- * @param size - input size
- * @param shape - input shape
+ * @param size - size of compoment
+ * @param shape - shape of compoment
  * @param className - className
  * @param children - children
- * @param onClear - type = search 時使用的 callback function
  * @returns
  */
 const Input: React.FC<InputProps> = ({

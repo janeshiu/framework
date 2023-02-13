@@ -66,6 +66,7 @@ const InputBaseSearch: React.FC<InputBaseSearchProps> = ({
 		<div className='w-full h-full flex flex-nowrap'>
 			<InputBase
 				{...props}
+				type='text'
 				innerRef={inputRef}
 				onChange={handleChange}
 				size={size}

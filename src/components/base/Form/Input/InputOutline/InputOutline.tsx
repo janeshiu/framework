@@ -30,7 +30,6 @@ const InputOutline: React.FC<InputOutlineProps> = ({
 }) => {
 	const baseClass = classNames({
 		[styles[`inputOutline`]]: true,
-		[styles[`inputOutline--circle`]]: shape === 'circle',
 		[`btn--${size}`]: true,
 		[`shape--${shape}`]: true,
 	});

@@ -9,12 +9,6 @@
 	&:has(input:disabled) {
 		@apply bg-common-disabled bg-opacity-lighter;
 	}
-
-	&-- {
-		&circle {
-			@apply px-2;
-		}
-	}
 }
 
 // InputIcon
