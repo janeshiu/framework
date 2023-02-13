@@ -2,7 +2,9 @@ import { ShapeType, SizeType } from '@/types/style';
 import classNames from 'classnames';
 import {
 	ChangeEvent,
+	DetailedHTMLProps,
 	HTMLInputTypeAttribute,
+	InputHTMLAttributes,
 	KeyboardEvent,
 	MouseEvent,
 	MutableRefObject,
@@ -13,6 +15,29 @@ import {
 import ButtonClear from '../../Button/ButtonClear';
 import styles from './Input.module.scss';
 
+type originInputProps = DetailedHTMLProps<
+	InputHTMLAttributes<HTMLInputElement>,
+	HTMLInputElement
+>;
+
+export interface InputBaseProps1
+	extends Omit<originInputProps, 'ref' | 'size'> {
+	name: string;
+	value?: string;
+	defaultValue?: string;
+	innerRef?: MutableRefObject<{ [name: string]: HTMLInputElement }>;
+
+	shape?: ShapeType;
+	size?: SizeType;
+	hideInput?: boolean;
+	showClearButton?: boolean;
+	autoSendAfterChanged?: boolean;
+
+	onSend?: (currentValue: string | undefined) => void;
+	onClear?: (event: MouseEvent<HTMLButtonElement>) => void;
+}
+
+<input />;
 export interface InputBaseProps {
 	name: string;
 	innerRef?: MutableRefObject<{ [name: string]: HTMLInputElement }>;
@@ -35,7 +60,7 @@ export interface InputBaseProps {
 	onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onFocus?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-	onSend?: (currentValue: string | undefined) => void;
+	onSend?: (currentValue: string | number | undefined) => void;
 	onClear?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -55,7 +80,7 @@ export interface InputBaseProps {
  * @param onClear - 點擊清除按鈕時所執行的 callback，若使用 value 時，請設置清除內容的 state
  * @returns
  */
-const InputBase: React.FC<InputBaseProps> = ({
+const InputBase: React.FC<InputBaseProps1> = ({
 	innerRef,
 	className,
 
