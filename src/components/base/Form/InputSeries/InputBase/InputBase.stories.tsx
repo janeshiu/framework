@@ -5,7 +5,6 @@ import { default as StorybookComponent } from './InputBase';
 type ComponentType = typeof StorybookComponent;
 
 export default {
-	title: 'base/InputBase/InputBase',
 	component: StorybookComponent,
 	argTypes: {
 		type: { control: 'text' },

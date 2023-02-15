@@ -1,6 +1,6 @@
 import InputToggle, {
 	InputToggleProps,
-} from '../Input/InputToggle/InputToggle';
+} from '../InputSeries/InputToggle/InputToggle';
 
 export interface CheckboxProps extends Omit<InputToggleProps, 'type'> {}
 

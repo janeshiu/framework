@@ -1,6 +1,8 @@
-import { InputProps } from '../Form/Input/Input';
+import { InputProps } from '../Form/InputSeries/Input';
 import { ShapeType, SizeType } from '@/types/style';
-import InputIcon, { InputIconProps } from '../Form/Input/InputIcon/InputIcon';
+import InputIcon, {
+	InputIconProps,
+} from '../Form/InputSeries/InputIcon/InputIcon';
 import { BsSearch } from 'react-icons/bs';
 import Form, { FormProps } from '../Form/Form';
 
