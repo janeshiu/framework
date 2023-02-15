@@ -5,7 +5,7 @@
 }
 
 .icon {
-	@apply text-common-disabled;
+	@apply flex items-center text-common-disabled;
 	@apply transition-all cursor-pointer;
 
 	&-- {

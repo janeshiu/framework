@@ -1,118 +1,107 @@
 import InputBase, { InputBaseProps } from '../InputBase/InputBase';
 import styles from './InputToggle.module.scss';
 import Label from '../../Label/Label';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { ColorType, ShapeType, SizeType } from '@/types/style';
-import { upperCaseFirstLetter } from '@/utils/base';
-import { IconSize } from '@/enums/style';
-import { inputIcon, toIconSizeKey, transformElement } from '@/utils/element';
-import { InputIconNameType } from '@/types/element';
+import InputToggleIcon, { InputToggleIconProps } from './InputToggleIcon';
 
-export interface InputToggleProps {
-	type: Extract<InputBaseProps['type'], 'radio' | 'checkbox'>;
+export interface InputToggleProps extends InputToggleIconProps {
 	name: string;
+	innerRef?: InputBaseProps['innerRef'];
 	content: string;
+	defaultValue: string;
+
+	/** input checked */
 	checked?: boolean;
-	disabled?: boolean;
-	value: string;
+	/** input defaultChecked */
+	defaultChecked?: boolean;
 
 	className?: string;
+	/** className for checked component */
 	checkedClassName?: string;
+	/** className for disabled component */
 	disablededClassName?: string;
 
-	size?: SizeType;
-	shape?: Exclude<ShapeType, 'round'>;
-	fill?: boolean;
-	color?: ColorType;
-	hideIcon?: boolean;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+
+	/** callback after isChecked state is changed(useEffect) */
 	afterChanged?: (isCheck: boolean) => void;
 }
 
 /**
  * Input Radio & Checkbox 基礎元件，後續使用時請先以此為基礎新增元件後再使用
- * @param type - radio or checkbox
  * @param name - input name
  * @param content - label content
- * @param checked - is input checked?
- * @param disabled - is disabled?
- * @param value - input value
+ * @param defaultValue - input value
  *
- * @param className - className for component
+ * @param checked - input checked
+ * @param defaultChecked - input defaultChecked
+ * @param className - className
  * @param checkedClassName - className for checked component
  * @param disablededClassName - className for disabled component
  *
- * @param size - component size
- * @param shape - input icon shape
- * @param fill - input icon style of checked
- * @param color - input icon color
- * @param hideIcon - hideIcon
- * @param onChange - callback of onChange event
- * @param afterChanged - callback after isChecked state is changed(useEffect)
+ * @param onChange - onChange
+ * @param afterChanged - callback after innerState is changed(useEffect)
  * @returns
  */
 const InputToggle: React.FC<InputToggleProps> = ({
-	type,
 	name,
 	content,
-	checked = false,
-	disabled = false,
-	shape = 'square',
-	fill = false,
-	size = 'normal',
-	color = 'primary',
+	innerRef,
+	defaultValue,
+
+	checked,
+	defaultChecked,
+
 	className,
 	checkedClassName,
 	disablededClassName,
-	value,
-	hideIcon = false,
+
 	onChange,
 	afterChanged,
+
+	...iconProps
 }) => {
-	const [isChecked, setIsChecked] = useState(checked);
-	const checkStatus = isChecked ? 'Check' : '';
-	const fillStatus = (disabled ? true : isChecked && fill) ? 'fill' : '';
-	const iconName = [
-		'Bs',
-		upperCaseFirstLetter(checkStatus),
-		upperCaseFirstLetter(type === 'radio' ? type : shape),
-		upperCaseFirstLetter(fillStatus),
-	].join('') as InputIconNameType;
+	const { type, disabled, size } = iconProps;
+	const initialChecked = checked ?? defaultChecked ?? false;
+	const [isChecked, setIsChecked] = useState<boolean>(initialChecked);
 
 	const baseClass = classNames({
 		[styles[`checkbox`]]: true,
-		[`color--${color}`]: true,
 		[checkedClassName ?? '']: isChecked,
 		[disablededClassName ?? '']: disabled,
 	});
 
-	const iconClass = classNames({
-		[styles[`icon`]]: true,
-		[styles[`icon--check`]]: isChecked,
-		[styles[`icon--disabled`]]: disabled,
-	});
-
-	const clonedIcon = transformElement(inputIcon[iconName], {
-		size: IconSize[toIconSizeKey(size)] + 2,
-	});
-
-	function renderContent() {
+	const renderContent = () => {
 		return (
 			<>
-				{!hideIcon && <span className={iconClass}>{clonedIcon}</span>}
+				<InputToggleIcon {...iconProps} checked={isChecked} />
 				<span>{content}</span>
 			</>
 		);
-	}
+	};
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		if (checked === undefined) {
+			setIsChecked((prev) => !prev);
+		}
+
+		onChange && onChange(e);
+	};
 
 	useEffect(() => {
 		afterChanged && afterChanged(isChecked);
 	}, [isChecked]);
 
 	useEffect(() => {
-		setIsChecked(checked);
-	}, [checked]);
+		if (defaultChecked !== undefined) {
+			setIsChecked(defaultChecked);
+		}
+
+		if (checked !== undefined) {
+			setIsChecked(checked);
+		}
+	}, [defaultChecked, checked]);
 
 	return (
 		<Label
@@ -122,16 +111,16 @@ const InputToggle: React.FC<InputToggleProps> = ({
 			row
 			size={size}>
 			<InputBase
-				type={type}
+				className='hidden'
 				name={name}
-				checked={isChecked}
+				innerRef={innerRef}
+				type={type}
+				size={size}
 				disabled={disabled}
-				defaultValue={value}
-				hideInput
-				onChange={(event: ChangeEvent<HTMLInputElement>) => {
-					setIsChecked((prev) => !prev);
-					onChange && onChange(event);
-				}}
+				checked={isChecked}
+				// defaultChecked={defaultChecked}
+				defaultValue={defaultValue}
+				onChange={handleChange}
 			/>
 		</Label>
 	);

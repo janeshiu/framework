@@ -46,8 +46,6 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 	const [activeValue, setActiveValue] =
 		useState<RadioItem['value']>(currentValue);
 
-	if (radioItemList.length === 0) return <></>;
-
 	const handleChanged = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		const currentValue = e.target.value;
@@ -97,6 +95,8 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 	useEffect(() => {
 		setActiveValue(currentValue);
 	}, [currentValue]);
+
+	if (radioItemList.length === 0) return <></>;
 
 	return (
 		<div
