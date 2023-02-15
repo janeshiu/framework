@@ -1,22 +1,25 @@
 import styles from './Radio.module.scss';
 import Radio, { RadioProps } from './Radio';
 
-interface RadioButtonProps extends Omit<RadioProps, 'hideIcon'> {}
+interface RadioButtonProps extends Omit<RadioProps, 'hideIcon' | 'fill'> {}
 
 /**
  * RadioButton, 自訂 Input Radio 樣式
  * @param name - input name
  * @param content - label content
- * @param checked - is initial input checked?
- * @param disabled - is disabled?
- * @param value - input value
- *
- * @param className - className for component
+ * @param defaultValue - input defaultValue
+
+ * @param checked - input checked
+ * @param defaultChecked - input defaultChecked
+
+ * @param className - className
  * @param checkedClassName - className for checked component
  * @param disablededClassName - className for disabled component
  *
  * @param size - component size
  * @param color - input icon color
+ * @param hideIcon - hideIcon
+
  * @param onChange - callback of onChange event
  * @param afterChange - callback after isChecked state is changed(useEffect)
  * @returns
