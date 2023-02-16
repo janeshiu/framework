@@ -48,7 +48,7 @@
 	}
 }
 
-.pattern--clickable {
+.pattern--hoverEffect {
 	&.pattern {
 		&-- {
 			&fill {
@@ -61,6 +61,7 @@
 				@apply hover:ring-2 hover:ring-pattern hover:ring-opacity-darker;
 			}
 			&ghost {
+				@apply hover:bg-pattern-active hover:bg-opacity-lighter;
 			}
 		}
 	}
@@ -167,6 +168,8 @@ input {
 }
 
 .btn {
+	@apply flex items-center justify-center transition-all;
+
 	&-- {
 		&large {
 			@apply h-10;
@@ -177,6 +180,37 @@ input {
 		}
 		&small {
 			@apply h-8;
+		}
+	}
+
+	&.btn-- {
+		&large {
+			@apply px-7 space-x-2.5;
+		}
+		&full {
+			@apply min-w-full space-x-2;
+		}
+		&normal {
+			@apply px-6  space-x-2;
+		}
+		&small {
+			@apply px-5  space-x-1.5;
+		}
+	}
+
+	&.iconOnly {
+		@apply p-0;
+
+		&.btn-- {
+			&large {
+				@apply w-10;
+			}
+			&normal {
+				@apply w-9;
+			}
+			&small {
+				@apply w-8;
+			}
 		}
 	}
 

@@ -8,41 +8,47 @@ import {
 } from '@/types/style';
 import { toIconSizeKey, transformElement } from '@/utils/element';
 import classNames from 'classnames';
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import styles from './Button.module.scss';
 
-export interface ButtonProps {
-	type?: 'button' | 'submit' | 'reset';
-	className?: string;
-	content?: string | number;
-	icon?: JSX.Element;
-	iconPosition?: Extract<HorizontalType, 'left' | 'right'>;
-	pattern?: PatternBaseType | 'fog' | 'ghost';
-	shape?: ShapeType;
-	size?: SizeType | 'full';
-	color?: ColorType;
+type originButtonProps = React.DetailedHTMLProps<
+	React.ButtonHTMLAttributes<HTMLButtonElement>,
+	HTMLButtonElement
+>;
 
-	disabled?: boolean;
-	onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+export interface ButtonProps extends Omit<originButtonProps, 'children'> {
+	/** button text */
+	content?: string | number;
+	/** button icon - react-icons element */
+	icon?: JSX.Element;
+	/** icon Position in button */
+	iconPosition?: Extract<HorizontalType, 'left' | 'right'>;
+	/** button pattern(fill / outline / fog / ghost) */
+	pattern?: PatternBaseType | 'fog' | 'ghost';
+	/** button shape(square / round / circle) */
+	shape?: ShapeType;
+	/** button size */
+	size?: SizeType | 'full';
+	/** button color */
+	color?: ColorType;
+	/** close hover css effect or not */
+	closeHoverEffect?: boolean;
 }
 
 /**
+ * 與 React.button 基本上使用方式相同，只是擴張一些樣式設定
  * 按鈕 - icon & content 請至少擇一填寫
- * @param type - button type
- * @param className -
- * @param content - 顯示文字
- * @param icon - react-icons element
- * @param iconPosition - icon 呈現位置
- * @param pattern - 樣式(fill / outline / fog / ghost)
- * @param shape - 形狀(square / round / circle)
- * @param size - 尺寸
- * @param color - 顏色
- * @param disabled - disabled
- * @param onClick - onClick
+ * @param content - button text
+ * @param icon - button icon - react-icons element
+ * @param iconPosition - icon Position in button
+ * @param pattern - button pattern(fill / outline / fog / ghost)
+ * @param shape - button shape(square / round / circle)
+ * @param size - button size
+ * @param color - button color
+ * @param closeHoverEffect - close hover css effect or not
  * @returns
  */
 const Button: React.FC<ButtonProps> = ({
-	type = 'button',
 	className,
 	content,
 	icon,
@@ -51,34 +57,32 @@ const Button: React.FC<ButtonProps> = ({
 	shape = 'round',
 	size = 'normal',
 	color = pattern === 'ghost' ? 'secondary' : 'primary',
-	disabled = false,
-	onClick,
+	closeHoverEffect = pattern === 'ghost',
+
+	...props
 }) => {
+	const { disabled = false } = props;
 	if (!icon && !content)
 		throw '<Button> : Please provide icon or content either.';
-
+	const iconOnly = icon && !content;
 	const generalSize = (size === 'full' ? 'normal' : size) as SizeType;
 	const clonedIcon = transformElement(icon, {
-		size: IconSize[toIconSizeKey(generalSize)] + (size === 'normal' ? 0 : 2),
+		size: IconSize[toIconSizeKey(generalSize)] + 4,
 	});
 
 	const baseClass = classNames({
 		[`btn`]: true,
-
-		[styles[`button`]]: true,
+		[`btn--${size}`]: true,
 
 		[`pattern--${pattern}`]: true,
 		[`shape--${shape}`]: true,
 		[`color--${color}`]: true,
 		[`text-small--${generalSize}`]: true,
-
-		[`btn--${size}`]: true,
-		[styles[`button--${size}`]]: true,
-		[styles[`iconPosition--${iconPosition}`]]: true,
+		[styles[`iconPosition--${iconPosition}`]]: iconPosition === 'right',
 	});
 	const toggleClass = classNames({
-		[styles['iconOnly']]: clonedIcon && !content,
-		[`pattern--clickable`]: !disabled,
+		[`iconOnly`]: iconOnly,
+		[`pattern--hoverEffect`]: !closeHoverEffect && !disabled,
 		[`pattern--disabled`]: disabled,
 	});
 
@@ -93,10 +97,8 @@ const Button: React.FC<ButtonProps> = ({
 
 	return (
 		<button
-			type={type}
-			className={`${baseClass} ${toggleClass} ${className ?? ''}`}
-			onClick={onClick}
-			disabled={disabled}>
+			{...props}
+			className={`${baseClass} ${toggleClass} ${className ?? ''}`}>
 			{renderContent()}
 		</button>
 	);
