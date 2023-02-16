@@ -20,8 +20,6 @@ export interface InputButtonProps extends InputProps {
 
 	/** is button disabled or not */
 	buttonDisabled?: ButtonProps['disabled'];
-	/** is button keep original shape in component */
-	buttonKeepShape?: boolean;
 	/** is button separate from Input component */
 	separate?: boolean;
 	/** button on click */
@@ -29,8 +27,17 @@ export interface InputButtonProps extends InputProps {
 }
 
 /**
- * 顯示 icon 的 Input(最多可設置兩顆)
+ * 顯示 button 的 Input
  * 若有設定 onSend & 未設置 buttonOnClick, 將自動執行 onSend
+ * @param buttonClassName - button className
+ * @param buttonContent - button content
+ * @param buttonIcon - button icon - react-icons
+ * @param buttonType - button type
+ * @param buttonColor - button color
+ * @param buttonPattern - button pattern without ghost
+ * @param buttonDisabled - is button disabled or not
+ * @param separate - is button separate from Input component
+ * @param buttonOnClick - button on click
  */
 const InputButton: React.FC<InputButtonProps> = ({
 	className,
