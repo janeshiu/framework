@@ -2,7 +2,7 @@ import Input, { InputProps } from '../Input';
 import styles from '../Input.module.scss';
 import { ShapeType, SizeType } from '@/types/style';
 import classNames from 'classnames';
-import { ButtonProps } from '../../../Button/Button';
+import { ButtonProps } from '../../../ButtonSeries/Button';
 import { MouseEvent } from 'react';
 
 export interface InputIconProps {

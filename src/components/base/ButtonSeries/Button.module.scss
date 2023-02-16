@@ -1,0 +1,7 @@
+.iconPostion {
+	&-- {
+		&right {
+			@apply space-x-reverse flex-row-reverse;
+		}
+	}
+}

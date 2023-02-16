@@ -2,7 +2,7 @@ import { SizeType } from '@/types/style';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import React, { MouseEvent } from 'react';
-import Button from '../Button/Button';
+import Button from '../ButtonSeries/Button';
 import styles from './Pagination.module.scss';
 
 const BsChevronDoubleLeft = dynamic(() =>

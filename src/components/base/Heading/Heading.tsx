@@ -1,7 +1,7 @@
 import { HeadingSize } from '@/enums/style';
 import { AlignType, HeadingSizeType } from '@/types/style';
 import { ReactNode } from 'react';
-import Button, { ButtonProps } from '../Button/Button';
+import Button, { ButtonProps } from '../ButtonSeries/Button';
 import styles from './Heading.module.scss';
 
 interface HeadingProps {

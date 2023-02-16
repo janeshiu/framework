@@ -1,6 +1,6 @@
 import { SizeType } from '@/types/style';
 import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react';
-import ButtonClear from '../../../Button/ButtonClear';
+import ButtonClear from '../../../ButtonSeries/ButtonClear/ButtonClear';
 import InputBase, { InputBaseProps } from './InputBase';
 
 export interface InputBaseSearchProps extends Omit<InputBaseProps, 'type'> {
