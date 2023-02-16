@@ -9,7 +9,7 @@ export interface InputToggleProps extends InputToggleIconProps {
 	name: string;
 	innerRef?: InputBaseProps['innerRef'];
 	content: string;
-	defaultValue: string;
+	defaultValue?: string;
 
 	/** input checked */
 	checked?: boolean;
@@ -32,7 +32,7 @@ export interface InputToggleProps extends InputToggleIconProps {
  * Input Radio & Checkbox 基礎元件，後續使用時請先以此為基礎新增元件後再使用
  * @param name - input name
  * @param content - label content
- * @param defaultValue - input value
+ * @param defaultValue - input defaultValue
  *
  * @param checked - input checked
  * @param defaultChecked - input defaultChecked
@@ -119,7 +119,7 @@ const InputToggle: React.FC<InputToggleProps> = ({
 				disabled={disabled}
 				checked={isChecked}
 				// defaultChecked={defaultChecked}
-				defaultValue={defaultValue}
+				defaultValue={defaultValue ?? name}
 				onChange={handleChange}
 			/>
 		</Label>

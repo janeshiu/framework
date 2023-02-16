@@ -1,32 +1,47 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import { RadioProps } from '../Radio/Radio';
+import styles from '../Radio.module.scss';
+import dynamic from 'next/dynamic';
+import classNames from 'classnames';
 
 const RadioButton = dynamic(() => import('../RadioButton/RadioButton'));
 const Radio = dynamic(() => import('../Radio/Radio'));
 
-export interface RadioItem
-	extends Pick<RadioProps, 'content' | 'defaultValue' | 'disabled'> {}
+export interface RadioItem extends Pick<RadioProps, 'content' | 'disabled'> {
+	value: RadioProps['defaultValue'];
+}
 
 interface RadioGroupProps {
+	/** input name for all radio */
 	name: string;
+	/** list of radioItem data */
 	radioItemList: RadioItem[];
-	currentValue?: string;
+	/** controlled value for checked radio */
+	value?: string;
+	/** uncontrolled value for checked radio*/
+	defaultValue?: string;
 	className?: string;
+	/**disabled all non-checked radio items */
 	disabledNonChecked?: boolean;
+	/** radio style */
 	pattern?: '' | 'button';
+	/** fill radio or not, only workable when patten is original */
+	fill?: boolean;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-	afterChanged?: (value: RadioItem['defaultValue']) => void;
+	/** callback after radio checked(useEffect) */
+	afterChanged?: (value: RadioProps['defaultValue']) => void;
 }
 
 /**
  * RadioGroup
  * @param name - input name for all radio
  * @param radioItemList - list of radioItem data
- * @param currentValue - value for checked radio, 使用時可不使用 useState 控制
+ * @param value - controlled value for checked radio
+ * @param defaultValue - uncontrolled value for checked radio
  * @param className - className
- * @param disabledNonChecked - disabled all non-checked radio
+ * @param disabledNonChecked - disabled all non-checked radio items
  * @param pattern - radio style
+ * @param fill - fill radio or not, only workable when patten is original
  * @param onChange - onChange
  * @param afterChanged - callback after radio checked(useEffect)
  * @returns
@@ -34,20 +49,31 @@ interface RadioGroupProps {
 const RadioGroup: React.FC<RadioGroupProps> = ({
 	name,
 	radioItemList,
-	currentValue = '',
+	value,
+	defaultValue,
 	className,
 	disabledNonChecked = false,
 	pattern = 'button',
+	fill,
 	onChange,
 	afterChanged,
 }) => {
-	const [activeValue, setActiveValue] =
-		useState<RadioItem['defaultValue']>(currentValue);
+	const [activeValue, setActiveValue] = useState<RadioItem['value']>(
+		value ?? defaultValue ?? ''
+	);
+
+	const baseClass = classNames({
+		[styles[`radioGroup--button`]]: pattern === 'button',
+	});
 
 	const handleChanged = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
-		const currentValue = e.target.value;
-		setActiveValue(currentValue);
+
+		if (value === undefined) {
+			const updatedValue = e.target.value;
+			setActiveValue(updatedValue);
+		}
+
 		onChange && onChange(e);
 	};
 
@@ -61,8 +87,9 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 		const props = {
 			...radioItem,
 			...option,
-			key: radioItem.defaultValue,
+			key: radioItem.value,
 			name,
+			defaultValue: radioItem.value,
 			onChange: handleChanged,
 		};
 
@@ -70,14 +97,14 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 			case 'button':
 				return <RadioButton {...props} />;
 			default:
-				return <Radio {...props} />;
+				return <Radio {...props} fill={fill} />;
 		}
 	};
 
 	const renderRadioItemList = (() => {
 		return radioItemList.map((radioItem) => {
-			const { defaultValue, disabled } = radioItem;
-			const isCheck = activeValue === defaultValue;
+			const { value, disabled } = radioItem;
+			const isCheck = activeValue === value;
 			const isDisabled = disabled || disabledNonChecked;
 			return renderRadioItem(radioItem, {
 				checked: isCheck,
@@ -91,14 +118,15 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 	}, [activeValue]);
 
 	useEffect(() => {
-		setActiveValue(currentValue);
-	}, [currentValue]);
+		if (value !== undefined) {
+			setActiveValue(value);
+		}
+	}, [value]);
 
 	if (radioItemList.length === 0) return <></>;
 
 	return (
-		<div
-			className={`${pattern === '' ? '' : 'space-x-1.5'} ${className ?? ''}`}>
+		<div className={`${baseClass} ${className ?? ''}`}>
 			{renderRadioItemList}
 		</div>
 	);

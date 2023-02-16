@@ -2,7 +2,9 @@ import InputToggle, {
 	InputToggleProps,
 } from '../../InputSeries/InputToggle/InputToggle';
 
-export interface RadioProps extends Omit<InputToggleProps, 'type' | 'shape'> {}
+export interface RadioProps extends Omit<InputToggleProps, 'type' | 'shape'> {
+	defaultValue: string;
+}
 
 /**
  * Input Radio 基礎元件

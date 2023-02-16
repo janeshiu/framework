@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { default as StorybookComponent } from './RadioGroup';
 
@@ -17,18 +17,24 @@ const Template: ComponentStory<ComponentType> = (args) => (
 );
 
 const radioItemList = [
-	{ content: 'radio1', defaultValue: 'radio1', disabled: false },
-	{ content: 'radio2', defaultValue: 'radio2', disabled: false },
-	{ content: 'radio3', defaultValue: 'radio3', disabled: false },
-	{ content: 'radio4', defaultValue: 'radio4', disabled: false },
-	{ content: 'radio5', defaultValue: 'radio5', disabled: false },
+	{ content: 'radio1', value: 'radio1', disabled: false },
+	{ content: 'radio2', value: 'radio2', disabled: false },
+	{ content: 'radio3', value: 'radio3', disabled: false },
+	{ content: 'radio4', value: 'radio4', disabled: false },
+	{ content: 'radio5', value: 'radio5', disabled: true },
 ];
 
-export const defaultChecked = Template.bind({});
-defaultChecked.args = {
+export const defaultValue = Template.bind({});
+defaultValue.args = {
 	name: 'radio',
 	radioItemList,
+	disabledNonChecked: false,
 };
 
-// export const checked = Template.bind({});
-// checked.args = {};
+export const value = Template.bind({});
+value.args = {
+	name: 'radio',
+	radioItemList,
+	value: 'radio2',
+	disabledNonChecked: false,
+};

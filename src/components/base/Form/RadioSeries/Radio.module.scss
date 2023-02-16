@@ -17,3 +17,11 @@
 		}
 	}
 }
+
+.radioGroup {
+	&-- {
+		&button {
+			@apply flex space-x-1.5;
+		}
+	}
+}
