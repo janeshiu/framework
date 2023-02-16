@@ -26,3 +26,27 @@
 		}
 	}
 }
+
+.inputButton {
+	@apply flex space-x-3 transition-all;
+
+	div {
+		+ button {
+			@apply px-4 #{!important};
+		}
+	}
+
+	&-- {
+		&connect {
+			@apply space-x-0;
+			&:has(button) {
+				> div {
+					@apply rounded-r-none;
+					+ button {
+						@apply rounded-l-none;
+					}
+				}
+			}
+		}
+	}
+}
