@@ -1,14 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { RadioProps } from '../Radio/Radio';
 
-const RadioButton = dynamic(() => import('./RadioButton'));
-const Radio = dynamic(() => import('./Radio'));
+const RadioButton = dynamic(() => import('../RadioButton/RadioButton'));
+const Radio = dynamic(() => import('../Radio/Radio'));
 
-export interface RadioItem {
-	content: string;
-	value: string;
-	disabled?: boolean;
-}
+export interface RadioItem
+	extends Pick<RadioProps, 'content' | 'defaultValue' | 'disabled'> {}
 
 interface RadioGroupProps {
 	name: string;
@@ -18,7 +16,7 @@ interface RadioGroupProps {
 	disabledNonChecked?: boolean;
 	pattern?: '' | 'button';
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-	afterChanged?: (value: RadioItem['value']) => void;
+	afterChanged?: (value: RadioItem['defaultValue']) => void;
 }
 
 /**
@@ -44,7 +42,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 	afterChanged,
 }) => {
 	const [activeValue, setActiveValue] =
-		useState<RadioItem['value']>(currentValue);
+		useState<RadioItem['defaultValue']>(currentValue);
 
 	const handleChanged = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
@@ -63,7 +61,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 		const props = {
 			...radioItem,
 			...option,
-			key: radioItem.value,
+			key: radioItem.defaultValue,
 			name,
 			onChange: handleChanged,
 		};
@@ -78,8 +76,8 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 
 	const renderRadioItemList = (() => {
 		return radioItemList.map((radioItem) => {
-			const { value, disabled } = radioItem;
-			const isCheck = activeValue === value;
+			const { defaultValue, disabled } = radioItem;
+			const isCheck = activeValue === defaultValue;
 			const isDisabled = disabled || disabledNonChecked;
 			return renderRadioItem(radioItem, {
 				checked: isCheck,

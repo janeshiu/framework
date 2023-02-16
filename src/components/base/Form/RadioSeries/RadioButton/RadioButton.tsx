@@ -1,5 +1,5 @@
-import styles from './Radio.module.scss';
-import Radio, { RadioProps } from './Radio';
+import styles from '../Radio.module.scss';
+import Radio, { RadioProps } from '../Radio/Radio';
 
 interface RadioButtonProps extends Omit<RadioProps, 'hideIcon' | 'fill'> {}
 
