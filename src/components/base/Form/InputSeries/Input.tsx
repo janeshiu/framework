@@ -6,7 +6,7 @@ import { ShapeType, SizeType } from '@/types/style';
 import InputOutline from './InputOutline/InputOutline';
 import InputBaseSearch, {
 	InputBaseSearchProps,
-} from './InputBase/InputBaseSearch';
+} from './InputBase/InputBaseSearch/InputBaseSearch';
 
 export interface InputProps extends InputBaseProps, InputBaseSearchProps {
 	/** size of compoment */

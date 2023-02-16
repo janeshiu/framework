@@ -1,7 +1,7 @@
 import { SizeType } from '@/types/style';
 import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react';
-import ButtonClear from '../../../ButtonSeries/ButtonClear/ButtonClear';
-import InputBase, { InputBaseProps } from './InputBase';
+import ButtonClear from '../../../../ButtonSeries/ButtonClear/ButtonClear';
+import InputBase, { InputBaseProps } from '../InputBase';
 
 export interface InputBaseSearchProps extends Omit<InputBaseProps, 'type'> {
 	/** size of ButtonClear */
@@ -63,10 +63,11 @@ const InputBaseSearch: React.FC<InputBaseSearchProps> = ({
 	}, [inputRef]);
 
 	return (
-		<div className='w-full h-full flex flex-nowrap'>
+		<div className='w-full h-full flex flex-nowrap items-center'>
 			<InputBase
 				{...props}
 				type='text'
+				role='search'
 				innerRef={inputRef}
 				onChange={handleChange}
 				size={size}
