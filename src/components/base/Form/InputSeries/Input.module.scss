@@ -11,28 +11,18 @@
 	}
 }
 
-// InputIcon
 .inputIcon {
-	&__ {
-		&button {
-			@apply px-3;
-			@apply w-auto #{!important};
-		}
-	}
-
 	&-- {
-		// iconPosition
-		&left {
-			@apply border-r-0 #{!important};
-		}
-		&right {
-			@apply border-l-0 #{!important};
+		&hasLeftIcon {
+			input {
+				@apply pl-0;
+			}
 		}
 
-		// iconClickable
-		&disabled {
-			@apply cursor-default;
-			@apply text-pattern #{!important};
+		&hasRightIcon {
+			input {
+				@apply pr-0;
+			}
 		}
 	}
 }

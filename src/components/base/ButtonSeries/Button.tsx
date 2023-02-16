@@ -33,6 +33,8 @@ export interface ButtonProps extends Omit<originButtonProps, 'children'> {
 	color?: ColorType;
 	/** close hover css effect or not */
 	closeHoverEffect?: boolean;
+	/** close disabled css effect or not */
+	closeDisabledEffect?: boolean;
 }
 
 /**
@@ -46,6 +48,7 @@ export interface ButtonProps extends Omit<originButtonProps, 'children'> {
  * @param size - button size
  * @param color - button color
  * @param closeHoverEffect - close hover css effect or not
+ * @param closeDisabledEffect - close disabled css effect or not
  * @returns
  */
 const Button: React.FC<ButtonProps> = ({
@@ -58,6 +61,7 @@ const Button: React.FC<ButtonProps> = ({
 	size = 'normal',
 	color = pattern === 'ghost' ? 'secondary' : 'primary',
 	closeHoverEffect = pattern === 'ghost',
+	closeDisabledEffect = false,
 
 	...props
 }) => {
@@ -83,7 +87,8 @@ const Button: React.FC<ButtonProps> = ({
 	const toggleClass = classNames({
 		[`iconOnly`]: iconOnly,
 		[`pattern--hoverEffect`]: !closeHoverEffect && !disabled,
-		[`pattern--disabled`]: disabled,
+		[`cursor-default`]: disabled,
+		[`pattern--disabled`]: !closeDisabledEffect && disabled,
 	});
 
 	function renderContent() {

@@ -1,88 +1,120 @@
 import Input, { InputProps } from '../Input';
 import styles from '../Input.module.scss';
-import { ShapeType, SizeType } from '@/types/style';
 import classNames from 'classnames';
-import { ButtonProps } from '../../../ButtonSeries/Button';
-import { MouseEvent } from 'react';
+import Button, { ButtonProps } from '../../../ButtonSeries/Button';
+import { MouseEvent, useRef } from 'react';
 
-export interface InputIconProps {
-	size?: SizeType;
-	shape?: ShapeType;
-	className?: string;
+export interface InputIconProps extends InputProps {
+	/** left icon - react-icons */
+	leftIcon?: ButtonProps['icon'];
+	/** left icon type (same as button type) */
+	leftIconType?: ButtonProps['type'];
+	/** left icon color */
+	leftIconColor?: ButtonProps['color'];
+	/** is left icon disabled or not */
+	leftIconDisabled?: ButtonProps['disabled'];
+	/** left icon on click */
+	leftIconOnClick?: ButtonProps['onClick'];
 
-	icon: JSX.Element;
-	iconType?: ButtonProps['type'];
-	iconClickable?: boolean;
-	iconPosition?: InputProps['buttonPosition'];
-
-	inputProps: Omit<InputProps['inputProps'], 'content'>;
-
-	messagesProps?: InputProps['messagesProps'];
-
-	onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-	onSend?: InputProps['onSend'];
+	/** right icon - react-icons */
+	rightIcon?: ButtonProps['icon'];
+	/** right icon type (same as button type) */
+	rightIconType?: ButtonProps['type'];
+	/** right icon color */
+	rightIconColor?: ButtonProps['color'];
+	/** is right icon disabled or not */
+	rightIconDisabled?: ButtonProps['disabled'];
+	/** right icon on click */
+	rightIconOnClick?: ButtonProps['onClick'];
 }
 
 /**
- * 顯示 icon 的 Input
- * @param size - 尺寸
- * @param shape - 形狀
- * @param className - className
- *
- * @param icon - react-icons element
- * @param iconType - button type
- * @param iconClickable - icon 是否可被點擊
- *
- * @param inputProps - InputBase props，排除 'size' | 'shape' | 'onSend' | 'content'
- * @param messagesProps - Messages props，控制訊息顯示
- * @param onClick - Button onClick，若有設置，點擊元件內按鈕執行
- * @param onSend - InputBase onSend，若有設置，按下 Enter 或 元件內按鈕執行，若與 onClick 同時存在，點擊按鈕時只會執行 onClick
+ * 顯示 icon 的 Input(最多可設置兩顆)
+ * 若有設定 onSend & 未設置 iconOnClick, 將自動執行 onSend
+ * @param leftIcon - left icon - react-icons
+ * @param leftIconType - left icon type (same as button type)
+ * @param leftIconColor - left icon color
+ * @param leftIconDisabled - is left icon disabled or not
+ * @param leftIconOnCLick - left icon on click
+ * @param rightIcon - right icon - react-icons
+ * @param rightIconType - right icon type (same as button type)
+ * @param rightIconColor - right icon color
+ * @param rightIconDisabled - is right icon disabled or not
+ * @param rightIconOnCLick - right icon on click
  */
 const InputIcon: React.FC<InputIconProps> = ({
-	size = 'normal',
-	shape = 'circle',
-	className,
+	leftIcon,
+	leftIconType,
+	leftIconColor,
+	leftIconDisabled,
+	leftIconOnClick,
 
-	icon,
-	iconType,
-	iconClickable = true,
-	iconPosition = 'right',
+	rightIcon,
+	rightIconType,
+	rightIconColor,
+	rightIconDisabled,
+	rightIconOnClick,
 
-	inputProps,
-
-	messagesProps,
-
-	onSend,
-	onClick,
+	...props
 }) => {
-	const buttonClass = classNames({
-		[styles[`inputIcon__button`]]: true,
-		[styles[`inputIcon--${iconPosition}`]]: true,
-		[styles[`inputIcon--disabled`]]: !iconClickable,
+	const { innerRef, name, size, className, onSend } = props;
+	const inputRef = innerRef || useRef<HTMLInputElement>();
+	const baseClass = classNames({
+		[`!space-x-0`]: true,
+		[styles[`inputIcon--hasLeftIcon`]]: !!leftIcon,
+		[styles[`inputIcon--hasRightIcon`]]: !!rightIcon,
 	});
 
-	const BUTTON_PROPS: ButtonProps = {
-		shape,
-		size,
-		icon,
-		type: iconType,
-		className: buttonClass,
-		pattern: 'ghost',
-		color: 'secondary',
-		onClick,
+	const handleClick = (
+		e: MouseEvent<HTMLButtonElement>,
+		iconOnClick:
+			| InputIconProps['leftIconOnClick']
+			| InputIconProps['rightIconOnClick']
+	) => {
+		if (iconOnClick) {
+			iconOnClick(e);
+			return;
+		}
+
+		const inputElement: HTMLInputElement =
+			(inputRef.current as { [name: string]: HTMLInputElement })[name] ||
+			inputRef.current;
+
+		const currentValue = inputElement.value;
+		onSend && onSend(currentValue);
 	};
 
 	return (
 		<Input
-			className={className}
-			shape={shape}
-			size={size}
-			inputProps={inputProps}
-			onSend={onSend}
-			buttonProps={BUTTON_PROPS}
-			buttonPosition={iconPosition}
-			messagesProps={messagesProps}
-		/>
+			{...props}
+			innerRef={inputRef}
+			className={`${baseClass} ${className ?? ''}`}>
+			{leftIcon && (
+				<Button
+					className='order-[-1]'
+					pattern='ghost'
+					closeDisabledEffect
+					size={size}
+					icon={leftIcon}
+					type={leftIconType}
+					color={leftIconColor}
+					disabled={leftIconDisabled}
+					onClick={(e) => handleClick(e, leftIconOnClick)}
+				/>
+			)}
+			{rightIcon && (
+				<Button
+					pattern='ghost'
+					size={size}
+					closeDisabledEffect
+					icon={rightIcon}
+					type={rightIconType}
+					color={rightIconColor}
+					disabled={rightIconDisabled}
+					onClick={(e) => handleClick(e, rightIconOnClick)}
+				/>
+			)}
+		</Input>
 	);
 };
 
