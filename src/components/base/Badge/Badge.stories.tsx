@@ -1,28 +1,32 @@
 import React from 'react';
-import Badge from './Badge';
+import { default as StorybookComponent } from './Badge';
 
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { BsAlarm } from 'react-icons/bs';
+import { BsAlarm, BsCheck2 } from 'react-icons/bs';
+
+type ComponentType = typeof StorybookComponent;
 
 export default {
-	title: 'base/Badge',
-	component: Badge,
+	component: StorybookComponent,
 	argTypes: {
 		icon: {
 			control: 'inline-radio',
-			options: ['icon', 'no-icon'],
-			defaultValue: 'icon',
+			options: ['BsAlarm', 'BsCheck2', 'undefined'],
 			mapping: {
-				icon: <BsAlarm />,
-				['no-icon']: undefined,
+				BsAlarm: <BsAlarm />,
+				BsCheck2: <BsCheck2 />,
+				undefined: undefined,
 			},
 		},
 	},
-} as ComponentMeta<typeof Badge>;
+} as ComponentMeta<ComponentType>;
 
-const Template: ComponentStory<typeof Badge> = (args) => <Badge {...args} />;
+const Template: ComponentStory<ComponentType> = (args) => (
+	<StorybookComponent {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {
 	content: 'Badge',
+	icon: <BsCheck2 />,
 };
