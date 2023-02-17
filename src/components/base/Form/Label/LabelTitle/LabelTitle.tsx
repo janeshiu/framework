@@ -1,6 +1,6 @@
 import { SizeType } from '@/types/style';
 import React, { ReactNode } from 'react';
-import LinkTo from '../../../LinkTo/LinkTo';
+import LinkTo, { LinkToProps } from '../../../LinkTo/LinkTo';
 import styles from '../Label.module.scss';
 
 export interface LabelTitleProps {
@@ -15,6 +15,8 @@ export interface LabelTitleProps {
 	hideLink?: boolean;
 	/** href of link */
 	href?: string;
+	/** target of link */
+	target?: LinkToProps['target'];
 	/** text of link */
 	linkContent?: ReactNode;
 	className?: string;
@@ -36,6 +38,7 @@ const LabelTitle: React.FC<LabelTitleProps> = ({
 	size = 'normal',
 	hideLink,
 	href,
+	target,
 	linkContent,
 	className,
 }) => {
@@ -52,7 +55,7 @@ const LabelTitle: React.FC<LabelTitleProps> = ({
 				{required && <sup className='text-error'>*</sup>}
 			</span>
 			{!hideLink && href && (
-				<LinkTo href={href} className={`text-small--${size}`}>
+				<LinkTo href={href} className={`text-small--${size}`} target={target}>
 					{linkContent}
 				</LinkTo>
 			)}

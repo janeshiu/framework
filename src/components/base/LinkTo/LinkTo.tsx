@@ -1,9 +1,10 @@
 import Link, { LinkProps } from 'next/link';
-import { ReactNode } from 'react';
+import { HTMLAttributeAnchorTarget, ReactNode } from 'react';
 
-interface LinkToProps extends LinkProps {
-	children: ReactNode;
+export interface LinkToProps extends Omit<LinkProps, 'legacyBehavior'> {
 	className?: string;
+	target?: HTMLAttributeAnchorTarget;
+	children: ReactNode;
 }
 
 /**
@@ -14,27 +15,15 @@ interface LinkToProps extends LinkProps {
  * @returns
  */
 const LinkTo: React.FC<LinkToProps> = ({
-	as,
+	className,
+	target,
 	children,
-	href,
-	replace,
-	scroll,
-	shallow,
-	passHref,
-	...rest
-}) => {
-	const { className } = rest;
 
+	...props
+}) => {
 	return (
-		<Link
-			as={as}
-			href={href}
-			passHref={passHref}
-			replace={replace}
-			scroll={scroll}
-			shallow={shallow}
-			className={`${className ?? ''}`}>
-			{children}
+		<Link {...props} className={`${className ?? ''}`} legacyBehavior>
+			<a target={target}>{children}</a>
 		</Link>
 	);
 };
