@@ -26,5 +26,6 @@ Default.args = {
 	content: 'Lable',
 	required: false,
 	href: '/',
+	target: '',
 	linkContent: 'Link',
 };
