@@ -1,18 +1,16 @@
 import Link, { LinkProps } from 'next/link';
 import { HTMLAttributeAnchorTarget, ReactNode } from 'react';
 
-export interface LinkToProps extends Omit<LinkProps, 'legacyBehavior'> {
+// LinkProps will conflict with storybook(JSDoc)
+export interface LinkToProps extends Omit<typeof Link, 'legacyBehavior'> {
 	className?: string;
 	target?: HTMLAttributeAnchorTarget;
 	children: ReactNode;
+	href: string;
 }
 
 /**
  * LinkTo 使用方式同 Link(next/link)
- * @param LinkProps - same as next/link
- * @param children - children
- * @param className - className
- * @returns
  */
 const LinkTo: React.FC<LinkToProps> = ({
 	className,
