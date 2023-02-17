@@ -1,6 +1,5 @@
 import { InputProps } from '../Input';
-import styles from '../Input.module.scss';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import InputIcon from '../InputIcon/InputIcon';
 import dynamic from 'next/dynamic';
 import Checkbox from '../../Checkbox/Checkbox';
@@ -13,23 +12,37 @@ const BsEyeSlash = dynamic(() =>
 	import('react-icons/bs').then((bootstrapIcons) => bootstrapIcons.BsEyeSlash)
 );
 
-export interface InputPasswordProps extends Omit<InputProps, 'onSend'> {
+export interface InputPasswordProps extends Omit<InputProps, 'type'> {
+	/** 控制是否顯示密碼的類型，不提供表示無法看見密碼 */
 	toggleMode?: 'icon' | 'checkbox';
 }
 
 /**
  * Input[type=password] 基本設置
  * @param toggleMode - 控制是否顯示密碼的類型，不提供表示無法看見密碼
-
  */
 const InputPassword: React.FC<InputPasswordProps> = ({
 	toggleMode,
 	...props
 }) => {
-	const { autoComplete, size } = props;
-	const { icon, inputType, handleToggleVisible } = usePassword({
+	const { size, value, onChange, autoComplete = 'new-password' } = props;
+	const [password, setPassword] = useState('');
+	const { icon, inputType, handleToggleVisible } = usePasswordVisible({
 		toggleMode,
 	});
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		onChange && onChange(e);
+
+		if (value !== undefined) return;
+		setPassword(e.target.value);
+	};
+
+	useEffect(() => {
+		if (value !== undefined) {
+			setPassword(value);
+		}
+	}, [value]);
 
 	if (toggleMode === 'checkbox') {
 		return (
@@ -37,10 +50,13 @@ const InputPassword: React.FC<InputPasswordProps> = ({
 				<InputIcon
 					{...props}
 					role='password'
+					value={password}
+					defaultValue={undefined}
 					type={inputType}
-					rightIcon={icon}
-					rightIconOnClick={handleToggleVisible}
-					autoComplete={autoComplete ?? 'new-password'}
+					// rightIcon={icon}
+					// rightIconOnClick={handleToggleVisible}
+					autoComplete={autoComplete}
+					onChange={handleChange}
 				/>
 				{toggleMode === 'checkbox' && (
 					<Checkbox
@@ -57,15 +73,18 @@ const InputPassword: React.FC<InputPasswordProps> = ({
 		<InputIcon
 			{...props}
 			role='password'
-			type={'text'}
+			value={password}
+			defaultValue={undefined}
+			type={inputType}
 			rightIcon={icon}
 			rightIconOnClick={handleToggleVisible}
-			autoComplete={autoComplete ?? 'new-password'}
+			autoComplete={autoComplete}
+			onChange={handleChange}
 		/>
 	);
 };
 
-function usePassword(options: {
+function usePasswordVisible(options: {
 	toggleMode: InputPasswordProps['toggleMode'];
 }) {
 	const { toggleMode } = options;
