@@ -2,7 +2,10 @@ import useBreakpoints from '@/hooks/useBreakpoint';
 import { SizeType } from '@/types/style';
 import React, { useState, MouseEvent, useEffect } from 'react';
 import styles from './Pagination.module.scss';
-import PaginationItem, { Action, ActionType } from './PaginationItem';
+import PaginationItem, {
+	Action,
+	ActionType,
+} from './PaginationItem/PaginationItem';
 
 interface PaginationProps {
 	totalPages: number;
@@ -11,7 +14,7 @@ interface PaginationProps {
 	showFirstLastButton?: boolean;
 	hideDisabledButton?: boolean;
 	size?: SizeType;
-	afterPageChanged: (currentPage: number) => void;
+	afterPageChanged?: (currentPage: number) => void;
 }
 
 /**
@@ -35,40 +38,16 @@ const Pagination: React.FC<PaginationProps> = ({
 	afterPageChanged,
 }) => {
 	const { isMobile } = useBreakpoints();
-	const [currentPage, setCurrentPage] = useState<number>(initialPage);
+	const { currentPage, handleChangePage } = usePagination({
+		totalPages,
+		initialPage,
+	});
 
 	if (isMobile) {
 		MAX_LENGTH = 7;
 		size = 'small';
 		showFirstLastButton = false;
 	}
-
-	const handleChangePage = (
-		event: MouseEvent<HTMLButtonElement>,
-		action: number | ActionType
-	) => {
-		event.preventDefault();
-
-		switch (action) {
-			case Action.FIRST:
-				setCurrentPage(1);
-				break;
-			case Action.PREV:
-				setCurrentPage((prev) => --prev);
-				break;
-			case Action.NEXT:
-				setCurrentPage((prev) => ++prev);
-				break;
-			case Action.LAST:
-				setCurrentPage(totalPages);
-				break;
-			case Action.NONE:
-				break;
-
-			default:
-				setCurrentPage(action as number);
-		}
-	};
 
 	/**
 	 * 抓取可顯示之頁碼列表
@@ -186,10 +165,10 @@ const Pagination: React.FC<PaginationProps> = ({
 	};
 
 	useEffect(() => {
-		afterPageChanged(currentPage);
+		totalPages > 0 && afterPageChanged && afterPageChanged(currentPage);
 	}, [currentPage]);
 
-	if (totalPages <= 0) return <></>;
+	if (totalPages <= 0) return null;
 
 	return (
 		<div className='flex justify-center w-full p-2'>
@@ -221,3 +200,44 @@ const Pagination: React.FC<PaginationProps> = ({
 };
 
 export default Pagination;
+
+function usePagination(options: {
+	totalPages: PaginationProps['totalPages'];
+	initialPage: PaginationProps['initialPage'];
+}) {
+	const { totalPages, initialPage = 1 } = options;
+	const [currentPage, setCurrentPage] = useState<number>(
+		initialPage > totalPages || initialPage < 1 ? 1 : Math.round(initialPage)
+	);
+
+	const handleChangePage = (
+		event: MouseEvent<HTMLButtonElement>,
+		action: number | ActionType
+	) => {
+		event.preventDefault();
+
+		switch (action) {
+			case Action.FIRST:
+				setCurrentPage(1);
+				break;
+			case Action.PREV:
+				setCurrentPage((prev) => --prev);
+				break;
+			case Action.NEXT:
+				setCurrentPage((prev) => ++prev);
+				break;
+			case Action.LAST:
+				setCurrentPage(totalPages);
+				break;
+			case Action.NONE:
+				break;
+			default:
+				setCurrentPage(action as number);
+		}
+	};
+
+	return {
+		currentPage,
+		handleChangePage,
+	};
+}

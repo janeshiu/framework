@@ -2,8 +2,8 @@ import { SizeType } from '@/types/style';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import React, { MouseEvent } from 'react';
-import Button from '../ButtonSeries/Button';
-import styles from './Pagination.module.scss';
+import Button from '../../ButtonSeries/Button';
+import styles from '../Pagination.module.scss';
 
 const BsChevronDoubleLeft = dynamic(() =>
 	import('react-icons/bs').then(
@@ -71,7 +71,7 @@ const PaginationItem: React.FC<PaginationItemProps> = ({
 
 	const baseClass = classNames({
 		[styles.item]: true,
-		[styles[`item--active`]]: isActive,
+		[styles[`item--active`]]: !disabled && isActive,
 		[styles[`item--disabled`]]: disabled || content === Action.NONE,
 		[`invisible`]: hidden,
 	});

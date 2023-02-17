@@ -6,9 +6,7 @@
 	@apply float-left;
 
 	button {
-		@apply min-w-[2rem] sm:min-w-[2.5rem] px-0;
-
-		@apply hover:bg-primary hover:bg-opacity-light;
+		@apply min-w-[2rem] sm:min-w-[2.5rem] px-0 #{!important};
 
 		@apply hover:bg-primary hover:bg-opacity-light;
 	}
@@ -22,8 +20,8 @@
 
 		&active {
 			button {
-				@apply bg-primary bg-opacity-dark;
-				@apply hover:bg-opacity-dark;
+				@apply bg-primary bg-opacity-normal-dark;
+				@apply hover:bg-opacity-normal-dark;
 			}
 		}
 	}
