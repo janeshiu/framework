@@ -53,8 +53,6 @@ const InputPassword: React.FC<InputPasswordProps> = ({
 					value={password}
 					defaultValue={undefined}
 					type={inputType}
-					// rightIcon={icon}
-					// rightIconOnClick={handleToggleVisible}
 					autoComplete={autoComplete}
 					onChange={handleChange}
 				/>
@@ -76,6 +74,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
 			value={password}
 			defaultValue={undefined}
 			type={inputType}
+			rightIconShow={toggleMode === 'icon'}
 			rightIcon={icon}
 			rightIconOnClick={handleToggleVisible}
 			autoComplete={autoComplete}
@@ -90,8 +89,7 @@ function usePasswordVisible(options: {
 	const { toggleMode } = options;
 	const [visible, setVisible] = useState(false);
 	const inputType = visible ? 'text' : 'password';
-	const icon =
-		toggleMode !== 'icon' ? undefined : visible ? <BsEyeSlash /> : <BsEye />;
+	const icon = visible ? <BsEyeSlash /> : <BsEye />;
 
 	const handleToggleVisible = () => {
 		setVisible((prev) => !prev);
@@ -102,9 +100,7 @@ function usePasswordVisible(options: {
 	};
 
 	useEffect(() => {
-		if (!toggleMode) {
-			resetVisible();
-		}
+		resetVisible();
 	}, [toggleMode]);
 
 	return {

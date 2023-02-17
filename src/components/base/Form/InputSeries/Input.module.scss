@@ -14,12 +14,18 @@
 .inputIcon {
 	&-- {
 		&hasLeftIcon {
+			&.inputIcon--circle {
+				@apply pl-1;
+			}
 			input {
 				@apply pl-0;
 			}
 		}
 
 		&hasRightIcon {
+			&.inputIcon--circle {
+				@apply pr-1;
+			}
 			input {
 				@apply pr-0;
 			}
