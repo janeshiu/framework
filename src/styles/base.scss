@@ -24,7 +24,8 @@ body {
 
 @layer base {
 	h1 {
-		@apply text-heading1;
+		// conflict with storybook style
+		@apply text-heading1 #{!important};
 	}
 
 	h2 {

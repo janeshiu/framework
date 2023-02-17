@@ -29,6 +29,7 @@ const Heading: React.FC<HeadingProps> = ({
 	children,
 }) => {
 	const HeadingTag = getHeadingTag(type);
+	const size = buttonProps?.size ?? getDefaultButtonSize(type);
 	const isCenter = align === 'center';
 	const hasButton = !!buttonProps;
 
@@ -39,10 +40,10 @@ const Heading: React.FC<HeadingProps> = ({
 			}`}>
 			{/* 僅供置中對齊用，實際不會顯示在畫面上 */}
 			{isCenter && hasButton && (
-				<Button {...buttonProps} className='invisible mr-auto' />
+				<Button {...buttonProps} size={size} className='invisible mr-auto' />
 			)}
 			<span>{children}</span>
-			{hasButton && <Button {...buttonProps} />}
+			{hasButton && <Button {...buttonProps} size={size} />}
 		</HeadingTag>
 	);
 };
@@ -58,6 +59,19 @@ function getHeadingTag(type: HeadingSizeType) {
 		case HeadingSize.QUATERNARY:
 		default:
 			return 'h4';
+	}
+}
+
+function getDefaultButtonSize(type: HeadingSizeType): ButtonProps['size'] {
+	switch (type) {
+		case HeadingSize.PRIMARY:
+		case HeadingSize.SECONDARY:
+			return 'large';
+		case HeadingSize.TERTIARY:
+			return 'normal';
+		case HeadingSize.QUATERNARY:
+		default:
+			return 'small';
 	}
 }
 

@@ -1,5 +1,8 @@
 .heading {
-	@apply flex items-center relative;
+	@apply flex flex-wrap items-center relative max-w-full;
+	> span {
+		@apply break-all;
+	}
 	button {
 		@apply font-normal;
 	}
@@ -13,11 +16,18 @@
 .center {
 	@apply justify-center;
 
+	> span {
+		@apply text-center;
+	}
+
 	button:last-child {
 		@apply ml-auto;
 	}
 }
 
 .right {
+	> span {
+		@apply text-right;
+	}
 	@apply justify-between flex-row-reverse;
 }
