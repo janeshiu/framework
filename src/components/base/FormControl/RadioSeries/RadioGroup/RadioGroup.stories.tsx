@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { default as StorybookComponent } from './RadioGroup';
 
@@ -24,15 +24,15 @@ const radioItemList = [
 	{ content: 'radio5', value: 'radio5', disabled: true },
 ];
 
-export const defaultValue = Template.bind({});
-defaultValue.args = {
+export const RadioGroup = Template.bind({});
+RadioGroup.args = {
 	name: 'radio',
 	radioItemList,
 	disabledNonChecked: false,
 };
 
-export const value = Template.bind({});
-value.args = {
+export const RadioGroupControlled = Template.bind({});
+RadioGroupControlled.args = {
 	name: 'radio',
 	radioItemList,
 	value: 'radio2',

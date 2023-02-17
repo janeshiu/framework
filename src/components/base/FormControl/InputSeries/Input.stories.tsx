@@ -17,8 +17,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Input = Template.bind({});
+Input.args = {
 	placeholder: '請輸入內容',
 	autoSendAfterChanged: false,
 	disabled: false,

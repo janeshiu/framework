@@ -16,8 +16,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const defaultChecked = Template.bind({});
-defaultChecked.args = {
+export const Checkbox = Template.bind({});
+Checkbox.args = {
 	content: 'Checkbox Content',
 	disabled: false,
 	defaultChecked: false,
@@ -25,8 +25,8 @@ defaultChecked.args = {
 	hideIcon: false,
 };
 
-export const checked = Template.bind({});
-checked.args = {
+export const CheckboxControlled = Template.bind({});
+CheckboxControlled.args = {
 	content: 'Checkbox Content',
 	disabled: false,
 	checked: false,

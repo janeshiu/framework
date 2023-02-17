@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { default as StorybookComponent } from './ButtonClear';
-import { BsCheck2, BsTrash } from 'react-icons/bs';
 
 type ComponentType = typeof StorybookComponent;
 
@@ -15,5 +14,5 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const ButtonClear = Template.bind({});
+ButtonClear.args = {};

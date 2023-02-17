@@ -52,14 +52,14 @@ export interface InputIconProps extends InputProps {
  * @param rightIconOnCLick - right icon on click
  */
 const InputIcon: React.FC<InputIconProps> = ({
-	leftIconShow,
+	leftIconShow = true,
 	leftIcon,
 	leftIconType,
 	leftIconColor,
 	leftIconDisabled,
 	leftIconOnClick,
 
-	rightIconShow,
+	rightIconShow = true,
 	rightIcon,
 	rightIconType,
 	rightIconColor,

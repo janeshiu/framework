@@ -16,8 +16,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const defaultChecked = Template.bind({});
-defaultChecked.args = {
+export const InputToggle = Template.bind({});
+InputToggle.args = {
 	type: 'checkbox',
 	content: 'InputToggle Content',
 	disabled: false,
@@ -26,8 +26,8 @@ defaultChecked.args = {
 	hideIcon: false,
 };
 
-export const checked = Template.bind({});
-checked.args = {
+export const InputToggleControlled = Template.bind({});
+InputToggleControlled.args = {
 	type: 'checkbox',
 	content: 'InputToggle Content',
 	disabled: false,

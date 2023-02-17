@@ -47,8 +47,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const InputIcon = Template.bind({});
+InputIcon.args = {
 	placeholder: '請輸入內容',
 	autoSendAfterChanged: false,
 	leftIconDisabled: true,
@@ -76,8 +76,8 @@ const TemplateExample: ComponentStory<ComponentType> = (args) => {
 	);
 };
 
-export const example = TemplateExample.bind({});
-example.args = {
+export const InputIconExample = TemplateExample.bind({});
+InputIconExample.args = {
 	placeholder: '請輸入內容，若有內容表示成功',
 	autoSendAfterChanged: false,
 	leftIcon: <BsPencilSquare />,

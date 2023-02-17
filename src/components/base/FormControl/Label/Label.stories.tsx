@@ -21,8 +21,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	</StorybookComponent>
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Label = Template.bind({});
+Label.args = {
 	content: 'Lable',
 	required: false,
 	href: '/',

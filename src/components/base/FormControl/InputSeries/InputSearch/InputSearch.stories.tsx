@@ -16,5 +16,5 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const InputSearch = Template.bind({});
+InputSearch.args = {};
