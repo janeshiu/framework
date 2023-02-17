@@ -2,7 +2,7 @@ import Input, { InputProps } from '../Input';
 import styles from '../Input.module.scss';
 import classNames from 'classnames';
 import Button, { ButtonProps } from '../../../ButtonSeries/Button';
-import { MouseEvent, useRef } from 'react';
+import { MouseEvent, ReactNode, useRef } from 'react';
 
 export interface InputIconProps extends InputProps {
 	/** left icon - react-icons */
@@ -26,6 +26,8 @@ export interface InputIconProps extends InputProps {
 	rightIconDisabled?: ButtonProps['disabled'];
 	/** right icon on click */
 	rightIconOnClick?: ButtonProps['onClick'];
+
+	children?: ReactNode;
 }
 
 /**
@@ -54,6 +56,8 @@ const InputIcon: React.FC<InputIconProps> = ({
 	rightIconColor,
 	rightIconDisabled,
 	rightIconOnClick,
+
+	children,
 
 	...props
 }) => {
@@ -114,6 +118,8 @@ const InputIcon: React.FC<InputIconProps> = ({
 					onClick={(e) => handleClick(e, rightIconOnClick)}
 				/>
 			)}
+
+			{children}
 		</Input>
 	);
 };
