@@ -1,8 +1,7 @@
 import { SizeType } from '@/types/style';
-import classNames from 'classnames';
-import { ReactNode } from 'react';
-import Message from './Message';
-import styles from './Message.module.scss';
+import { ReactElement, ReactNode } from 'react';
+import Message from '../Message';
+import styles from '../Message.module.scss';
 
 export interface MessageGroupProps {
 	className?: string;
@@ -19,6 +18,8 @@ export interface MessageGroupProps {
 	helper?: boolean;
 	helperMsg?: ReactNode;
 	helperClass?: string;
+
+	children?: ReactElement<any, any>;
 }
 
 /**
@@ -41,6 +42,7 @@ export interface MessageGroupProps {
 const MessageGroup: React.FC<MessageGroupProps> = ({
 	className,
 	size = 'normal',
+	children = null,
 
 	success,
 	successMsg,
@@ -57,10 +59,11 @@ const MessageGroup: React.FC<MessageGroupProps> = ({
 	const hasMessage =
 		(helper && helperMsg) || (error && errorMsg) || (success && successMsg);
 
-	if (!hasMessage) return <></>;
+	if (!hasMessage) return children;
 
 	return (
 		<div className={`${styles.group} ${className ?? ''}`}>
+			{children}
 			{helper && helperMsg && (
 				<Message size={size} msg={helperMsg} className={helperClass} />
 			)}
