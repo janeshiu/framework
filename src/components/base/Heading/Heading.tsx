@@ -5,20 +5,23 @@ import Button, { ButtonProps } from '../ButtonSeries/Button';
 import styles from './Heading.module.scss';
 
 interface HeadingProps {
+	/** type of Heading(size) */
 	type?: HeadingSizeType;
 	className?: string;
+	/** text align */
 	align?: AlignType;
+	/** Button Props */
 	buttonProps?: ButtonProps;
 	children: ReactNode;
 }
 
 /**
  * 主要標題文字
- * @param type - Heading 尺寸類型
+ * @param type - type of Heading(size)
  * @param className - className
- * @param align - 標題位置
- * @param buttonProps - buttonProps
- * @param children - children
+ * @param align - text align
+ * @param buttonProps - Button Props
+ * @param children
  * @returns
  */
 const Heading: React.FC<HeadingProps> = ({
@@ -31,7 +34,7 @@ const Heading: React.FC<HeadingProps> = ({
 	const HeadingTag = getHeadingTag(type);
 	const size = buttonProps?.size ?? getDefaultButtonSize(type);
 	const isCenter = align === 'center';
-	const hasButton = !!buttonProps;
+	const hasButton = !!buttonProps && Object.keys(buttonProps).length > 0;
 
 	return (
 		<HeadingTag
