@@ -1,0 +1,42 @@
+.navbar {
+	@apply inline-flex flex-nowrap space-x-6;
+}
+
+.item {
+	@apply relative p-2;
+
+	// hover line animate
+	@apply after:transition-all after:duration-200;
+	@apply after:absolute after:bottom-1.5 after:left-1/2 after:-translate-x-1/2;
+	@apply after:h-0.5 after:w-0 after:rounded after:bg-common;
+	@apply hover:after:w-full;
+
+	> a {
+		svg {
+			@apply transition-transform;
+		}
+	}
+
+	> ul {
+		@apply absolute top-full right-0 transition-all overflow-hidden;
+		@apply py-0;
+	}
+
+	&[aria-expanded='true'] {
+		> a {
+			svg {
+				@apply rotate-180;
+			}
+		}
+
+		> ul {
+			@apply py-2;
+		}
+	}
+
+	&-- {
+		&content {
+			@apply flex flex-nowrap space-x-1.5 items-center;
+		}
+	}
+}
