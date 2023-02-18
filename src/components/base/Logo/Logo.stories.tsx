@@ -11,11 +11,13 @@ export default {
 } as ComponentMeta<ComponentType>;
 
 const Template: ComponentStory<ComponentType> = (args) => (
-	<StorybookComponent {...args}></StorybookComponent>
+	<div style={{ height: '5rem', width: '100%' }}>
+		<StorybookComponent {...args} />
+	</div>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-	// src: 'logo.png',
+	src: '/logo.png',
 	children: 'Logo',
 };
