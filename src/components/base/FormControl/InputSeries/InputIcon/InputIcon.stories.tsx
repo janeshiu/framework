@@ -1,14 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { default as StorybookComponent } from './InputIcon';
 import {
 	BsCalendarEvent,
-	BsCheck2,
 	BsCheckLg,
 	BsJournalText,
 	BsPencilSquare,
 	BsPlus,
-	BsX,
 	BsXLg,
 } from 'react-icons/bs';
 
@@ -47,8 +45,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const InputIcon = Template.bind({});
-InputIcon.args = {
+export const Default = Template.bind({});
+Default.args = {
 	placeholder: '請輸入內容',
 	autoSendAfterChanged: false,
 	leftIconDisabled: true,
@@ -76,8 +74,8 @@ const TemplateExample: ComponentStory<ComponentType> = (args) => {
 	);
 };
 
-export const InputIconExample = TemplateExample.bind({});
-InputIconExample.args = {
+export const Example = TemplateExample.bind({});
+Example.args = {
 	placeholder: '請輸入內容，若有內容表示成功',
 	autoSendAfterChanged: false,
 	leftIcon: <BsPencilSquare />,

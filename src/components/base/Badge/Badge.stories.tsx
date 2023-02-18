@@ -25,8 +25,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const Badge = Template.bind({});
-Badge.args = {
+export const Default = Template.bind({});
+Default.args = {
 	content: 'Badge',
 	icon: <BsCheck2 />,
 };

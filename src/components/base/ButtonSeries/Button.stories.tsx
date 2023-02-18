@@ -28,16 +28,16 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const Button = Template.bind({});
-Button.args = {
+export const Default = Template.bind({});
+Default.args = {
 	content: 'Button',
 	icon: <BsCheck2 />,
 	disabled: false,
 };
 
-export const ButtonIconOnly = Template.bind({});
-ButtonIconOnly.argTypes = {
-	...ButtonIconOnly.argTypes,
+export const iconOnly = Template.bind({});
+iconOnly.argTypes = {
+	...iconOnly.argTypes,
 	icon: {
 		control: 'inline-radio',
 		options: ['BsCheck2', 'BsTrash'],
@@ -47,7 +47,7 @@ ButtonIconOnly.argTypes = {
 		},
 	},
 };
-ButtonIconOnly.args = {
+iconOnly.args = {
 	icon: <BsCheck2 />,
 	disabled: false,
 };

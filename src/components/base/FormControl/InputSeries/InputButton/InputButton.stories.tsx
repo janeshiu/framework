@@ -28,8 +28,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const InputButton = Template.bind({});
-InputButton.args = {
+export const Default = Template.bind({});
+Default.args = {
 	placeholder: '請輸入內容',
 	autoSendAfterChanged: false,
 	buttonIcon: <BsPlus />,

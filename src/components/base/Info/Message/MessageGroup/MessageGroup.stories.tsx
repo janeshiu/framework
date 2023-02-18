@@ -14,8 +14,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args}></StorybookComponent>
 );
 
-export const MessageGroup = Template.bind({});
-MessageGroup.args = {
+export const Default = Template.bind({});
+Default.args = {
 	success: true,
 	successMsg: 'Success Message',
 

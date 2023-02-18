@@ -6,7 +6,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 type ComponentType = typeof InputOutline;
 
 export default {
-	title: 'base/InputBase/InputOutline',
 	component: InputOutline,
 	argTypes: {},
 } as ComponentMeta<ComponentType>;

@@ -14,7 +14,7 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args}></StorybookComponent>
 );
 
-export const Message = Template.bind({});
-Message.args = {
+export const Default = Template.bind({});
+Default.args = {
 	msg: 'Message',
 };

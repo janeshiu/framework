@@ -25,13 +25,13 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const InputPassword = Template.bind({});
-InputPassword.args = {
+export const Default = Template.bind({});
+Default.args = {
 	placeholder: '請輸入密碼',
 };
 
-export const InputPasswordControlled = Template.bind({});
-InputPasswordControlled.args = {
+export const Controlled = Template.bind({});
+Controlled.args = {
 	placeholder: '請輸入密碼',
 	value: '123456',
 	toggleMode: 'icon',

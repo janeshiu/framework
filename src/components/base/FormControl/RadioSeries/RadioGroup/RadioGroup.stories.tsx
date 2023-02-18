@@ -24,15 +24,15 @@ const radioItemList = [
 	{ content: 'radio5', value: 'radio5', disabled: true },
 ];
 
-export const RadioGroup = Template.bind({});
-RadioGroup.args = {
+export const Default = Template.bind({});
+Default.args = {
 	name: 'radio',
 	radioItemList,
 	disabledNonChecked: false,
 };
 
-export const RadioGroupControlled = Template.bind({});
-RadioGroupControlled.args = {
+export const Controlled = Template.bind({});
+Controlled.args = {
 	name: 'radio',
 	radioItemList,
 	value: 'radio2',

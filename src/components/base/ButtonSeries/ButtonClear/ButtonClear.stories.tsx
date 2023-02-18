@@ -14,5 +14,5 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const ButtonClear = Template.bind({});
-ButtonClear.args = {};
+export const Default = Template.bind({});
+Default.args = {};

@@ -26,5 +26,5 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	</StorybookComponent>
 );
 
-export const Form = Template.bind({});
-Form.args = {};
+export const Default = Template.bind({});
+Default.args = {};

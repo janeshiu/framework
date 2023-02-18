@@ -14,14 +14,14 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args}></StorybookComponent>
 );
 
-export const Heading = Template.bind({});
-Heading.args = {
+export const Default = Template.bind({});
+Default.args = {
 	type: 'primary',
 	children: 'Heading',
 };
 
-export const HeadingWithButton = Template.bind({});
-HeadingWithButton.args = {
+export const withButton = Template.bind({});
+withButton.args = {
 	type: 'primary',
 	children: 'Heading',
 	buttonProps: {

@@ -14,8 +14,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args}></StorybookComponent>
 );
 
-export const Pagination = Template.bind({});
-Pagination.args = {
+export const Default = Template.bind({});
+Default.args = {
 	totalPages: 100,
 	hideDisabledButton: false,
 };

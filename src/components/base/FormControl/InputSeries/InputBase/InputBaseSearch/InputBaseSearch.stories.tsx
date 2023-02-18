@@ -16,8 +16,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const InputBaseSearch = Template.bind({});
-InputBaseSearch.args = {
+export const Default = Template.bind({});
+Default.args = {
 	placeholder: '若存在內容，右方會出現「Ｘ」清除按鈕',
 	autoSendAfterChanged: false,
 };

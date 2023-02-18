@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { default as StorybookComponent } from './Label';
 import Input from '../InputSeries/Input';
@@ -21,8 +21,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	</StorybookComponent>
 );
 
-export const Label = Template.bind({});
-Label.args = {
+export const Default = Template.bind({});
+Default.args = {
 	content: 'Lable',
 	required: false,
 	href: '/',

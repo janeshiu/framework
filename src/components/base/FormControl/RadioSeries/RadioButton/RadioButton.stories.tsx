@@ -16,15 +16,15 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args} />
 );
 
-export const RadioButton = Template.bind({});
-RadioButton.args = {
+export const Default = Template.bind({});
+Default.args = {
 	content: 'RadioButton Content',
 	disabled: false,
 	defaultChecked: false,
 };
 
-export const RadioButtonControlled = Template.bind({});
-RadioButtonControlled.args = {
+export const Controlled = Template.bind({});
+Controlled.args = {
 	content: 'RadioButton Content',
 	disabled: false,
 	checked: false,

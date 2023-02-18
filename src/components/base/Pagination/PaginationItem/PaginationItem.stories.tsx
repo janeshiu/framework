@@ -21,7 +21,7 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	</ul>
 );
 
-export const PaginationItem = Template.bind({});
-PaginationItem.args = {
+export const Default = Template.bind({});
+Default.args = {
 	content: Action.PREV,
 };

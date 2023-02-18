@@ -14,8 +14,8 @@ const Template: ComponentStory<ComponentType> = (args) => (
 	<StorybookComponent {...args}></StorybookComponent>
 );
 
-export const LinkTo = Template.bind({});
-LinkTo.args = {
+export const Default = Template.bind({});
+Default.args = {
 	children: 'Link',
 	href: '/',
 	target: '_blank',
