@@ -2,7 +2,7 @@ import { SizeType } from '@/types/style';
 import { ReactNode } from 'react';
 import styles from './Message.module.scss';
 
-interface MessageProps {
+export interface MessageProps {
 	msg: ReactNode;
 	size?: SizeType;
 	type?: 'success' | 'error' | 'normal';
