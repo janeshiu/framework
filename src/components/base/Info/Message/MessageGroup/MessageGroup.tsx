@@ -75,6 +75,7 @@ const MessageGroup: React.FC<MessageGroupProps> = ({
 			hasTypeMessage(type) && (
 				<Message
 					size={size}
+					type={type}
 					messageType={messageType}
 					msg={props[`${type}Msg`]}
 					className={props[`${type}Class`]}
