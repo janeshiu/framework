@@ -42,6 +42,11 @@ const Pagination: React.FC<PaginationProps> = ({
 		totalPages,
 		initialPage,
 	});
+	const { getPageNumbers, isButtonDisabled } = usePaginationRenderTool({
+		currentPage,
+		totalPages,
+		MAX_LENGTH,
+	});
 
 	if (isMobile) {
 		MAX_LENGTH = 7;
@@ -49,6 +54,136 @@ const Pagination: React.FC<PaginationProps> = ({
 		showFirstLastButton = false;
 	}
 
+	/**
+	 * 提供中間顯示的頁面號碼 與 ...
+	 * @returns
+	 */
+	const renderPaginationList = () => {
+		const pageNumbers = getPageNumbers();
+		const paginationChunks: [[number | Action.NONE]] = [[1]];
+
+		// 將有連號的頁碼進行分段，並在分段的間隔塞入 ...
+		pageNumbers.forEach((pageNumber, index) => {
+			if (index === 0) return;
+
+			const currentChunk = paginationChunks[paginationChunks.length - 1];
+			const prevNumber = currentChunk[currentChunk.length - 1];
+			if (prevNumber !== pageNumber - 1) {
+				paginationChunks.push([Action.NONE]);
+				paginationChunks.push([pageNumber]);
+			} else {
+				currentChunk.push(pageNumber);
+			}
+		});
+
+		// 將排序好的頁碼清單轉換為元件
+		const paginationList: JSX.Element[] = paginationChunks
+			.flat()
+			.map((pageNumber, index) => {
+				return renderPaginationItem({
+					content: pageNumber,
+					key: pageNumber === Action.NONE ? `${pageNumber}${index}` : undefined,
+				});
+			});
+
+		return paginationList;
+	};
+
+	const renderPaginationItem = (options: {
+		content: number | Action;
+		key?: string | number;
+	}) => {
+		const { content, key } = options;
+		const actionValues: ActionType[] = Object.values(Action);
+		const isDisabled = isButtonDisabled(content);
+		const isButton =
+			typeof content === 'string' &&
+			actionValues.includes(`${content}`) &&
+			content !== Action.NONE;
+
+		return (
+			<PaginationItem
+				key={key ?? content}
+				size={size}
+				content={content}
+				disabled={isDisabled}
+				hidden={hideDisabledButton && isDisabled && isButton}
+				isActive={content === currentPage}
+				onClick={handleChangePage}
+			/>
+		);
+	};
+
+	useEffect(() => {
+		totalPages > 0 && afterPageChanged && afterPageChanged(currentPage);
+	}, [currentPage]);
+
+	if (totalPages <= 0) return null;
+
+	return (
+		<div className='flex justify-center w-full p-2'>
+			<ul className={styles.pagination}>
+				{showFirstLastButton && renderPaginationItem({ content: Action.FIRST })}
+				{renderPaginationItem({ content: Action.PREV })}
+
+				{renderPaginationList()}
+
+				{renderPaginationItem({ content: Action.NEXT })}
+				{showFirstLastButton && renderPaginationItem({ content: Action.LAST })}
+			</ul>
+		</div>
+	);
+};
+
+export default Pagination;
+
+function usePagination(options: {
+	totalPages: PaginationProps['totalPages'];
+	initialPage: PaginationProps['initialPage'];
+}) {
+	const { totalPages, initialPage = 1 } = options;
+	const [currentPage, setCurrentPage] = useState<number>(
+		initialPage > totalPages || initialPage < 1 ? 1 : Math.round(initialPage)
+	);
+
+	const handleChangePage = (
+		event: MouseEvent<HTMLButtonElement>,
+		action: number | ActionType
+	) => {
+		event.preventDefault();
+
+		switch (action) {
+			case Action.FIRST:
+				setCurrentPage(1);
+				break;
+			case Action.PREV:
+				setCurrentPage((prev) => --prev);
+				break;
+			case Action.NEXT:
+				setCurrentPage((prev) => ++prev);
+				break;
+			case Action.LAST:
+				setCurrentPage(totalPages);
+				break;
+			case Action.NONE:
+				break;
+			default:
+				setCurrentPage(action as number);
+		}
+	};
+
+	return {
+		currentPage,
+		handleChangePage,
+	};
+}
+
+function usePaginationRenderTool(options: {
+	currentPage: number;
+	totalPages: PaginationProps['totalPages'];
+	MAX_LENGTH: PaginationProps['MAX_LENGTH'];
+}) {
+	const { currentPage, totalPages, MAX_LENGTH = 7 } = options;
 	/**
 	 * 抓取可顯示之頁碼列表
 	 * @returns {number[]}
@@ -110,134 +245,24 @@ const Pagination: React.FC<PaginationProps> = ({
 	};
 
 	/**
-	 *
+	 * 確認目前顯示的按鈕是否可被鎖定
+	 * @param content pagination content
 	 * @returns
 	 */
-	const renderPaginationList = () => {
-		const pageNumbers = getPageNumbers();
-		const paginationChunks: [[number | Action.NONE]] = [[1]];
-
-		pageNumbers.forEach((pageNumber, index) => {
-			if (index === 0) return;
-
-			const currentChunk = paginationChunks[paginationChunks.length - 1];
-			const prevNumber = currentChunk[currentChunk.length - 1];
-			if (prevNumber !== pageNumber - 1) {
-				paginationChunks.push([Action.NONE]);
-				paginationChunks.push([pageNumber]);
-			} else {
-				currentChunk.push(pageNumber);
-			}
-		});
-		const paginationList = paginationChunks.map((pageItems) => {
-			return pageItems.map((pageNumber) =>
-				renderPaginationItem({
-					content: pageNumber,
-					disabled: pageNumber === Action.NONE,
-				})
-			);
-		});
-		return [...paginationList];
-	};
-
-	const renderPaginationItem = (options: {
-		content: number | Action;
-		disabled?: boolean;
-	}) => {
-		const { content, disabled } = options;
-		const actionValues: ActionType[] = Object.values(Action);
-		const isButton =
-			typeof content === 'string' &&
-			actionValues.includes(`${content}`) &&
-			content !== Action.NONE;
-
-		return (
-			<PaginationItem
-				key={content}
-				size={size}
-				content={content}
-				disabled={disabled}
-				hidden={hideDisabledButton && disabled && isButton}
-				isActive={content === currentPage}
-				onClick={handleChangePage}
-			/>
-		);
-	};
-
-	useEffect(() => {
-		totalPages > 0 && afterPageChanged && afterPageChanged(currentPage);
-	}, [currentPage]);
-
-	if (totalPages <= 0) return null;
-
-	return (
-		<div className='flex justify-center w-full p-2'>
-			<ul className={styles.pagination}>
-				{showFirstLastButton &&
-					renderPaginationItem({
-						content: Action.FIRST,
-						disabled: currentPage === 1,
-					})}
-				{renderPaginationItem({
-					content: Action.PREV,
-					disabled: currentPage === 1,
-				})}
-
-				{renderPaginationList()}
-
-				{renderPaginationItem({
-					content: Action.NEXT,
-					disabled: currentPage === totalPages,
-				})}
-				{showFirstLastButton &&
-					renderPaginationItem({
-						content: Action.LAST,
-						disabled: currentPage === totalPages,
-					})}
-			</ul>
-		</div>
-	);
-};
-
-export default Pagination;
-
-function usePagination(options: {
-	totalPages: PaginationProps['totalPages'];
-	initialPage: PaginationProps['initialPage'];
-}) {
-	const { totalPages, initialPage = 1 } = options;
-	const [currentPage, setCurrentPage] = useState<number>(
-		initialPage > totalPages || initialPage < 1 ? 1 : Math.round(initialPage)
-	);
-
-	const handleChangePage = (
-		event: MouseEvent<HTMLButtonElement>,
-		action: number | ActionType
-	) => {
-		event.preventDefault();
-
-		switch (action) {
+	const isButtonDisabled = (content: number | ActionType) => {
+		switch (content) {
 			case Action.FIRST:
-				setCurrentPage(1);
-				break;
 			case Action.PREV:
-				setCurrentPage((prev) => --prev);
-				break;
+				return currentPage === 1;
 			case Action.NEXT:
-				setCurrentPage((prev) => ++prev);
-				break;
 			case Action.LAST:
-				setCurrentPage(totalPages);
-				break;
+				return currentPage === totalPages;
 			case Action.NONE:
-				break;
+				return true;
 			default:
-				setCurrentPage(action as number);
+				return false;
 		}
 	};
 
-	return {
-		currentPage,
-		handleChangePage,
-	};
+	return { getPageNumbers, isButtonDisabled };
 }

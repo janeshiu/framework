@@ -6,7 +6,8 @@
 	@apply float-left;
 
 	button {
-		@apply min-w-[2rem] sm:min-w-[2.5rem] px-0 #{!important};
+		@apply min-w-[2rem] sm:min-w-[2.5rem];
+		@apply px-0 #{!important};
 
 		@apply hover:bg-primary hover:bg-opacity-light;
 	}
