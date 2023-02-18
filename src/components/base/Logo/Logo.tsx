@@ -18,7 +18,7 @@ const Logo: React.FC<LogoProps> = ({ src, className, children }) => {
 	return (
 		<div className={`${styles.logo} ${className ?? ''}`}>
 			{src && <Image src={src} alt='logo' fill />}
-			<span>{children}</span>
+			<span className='w-full'>{children}</span>
 		</div>
 	);
 };
