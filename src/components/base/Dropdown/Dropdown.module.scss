@@ -1,0 +1,13 @@
+.dropdown {
+	@apply w-40 py-2 bg-common-primary-light shadow;
+}
+
+.item {
+	@apply relative;
+
+	@apply hover:bg-primary hover:bg-opacity-light;
+
+	a {
+		@apply px-4 py-2 text-center;
+	}
+}

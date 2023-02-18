@@ -44,6 +44,12 @@ body {
 		@apply text-info underline decoration-2 underline-offset-2;
 	}
 
+	li {
+		a {
+			@apply text-common-primary no-underline;
+		}
+	}
+
 	input {
 		@apply w-full h-full px-3 transition-all;
 		@apply border-0 outline-none bg-transparent placeholder-common-primary placeholder-opacity-darker;

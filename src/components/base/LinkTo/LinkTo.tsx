@@ -1,8 +1,8 @@
 import Link, { LinkProps } from 'next/link';
-import { HTMLAttributeAnchorTarget, ReactNode } from 'react';
+import { useRouter } from 'next/router';
+import { HTMLAttributeAnchorTarget, MouseEvent, ReactNode } from 'react';
 
-// LinkProps will conflict with storybook(JSDoc)
-export interface LinkToProps extends Omit<typeof Link, 'legacyBehavior'> {
+export interface LinkToProps extends Omit<LinkProps, 'legacyBehavior'> {
 	className?: string;
 	target?: HTMLAttributeAnchorTarget;
 	children: ReactNode;
@@ -16,12 +16,35 @@ const LinkTo: React.FC<LinkToProps> = ({
 	className,
 	target,
 	children,
+	onClick,
 
 	...props
 }) => {
+	const { href } = props;
+	const router = useRouter();
+	const handleClick = (
+		e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
+		href: string
+	) => {
+		e.preventDefault();
+
+		onClick && onClick(e);
+
+		if (href && href !== '#') {
+			router.push(href);
+		}
+	};
+
 	return (
-		<Link {...props} className={`${className ?? ''}`} legacyBehavior>
-			<a target={target}>{children}</a>
+		<Link {...props} legacyBehavior>
+			<a
+				target={target}
+				className={`w-full h-full inline-block ${className ?? ''}`}
+				onClick={(e) => {
+					handleClick(e, href);
+				}}>
+				{children}
+			</a>
 		</Link>
 	);
 };
