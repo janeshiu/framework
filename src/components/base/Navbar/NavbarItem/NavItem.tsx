@@ -1,13 +1,14 @@
 import { LinkItem } from '@/types/link';
-import { MouseEvent, useState } from 'react';
+import { FocusEvent, MouseEvent, ReactElement, useState } from 'react';
 import { BsFillCaretDownFill } from 'react-icons/bs';
-import Dropdown from '../../Dropdown/Dropdown';
+import { DropdownProps } from '../../Dropdown/Dropdown';
 import LinkTo from '../../LinkTo/LinkTo';
 import styles from '../Navbar.module.scss';
 
 export interface NavbarItemProps extends LinkItem {
 	extend?: boolean;
-	list?: LinkItem[];
+	children?: ReactElement<DropdownProps>;
+	onBlur?: (event: FocusEvent<HTMLElement>) => void;
 }
 
 /**
@@ -17,17 +18,18 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
 	extend,
 	content,
 	href,
-	list,
+	children,
 	onClick,
+	onBlur,
 }) => {
-	const hasDropdown = list && list?.length > 0;
+	const hasDropdown = children;
 
 	if (!href && !hasDropdown) {
-		throw `<NavbarItem>: Please provide href or list either.`;
+		throw `<NavbarItem>: Please provide href or <Dropdown></Dropdown> as children either.`;
 	}
 
 	return (
-		<li className={styles.item} aria-expanded={extend}>
+		<li className={styles.item} aria-expanded={extend} onBlur={onBlur}>
 			<LinkTo
 				href={hasDropdown || !href ? '#' : href}
 				className={styles[`item--content`]}
@@ -35,7 +37,7 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
 				<span>{content}</span>
 				{hasDropdown && <BsFillCaretDownFill size={14} />}
 			</LinkTo>
-			{list && <Dropdown list={list} />}
+			{children}
 		</li>
 	);
 };

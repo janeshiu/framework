@@ -1,21 +1,42 @@
-import { MouseEvent, useState } from 'react';
+import {
+	Children,
+	FocusEvent,
+	MouseEvent,
+	ReactElement,
+	useCallback,
+	useState,
+} from 'react';
 import styles from './Navbar.module.scss';
 import NavbarItem, { NavbarItemProps } from './NavbarItem/NavItem';
+import { transformElement } from '@/utils/element';
 
 export interface NavbarProps {
-	list: NavbarItemProps[];
+	/** please provide NavbarItem(s) as children*/
+	children: ReactElement<NavbarItemProps> | ReactElement<NavbarItemProps>[];
 }
-
 /**
  * NavItem
+ * please provide NavbarItem(s) as children
  */
-const Navbar: React.FC<NavbarProps> = ({ list }) => {
-	type TElem = typeof list[number];
-	type TElemContent = Extract<TElem, { content: string }>;
-	type TContents = TElemContent['content'];
-	const [extend, setExtend] = useState<TContents>('');
-
-	if (list.length === 0) return null;
+const Navbar: React.FC<NavbarProps> = ({ children }) => {
+	const [extend, setExtend] = useState<string>('');
+	const memoRenderChildren = useCallback(() => {
+		return Children.map(children, (elem) => {
+			const { children, href, content, onClick } = elem.props;
+			const hasDropdown = children;
+			const itemProps = {
+				content,
+				children,
+				href: hasDropdown ? '#' : href,
+				extend: hasDropdown && extend === content,
+				onClick: (e: MouseEvent<HTMLElement>) => {
+					handleClick(e, { content, onClick });
+				},
+				onBlur: handleCloseExtend,
+			};
+			return transformElement(elem, itemProps);
+		});
+	}, [children, extend]);
 
 	const handleClick = (
 		e: MouseEvent<HTMLElement>,
@@ -30,23 +51,11 @@ const Navbar: React.FC<NavbarProps> = ({ list }) => {
 		onClick && onClick(e);
 	};
 
-	return (
-		<ul className={styles.navbar}>
-			{list.map((itemProps) => {
-				const { content, list } = itemProps;
-				const hasList = list && list.length > 0;
-				return (
-					<NavbarItem
-						{...itemProps}
-						extend={extend === content && hasList}
-						onClick={(e) => {
-							handleClick(e, itemProps);
-						}}
-					/>
-				);
-			})}
-		</ul>
-	);
+	const handleCloseExtend = (e: FocusEvent<HTMLElement>) => {
+		setExtend('');
+	};
+
+	return <ul className={styles.navbar}>{memoRenderChildren()}</ul>;
 };
 
 export default Navbar;

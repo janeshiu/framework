@@ -1,22 +1,19 @@
+import { transformElement } from '@/utils/element';
+import { Children, ReactElement } from 'react';
 import styles from './Dropdown.module.scss';
-import DropdownItem, { DropdownItemProps } from './DropdownItem/DropdownItem';
+import { DropdownItemProps } from './DropdownItem/DropdownItem';
 
 export interface DropdownProps {
-	isOpen?: boolean;
-	list: DropdownItemProps[];
+	children: ReactElement<DropdownItemProps> | ReactElement<DropdownItemProps>[];
 }
 
 /**
  * DropdownItem
  */
-const Dropdown: React.FC<DropdownProps> = ({ isOpen, list }) => {
-	if (list.length === 0) return null;
-
+const Dropdown: React.FC<DropdownProps> = ({ children }) => {
 	return (
 		<ul className={`shape--round ${styles.dropdown}`}>
-			{list.map((itemProps) => (
-				<DropdownItem {...itemProps} />
-			))}
+			{Children.map(children, (elem) => transformElement(elem, elem.props))}
 		</ul>
 	);
 };
