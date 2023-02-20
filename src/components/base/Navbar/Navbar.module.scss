@@ -18,8 +18,8 @@
 	}
 
 	> ul {
-		@apply absolute top-full right-0 transition-all overflow-hidden;
-		@apply py-0;
+		@apply absolute top-full right-0 transition-all overflow-hidden duration-200;
+		@apply py-0 origin-top scale-y-0;
 	}
 
 	&[aria-expanded='true'] {
@@ -30,7 +30,7 @@
 		}
 
 		> ul {
-			@apply py-2;
+			@apply py-2 scale-y-100;
 		}
 	}
 
