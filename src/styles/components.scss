@@ -122,6 +122,14 @@ input {
 	}
 }
 
+.field {
+	&__ {
+		&body {
+			@apply space-y-4 py-12;
+		}
+	}
+}
+
 // fontSize
 .text {
 	&- {
