@@ -22,6 +22,7 @@
 	}
 
 	a {
-		@apply no-underline;
+		@apply no-underline underline-offset-4 w-auto;
+		@apply hover:underline;
 	}
 }
