@@ -7,7 +7,7 @@ import {
 	useState,
 } from 'react';
 import styles from './Navbar.module.scss';
-import NavbarItem, { NavbarItemProps } from './NavbarItem/NavItem';
+import { NavbarItemProps } from './NavbarItem/NavItem';
 import { transformElement } from '@/utils/element';
 
 export interface NavbarProps {

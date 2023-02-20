@@ -1,5 +1,5 @@
 import { LinkItem } from '@/types/link';
-import { FocusEvent, MouseEvent, ReactElement, useState } from 'react';
+import { FocusEvent, ReactElement } from 'react';
 import { BsFillCaretDownFill } from 'react-icons/bs';
 import { DropdownProps } from '../../Dropdown/Dropdown';
 import LinkTo from '../../LinkTo/LinkTo';
