@@ -8,7 +8,7 @@ import {
 } from '@/types/style';
 import { toIconSizeKey, transformElement } from '@/utils/element';
 import classNames from 'classnames';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styles from './Button.module.scss';
 
 type originButtonProps = React.DetailedHTMLProps<
@@ -18,7 +18,7 @@ type originButtonProps = React.DetailedHTMLProps<
 
 export interface ButtonProps extends Omit<originButtonProps, 'children'> {
 	/** button text */
-	content?: string | number;
+	content?: ReactNode;
 	/** button icon - react-icons element */
 	icon?: JSX.Element;
 	/** icon Position in button */
