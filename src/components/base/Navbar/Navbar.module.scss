@@ -12,6 +12,8 @@
 	@apply hover:after:w-full;
 
 	> a {
+		@apply flex justify-center;
+
 		svg {
 			@apply transition-transform;
 		}

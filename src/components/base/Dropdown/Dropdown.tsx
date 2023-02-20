@@ -4,6 +4,7 @@ import styles from './Dropdown.module.scss';
 import { DropdownItemProps } from './DropdownItem/DropdownItem';
 
 export interface DropdownProps {
+	/** please provide <DropdownItem/>(s) as children */
 	children: ReactElement<DropdownItemProps> | ReactElement<DropdownItemProps>[];
 }
 

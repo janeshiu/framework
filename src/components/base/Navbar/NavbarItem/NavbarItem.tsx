@@ -7,6 +7,7 @@ import styles from '../Navbar.module.scss';
 
 export interface NavbarItemProps extends LinkItem {
 	extend?: boolean;
+	/** Please provide <Dropdown/> component as children */
 	children?: ReactElement<DropdownProps>;
 	onBlur?: (event: FocusEvent<HTMLElement>) => void;
 }
