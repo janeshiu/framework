@@ -1,0 +1,12 @@
+.header {
+	@apply flex justify-between items-center h-[6rem] pb-8 px-4;
+
+	> a {
+		@apply text-common-primary no-underline;
+		@apply w-auto;
+	}
+
+	> nav {
+		@apply flex justify-end;
+	}
+}
