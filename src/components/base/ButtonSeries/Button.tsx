@@ -65,7 +65,7 @@ const Button: React.FC<ButtonProps> = ({
 
 	...props
 }) => {
-	const { disabled = false } = props;
+	const { type = 'button', disabled = false } = props;
 	if (!icon && !content)
 		throw '<Button> : Please provide icon or content either.';
 	const iconOnly = icon && !content;
@@ -103,6 +103,7 @@ const Button: React.FC<ButtonProps> = ({
 	return (
 		<button
 			{...props}
+			type={type}
 			className={`${baseClass} ${toggleClass} ${className ?? ''}`}>
 			{renderContent()}
 		</button>

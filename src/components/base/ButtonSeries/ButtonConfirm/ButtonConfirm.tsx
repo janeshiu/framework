@@ -9,14 +9,9 @@ export interface ButtonClearProps
  * @returns
  */
 const ButtonConfirm: React.FC<ButtonClearProps> = (props) => {
-	const { color } = props;
+	const { type = 'submit', color = 'secondary' } = props;
 	return (
-		<Button
-			{...props}
-			color={color ?? 'secondary'}
-			pattern='fill'
-			shape='round'
-		/>
+		<Button {...props} type={type} color={color} pattern='fill' shape='round' />
 	);
 };
 
