@@ -11,6 +11,8 @@ import { NavbarItemProps } from './NavbarItem/NavbarItem';
 import { transformElement } from '@/utils/element';
 
 export interface NavbarProps {
+	ariaLabel?: string;
+	ariaLabelBy?: string;
 	/** please provide NavbarItem(s) as children*/
 	children: ReactElement<NavbarItemProps> | ReactElement<NavbarItemProps>[];
 }
@@ -18,7 +20,11 @@ export interface NavbarProps {
  * NavItem
  * please provide NavbarItem(s) as children
  */
-const Navbar: React.FC<NavbarProps> = ({ children }) => {
+const Navbar: React.FC<NavbarProps> = ({
+	ariaLabel,
+	ariaLabelBy,
+	children,
+}) => {
 	const [extend, setExtend] = useState<string>('');
 	const memoRenderChildren = useCallback(() => {
 		return Children.map(children, (elem) => {
@@ -55,7 +61,11 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 		setExtend('');
 	};
 
-	return <ul className={styles.navbar}>{memoRenderChildren()}</ul>;
+	return (
+		<nav aria-label={ariaLabel} aria-labelledBy={ariaLabelBy}>
+			<ul className={styles.navbar}>{memoRenderChildren()}</ul>
+		</nav>
+	);
 };
 
 export default Navbar;
