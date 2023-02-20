@@ -1,4 +1,5 @@
 import { InputProps } from '../Input';
+import styles from '../Input.module.scss';
 import { ChangeEvent, useEffect, useState } from 'react';
 import InputIcon from '../InputIcon/InputIcon';
 import dynamic from 'next/dynamic';
@@ -71,6 +72,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
 		<InputIcon
 			{...props}
 			role='password'
+			className={`${styles.inputPassword} ${props.className ?? ''}`}
 			value={password}
 			defaultValue={undefined}
 			type={inputType}

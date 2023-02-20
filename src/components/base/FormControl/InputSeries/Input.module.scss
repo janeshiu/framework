@@ -56,3 +56,14 @@
 		}
 	}
 }
+
+.inputPassword {
+	input {
+		&[value=''],
+		&:not([value]) {
+			+ button {
+				@apply opacity-0;
+			}
+		}
+	}
+}
