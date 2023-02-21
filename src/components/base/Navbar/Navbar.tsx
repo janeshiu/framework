@@ -62,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({
 	};
 
 	return (
-		<nav aria-label={ariaLabel} aria-labelledBy={ariaLabelBy}>
+		<nav aria-label={ariaLabel} aria-labelledby={ariaLabelBy}>
 			<ul className={styles.navbar}>{memoRenderChildren()}</ul>
 		</nav>
 	);
