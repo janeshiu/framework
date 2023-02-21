@@ -62,7 +62,7 @@
 		&[value=''],
 		&:not([value]) {
 			+ button {
-				@apply opacity-0;
+				@apply opacity-0 scale-0;
 			}
 		}
 	}

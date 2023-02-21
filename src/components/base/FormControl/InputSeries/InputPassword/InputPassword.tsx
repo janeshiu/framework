@@ -9,8 +9,8 @@ const BsEye = dynamic(() =>
 	import('react-icons/bs').then((bootstrapIcons) => bootstrapIcons.BsEye)
 );
 
-const BsEyeSlash = dynamic(() =>
-	import('react-icons/bs').then((bootstrapIcons) => bootstrapIcons.BsEyeSlash)
+const RxEyeClosed = dynamic(() =>
+	import('react-icons/rx').then((bootstrapIcons) => bootstrapIcons.RxEyeClosed)
 );
 
 export interface InputPasswordProps extends Omit<InputProps, 'type'> {
@@ -91,8 +91,7 @@ function usePasswordVisible(options: {
 	const { toggleMode } = options;
 	const [visible, setVisible] = useState(false);
 	const inputType = visible ? 'text' : 'password';
-	const icon = visible ? <BsEyeSlash /> : <BsEye />;
-
+	const icon = visible ? <BsEye /> : <RxEyeClosed size='100' />;
 	const handleToggleVisible = () => {
 		setVisible((prev) => !prev);
 	};
