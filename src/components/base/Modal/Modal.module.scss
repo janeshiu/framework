@@ -1,0 +1,50 @@
+.modal {
+	&__ {
+		&wrapper {
+			@apply fixed w-full h-full top-0 left-0 z-[9999];
+			@apply flex justify-center items-center;
+		}
+
+		&container {
+			@apply bg-bg-primary py-10 px-6 transition-all;
+			@apply w-11/12 sm:w-[32rem];
+		}
+
+		&header {
+			@apply flex justify-between items-start;
+
+			&.closeOnly {
+				@apply justify-end;
+			}
+		}
+
+		&body {
+			@apply flex flex-col py-6;
+		}
+
+		&icon {
+			@apply flex justify-center;
+
+			&.success {
+				@apply text-success;
+			}
+			&.error {
+				@apply text-error-lighter;
+			}
+			&.warning {
+				@apply text-warning-light;
+			}
+			&.info {
+				@apply text-info-lighter;
+			}
+			&.question {
+				@apply text-primary-light;
+			}
+		}
+	}
+}
+
+.backdrop {
+	@apply absolute w-full h-full -z-10;
+	@apply bg-common-primary bg-opacity-darker;
+}

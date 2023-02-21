@@ -1,5 +1,12 @@
 @tailwind components;
 
+[data-scroll='false'] {
+	&,
+	body {
+		@apply overflow-hidden;
+	}
+}
+
 // 不使用也會編譯進 CSS
 .color {
 	&-- {
