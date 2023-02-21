@@ -6,7 +6,7 @@
 		}
 
 		&container {
-			@apply bg-bg-primary py-10 px-6 transition-all;
+			@apply bg-bg-primary p-6 transition-all;
 			@apply w-11/12 sm:w-[32rem];
 		}
 
@@ -19,7 +19,7 @@
 		}
 
 		&body {
-			@apply flex flex-col py-6;
+			@apply flex flex-col py-6 px-6;
 		}
 
 		&icon {
