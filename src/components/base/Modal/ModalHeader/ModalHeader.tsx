@@ -5,8 +5,12 @@ import Heading from '../../Heading/Heading';
 import styles from '../Modal.module.scss';
 
 export interface ModalHeaderProps {
+	/** title of modal */
 	title?: string;
+	/** does close button show or not */
 	showCloseButton?: boolean;
+
+	className?: string;
 	onClose: () => void;
 }
 
@@ -16,6 +20,7 @@ export interface ModalHeaderProps {
 const ModalHeader: React.FC<ModalHeaderProps> = ({
 	title,
 	showCloseButton = true,
+	className,
 	onClose,
 }) => {
 	const noContent = !title && !showCloseButton;
@@ -28,7 +33,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
 	});
 
 	return (
-		<div className={`${baseClass}`}>
+		<div className={`${baseClass} ${className ?? ''}`}>
 			{title && <Heading type='quaternary'>{title}</Heading>}
 			{showCloseButton && (
 				<Button
