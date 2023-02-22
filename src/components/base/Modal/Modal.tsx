@@ -15,7 +15,7 @@ interface ModalProps
 	className?: string;
 	headerClassName?: ModalHeaderProps['className'];
 	bodyClassName?: ModalBodyProps['className'];
-	bodyContent: ModalBodyProps['children'];
+	message: ModalBodyProps['children'];
 
 	/** can backdrop be click to close modal */
 	backdropClickDisabled?: boolean;
@@ -57,7 +57,7 @@ const Modal: React.FC<ModalProps> = ({
 	loading,
 	align,
 	bodyClassName,
-	bodyContent,
+	message,
 
 	isOpen,
 	backdropClickDisabled,
@@ -83,7 +83,7 @@ const Modal: React.FC<ModalProps> = ({
 		loading,
 		align,
 		className: bodyClassName,
-		children: bodyContent,
+		children: message,
 	};
 
 	const handleBackdropClick = () => {
