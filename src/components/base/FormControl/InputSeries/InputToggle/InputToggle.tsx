@@ -1,7 +1,7 @@
 import InputBase, { InputBaseProps } from '../InputBase/InputBase';
 import styles from './InputToggle.module.scss';
 import Label from '../../Label/Label';
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import InputToggleIcon, { InputToggleIconProps } from './InputToggleIcon';
 

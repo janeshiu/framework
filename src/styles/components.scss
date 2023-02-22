@@ -249,6 +249,10 @@ input {
 	}
 }
 
+.modalFooter__buttonWrapper {
+	@apply flex justify-end w-full space-x-4;
+}
+
 // 有使用到才會編譯進 CSS
 @layer components {
 	.heading {

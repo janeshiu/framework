@@ -1,4 +1,6 @@
 .inputToggleTitle {
+	@apply p-0;
+
 	> span {
 		@apply flex items-center space-x-1.5;
 	}
