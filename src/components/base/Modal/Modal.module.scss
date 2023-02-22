@@ -22,6 +22,10 @@
 			@apply flex flex-col py-6 px-6;
 		}
 
+		&footer {
+			@apply flex flex-col justify-center items-center pt-4 space-y-2;
+		}
+
 		&icon {
 			@apply flex justify-center pb-4;
 

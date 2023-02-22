@@ -1,18 +1,21 @@
 import useDisableScroll from '@/hooks/useDisableScroll';
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Modal.module.scss';
 import ModalBody, { ModalBodyProps } from './ModalBody/ModalBody';
 import ModalHeader, { ModalHeaderProps } from './ModalHeader/ModalHeader';
 
-interface ModalProps extends ModalHeaderProps, ModalBodyProps {
+interface ModalProps
+	extends ModalHeaderProps,
+		Omit<ModalBodyProps, 'children'> {
 	/** does modal open or not */
 	isOpen: boolean;
 
 	className?: string;
-	headerClassName?: string;
-	bodyClassName?: string;
+	headerClassName?: ModalHeaderProps['className'];
+	bodyClassName?: ModalBodyProps['className'];
+	bodyContent: ModalBodyProps['children'];
 
 	/** can backdrop be click to close modal */
 	backdropClickDisabled?: boolean;
@@ -21,7 +24,8 @@ interface ModalProps extends ModalHeaderProps, ModalBodyProps {
 	/** time before close modal */
 	closeCountdown?: number;
 
-	onClose: () => void;
+	/** 請盡量使用 ModalFooter 去組出想要呈現的模樣 */
+	children?: ReactNode;
 }
 
 /**
@@ -53,13 +57,14 @@ const Modal: React.FC<ModalProps> = ({
 	loading,
 	align,
 	bodyClassName,
-	children,
+	bodyContent,
 
 	isOpen,
 	backdropClickDisabled,
 	autoCloseModal,
 	closeCountdown = 1500,
 	className,
+	children,
 	onClose,
 }) => {
 	const [mounted, setMounted] = useState(true);
@@ -78,7 +83,7 @@ const Modal: React.FC<ModalProps> = ({
 		loading,
 		align,
 		className: bodyClassName,
-		children,
+		children: bodyContent,
 	};
 
 	const handleBackdropClick = () => {
@@ -119,6 +124,7 @@ const Modal: React.FC<ModalProps> = ({
 					<div className={`${containerClass}`}>
 						<ModalHeader {...headerProps} />
 						<ModalBody {...bodyProps} />
+						{children}
 					</div>
 				</div>,
 				document.getElementById('modalPortal')!
