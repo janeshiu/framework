@@ -6,7 +6,7 @@ import styles from './Modal.module.scss';
 import ModalBody, { ModalBodyProps } from './ModalBody/ModalBody';
 import ModalHeader, { ModalHeaderProps } from './ModalHeader/ModalHeader';
 
-interface ModalProps
+export interface ModalProps
 	extends ModalHeaderProps,
 		Omit<ModalBodyProps, 'children'> {
 	/** does modal open or not */
@@ -15,7 +15,7 @@ interface ModalProps
 	className?: string;
 	headerClassName?: ModalHeaderProps['className'];
 	bodyClassName?: ModalBodyProps['className'];
-	message: ModalBodyProps['children'];
+	message?: ModalBodyProps['children'];
 
 	/** can backdrop be click to close modal */
 	backdropClickDisabled?: boolean;

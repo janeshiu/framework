@@ -8,7 +8,7 @@ import ModalIcon, { ModalIconProps } from '../ModalIcon/ModalIcon';
 export interface ModalBodyProps extends ModalIconProps {
 	className?: string;
 	align?: AlignType;
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 /**

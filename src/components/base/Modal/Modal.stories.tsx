@@ -42,7 +42,7 @@ const Template: ComponentStory<ComponentType> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
 	title: 'Model Title',
-	bodyContent: (
+	message: (
 		<>
 			<p>Modal Body</p>
 			<p>Modal Example for reference</p>
