@@ -19,3 +19,12 @@ export const parameters = {
 		},
 	},
 };
+
+export const decorators = [
+	(Story) => (
+		<>
+			<div id='root'>{Story()}</div>
+			<div id='modalPortal'></div>
+		</>
+	),
+];
