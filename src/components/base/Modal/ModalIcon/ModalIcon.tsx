@@ -58,7 +58,7 @@ const ModalIcon: React.FC<ModalIconProps> = ({ iconType, loading }) => {
 		[styles[`${iconType}`]]: true,
 	});
 
-	if (!icon && !loading) return null;
+	if (!iconType && !loading) return null;
 
 	return <span className={iconClass}>{loading ? <Loading /> : Icon}</span>;
 };
