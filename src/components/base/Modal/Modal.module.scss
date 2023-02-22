@@ -23,7 +23,7 @@
 		}
 
 		&icon {
-			@apply flex justify-center;
+			@apply flex justify-center pb-4;
 
 			&.success {
 				@apply text-success;

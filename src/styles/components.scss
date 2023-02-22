@@ -7,6 +7,20 @@
 	}
 }
 
+.align {
+	&-- {
+		&left {
+			@apply text-left;
+		}
+		&center {
+			@apply text-center;
+		}
+		&right {
+			@apply text-right;
+		}
+	}
+}
+
 // 不使用也會編譯進 CSS
 .color {
 	&-- {

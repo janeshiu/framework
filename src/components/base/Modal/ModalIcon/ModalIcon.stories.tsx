@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { default as StorybookComponent } from './ModalBody';
+import { default as StorybookComponent } from './ModalIcon';
 
 type ComponentType = typeof StorybookComponent;
 
@@ -16,7 +16,6 @@ const Template: ComponentStory<ComponentType> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-	children: 'Modal Body',
-	loading: false,
 	iconType: 'success',
+	loading: false,
 };
