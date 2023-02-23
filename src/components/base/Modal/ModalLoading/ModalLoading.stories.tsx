@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { default as StorybookComponent } from './ModalLoading';
-import useModal from '@/hooks/useModal';
+import useModal from '@/hooks/useModal/useModal';
 import Button from '../../ButtonSeries/Button';
 
 type ComponentType = typeof StorybookComponent;

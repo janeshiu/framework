@@ -6,7 +6,7 @@ import ModalFooter from './ModalFooter/ModalFooter';
 import ButtonCancel from '../ButtonSeries/ButtonCancel/ButtonCancel';
 import ButtonConfirm from '../ButtonSeries/ButtonConfirm/ButtonConfirm';
 import Checkbox from '../FormControl/Checkbox/Checkbox';
-import useModal from '@/hooks/useModal';
+import useModal from '@/hooks/useModal/useModal';
 
 type ComponentType = typeof StorybookComponent;
 
@@ -17,24 +17,24 @@ export default {
 } as ComponentMeta<ComponentType>;
 
 const Template: ComponentStory<ComponentType> = (args) => {
-	const { isOpen, open, close, toggle } = useModal();
+	const { isOpen, openModal, closeModal, toggleModal } = useModal(false);
 
 	useEffect(() => {
-		toggle(args.isOpen);
+		toggleModal(args.isOpen);
 	}, [args.isOpen]);
 
 	return (
 		<div>
-			<StorybookComponent {...args} isOpen={isOpen} onClose={close}>
+			<StorybookComponent {...args} isOpen={isOpen} onClose={closeModal}>
 				<ModalFooter>
 					<Checkbox name='checkbox' content='Checkbox' />
 					<div className='modalFooter__buttonWrapper'>
-						<ButtonCancel content='Cancel' />
-						<ButtonConfirm content='Confirm' />
+						<ButtonCancel content='Cancel' onClick={closeModal} />
+						<ButtonConfirm content='Confirm' onClick={closeModal} />
 					</div>
 				</ModalFooter>
 			</StorybookComponent>
-			<Button content='Open Modal' onClick={open} />
+			<Button content='Open Modal' onClick={openModal} />
 		</div>
 	);
 };
