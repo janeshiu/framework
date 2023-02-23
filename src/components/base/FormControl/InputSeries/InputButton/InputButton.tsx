@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Button, { ButtonProps } from '../../../ButtonSeries/Button';
 import { MouseEvent, useRef } from 'react';
 
-export interface InputButtonProps extends InputProps {
+export interface InputButtonProps extends Omit<InputProps, 'codeRef'> {
 	/** button className */
 	buttonClassName?: ButtonProps['className'];
 	/** button content */
@@ -55,8 +55,8 @@ const InputButton: React.FC<InputButtonProps> = ({
 
 	...props
 }) => {
-	const { innerRef, name, size, shape, onSend } = props;
-	const inputRef = innerRef || useRef<HTMLInputElement>();
+	const { size, shape, onSend } = props;
+	const inputRef = useRef<HTMLInputElement>();
 	const baseClass = classNames({
 		[styles[`inputButton`]]: true,
 		[styles[`inputButton--connect`]]: !separate,
@@ -71,17 +71,16 @@ const InputButton: React.FC<InputButtonProps> = ({
 			return;
 		}
 
-		const inputElement: HTMLInputElement =
-			(inputRef.current as { [name: string]: HTMLInputElement })[name] ||
-			inputRef.current;
-
-		const currentValue = inputElement.value;
-		onSend && onSend(currentValue);
+		if (inputRef.current) {
+			const inputElement: HTMLInputElement = inputRef.current;
+			const currentValue = inputElement.value;
+			onSend && onSend(currentValue);
+		}
 	};
 
 	return (
 		<div className={`${baseClass} ${className ?? ''}`}>
-			<Input {...props} innerRef={inputRef} />
+			<Input {...props} innerRef={inputRef} codeRef={inputRef} />
 			{(buttonContent || buttonIcon) && (
 				<Button
 					size={size}

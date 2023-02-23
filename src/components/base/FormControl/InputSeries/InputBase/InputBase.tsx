@@ -21,6 +21,9 @@ export interface InputBaseProps<T = HTMLInputElement | undefined>
 	/** 請提供 useRef() / useRef({})，後續 element 會放置於 useRef.current / useRef.current[name] */
 	innerRef?: MutableRefObject<T | { [name: string]: T }>;
 
+	/** 架構基礎 component 邏輯使用的 ref，一般情況下請勿使用 */
+	codeRef?: MutableRefObject<T>;
+
 	/** input type - 排除 submit, reset */
 	type?: Exclude<originInputProps['type'], 'submit' | 'reset'>;
 	value?: string;
@@ -48,6 +51,7 @@ export interface InputBaseProps<T = HTMLInputElement | undefined>
  */
 const InputBase: React.FC<InputBaseProps> = ({
 	innerRef,
+	codeRef,
 
 	size = 'normal',
 	autoSendAfterChanged = false,
@@ -81,6 +85,10 @@ const InputBase: React.FC<InputBaseProps> = ({
 			className={`text-normal--${size} ${className ?? ''}`}
 			ref={(e: HTMLInputElement) => {
 				inputRef.current = e;
+
+				if (codeRef) {
+					codeRef.current = e;
+				}
 
 				if (!innerRef) return;
 

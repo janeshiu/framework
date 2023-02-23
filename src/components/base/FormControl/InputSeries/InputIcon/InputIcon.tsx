@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Button, { ButtonProps } from '../../../ButtonSeries/Button';
 import { MouseEvent, ReactNode, useRef } from 'react';
 
-export interface InputIconProps extends InputProps {
+export interface InputIconProps extends Omit<InputProps, 'codeRef'> {
 	/** show left icon or not */
 	leftIconShow?: boolean;
 	/** left icon - react-icons */
@@ -70,8 +70,8 @@ const InputIcon: React.FC<InputIconProps> = ({
 
 	...props
 }) => {
-	const { innerRef, name, size, shape, className, onSend } = props;
-	const inputRef = innerRef || useRef<HTMLInputElement>();
+	const { size, shape, className, onSend } = props;
+	const inputRef = useRef<HTMLInputElement>();
 	const baseClass = classNames({
 		[`!space-x-0`]: true,
 		[styles[`inputIcon--circle`]]: shape === 'circle',
@@ -90,18 +90,18 @@ const InputIcon: React.FC<InputIconProps> = ({
 			return;
 		}
 
-		const inputElement: HTMLInputElement =
-			(inputRef.current as { [name: string]: HTMLInputElement })[name] ||
-			inputRef.current;
+		if (inputRef.current) {
+			const inputElement: HTMLInputElement = inputRef.current;
 
-		const currentValue = inputElement.value;
-		onSend && onSend(currentValue);
+			const currentValue = inputElement.value;
+			onSend && onSend(currentValue);
+		}
 	};
 
 	return (
 		<Input
 			{...props}
-			innerRef={inputRef}
+			codeRef={inputRef}
 			className={`${baseClass} ${className ?? ''}`}>
 			{leftIconShow && leftIcon && (
 				<Button
