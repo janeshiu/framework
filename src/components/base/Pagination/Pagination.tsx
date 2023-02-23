@@ -1,4 +1,4 @@
-import useBreakpoints from '@/hooks/useBreakpoint';
+import useBreakpoints from '@/hooks/useBreakpoint/useBreakpoint';
 import { SizeType } from '@/types/style';
 import React, { useState, MouseEvent, useEffect } from 'react';
 import styles from './Pagination.module.scss';

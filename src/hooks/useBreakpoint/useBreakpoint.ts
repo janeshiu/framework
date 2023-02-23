@@ -1,15 +1,15 @@
 import { Breakpoints } from '@/enums/style';
-import useWindowDimensions from './useDimensions';
+import useDimensions from '../useDimensions/useDimensions';
 
 const useBreakpoints = () => {
-	const { width } = useWindowDimensions();
+	const { width } = useDimensions();
 
 	return {
 		isMobile: width && width < Breakpoints.sm,
 		isTablet: width && width < Breakpoints.md,
 		isNotebook: width && width < Breakpoints.lg,
 		isDesktop: width && width < Breakpoints.xl,
-		isDesktop_lg: width && width < Breakpoints['2xl'],
+		isDesktop_lg: width && width < Breakpoints.xxl,
 	};
 };
 
