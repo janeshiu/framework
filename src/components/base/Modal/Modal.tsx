@@ -1,4 +1,5 @@
 import useDisableScroll from '@/hooks/useDisableScroll';
+import useTimer from '@/hooks/useTimer';
 import classNames from 'classnames';
 import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -22,7 +23,9 @@ export interface ModalProps
 	/** close modal automatically by timer */
 	autoCloseModal?: boolean;
 	/** time before close modal */
-	closeCountdown?: number;
+	duration?: number;
+	/** can user close modal by clicking X button or backdrop */
+	manualClose?: boolean;
 
 	/** 請盡量使用 ModalFooter 去組出想要呈現的模樣 */
 	children?: ReactNode;
@@ -62,7 +65,8 @@ const Modal: React.FC<ModalProps> = ({
 	isOpen,
 	backdropClickDisabled,
 	autoCloseModal,
-	closeCountdown = 1500,
+	duration = 1500,
+	manualClose = true,
 	className,
 	children,
 	onClose,
@@ -74,7 +78,7 @@ const Modal: React.FC<ModalProps> = ({
 	});
 	const headerProps = {
 		title,
-		showCloseButton,
+		showCloseButton: !manualClose ? false : showCloseButton,
 		className: headerClassName,
 		onClose,
 	};
@@ -87,7 +91,7 @@ const Modal: React.FC<ModalProps> = ({
 	};
 
 	const handleBackdropClick = () => {
-		if (backdropClickDisabled) return;
+		if (backdropClickDisabled || !manualClose) return;
 
 		onClose();
 	};
@@ -97,19 +101,19 @@ const Modal: React.FC<ModalProps> = ({
 	useEffect(() => {
 		let timer: NodeJS.Timeout;
 
-		if (isOpen && autoCloseModal) {
+		if (isOpen && autoCloseModal && duration >= 0) {
 			timer = setTimeout(
 				() => {
 					onClose();
 				},
-				closeCountdown > 0 ? closeCountdown : 0
+				duration >= 0 ? duration : 0
 			);
 		}
 
 		return () => {
 			clearTimeout(timer);
 		};
-	}, [isOpen, autoCloseModal]);
+	}, [isOpen, autoCloseModal, duration]);
 
 	useEffect(() => {
 		setMounted(true);
