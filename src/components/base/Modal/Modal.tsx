@@ -1,5 +1,4 @@
-import useDisableScroll from '@/hooks/useDisableScroll';
-import useTimer from '@/hooks/useTimer';
+import useDisableScroll from '@/hooks/useDisableScroll/useDisableScroll';
 import classNames from 'classnames';
 import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
