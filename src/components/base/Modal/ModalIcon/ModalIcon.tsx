@@ -1,34 +1,14 @@
 import { transformElement } from '@/utils/element';
 import classNames from 'classnames';
-import dynamic from 'next/dynamic';
 import Loading from '../../Loading/Loading';
 import styles from '../Modal.module.scss';
-
-const SuccessIcon = dynamic(() =>
-	import('react-icons/tb').then(
-		(bootstrapIcons) => bootstrapIcons.TbCircleCheck
-	)
-);
-
-const ErrorIcon = dynamic(() =>
-	import('react-icons/tb').then((bootstrapIcons) => bootstrapIcons.TbCircleX)
-);
-
-const WarningIcon = dynamic(() =>
-	import('react-icons/tb').then(
-		(bootstrapIcons) => bootstrapIcons.TbAlertCircle
-	)
-);
-
-const InfoIcon = dynamic(() =>
-	import('react-icons/tb').then((bootstrapIcons) => bootstrapIcons.TbInfoCircle)
-);
-
-const QuestionIcon = dynamic(() =>
-	import('react-icons/ri').then(
-		(bootstrapIcons) => bootstrapIcons.RiQuestionLine
-	)
-);
+import { RiQuestionLine as QuestionIcon } from 'react-icons/ri';
+import {
+	TbCircleCheck as SuccessIcon,
+	TbCircleX as ErrorIcon,
+	TbAlertCircle as WarningIcon,
+	TbInfoCircle as InfoIcon,
+} from 'react-icons/tb';
 
 const icon = {
 	success: <SuccessIcon />,
