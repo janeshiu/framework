@@ -82,6 +82,7 @@ export interface InputToggleIconProps {
 	type: Extract<InputBaseProps['type'], 'radio' | 'checkbox'>;
 	checked?: boolean;
 	disabled?: boolean;
+	className?: string;
 
 	/** size of component */
 	size?: SizeType;
@@ -116,6 +117,7 @@ const InputToggleIcon: React.FC<InputToggleIconProps> = ({
 	type,
 	checked = false,
 	disabled = false,
+	className,
 
 	size = 'normal',
 	shape = 'square',
@@ -138,6 +140,7 @@ const InputToggleIcon: React.FC<InputToggleIconProps> = ({
 		[styles[`icon`]]: true,
 		[styles[`icon--check`]]: checked,
 		[styles[`icon--disabled`]]: disabled,
+		[className ?? '']: true,
 	});
 
 	const clonedIcon = transformElement(inputIcon[iconName], {

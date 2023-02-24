@@ -1,3 +1,25 @@
+.inputToggle {
+	&:has(input:checked) {
+		.icon {
+			&-- {
+				&isChecked {
+					@apply flex;
+				}
+			}
+		}
+	}
+
+	&:has(input:not(:checked)) {
+		.icon {
+			&-- {
+				&isNotChecked {
+					@apply flex;
+				}
+			}
+		}
+	}
+}
+
 .inputToggleTitle {
 	@apply p-0;
 
@@ -17,6 +39,14 @@
 
 		&disabled {
 			@apply text-common-disabled cursor-default;
+		}
+
+		&isChecked {
+			@apply hidden;
+		}
+
+		&isNotChecked {
+			@apply hidden;
 		}
 	}
 }

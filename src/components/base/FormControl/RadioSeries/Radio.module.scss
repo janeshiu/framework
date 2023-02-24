@@ -2,6 +2,19 @@
 	@apply inline-flex justify-center items-center h-12 px-4 cursor-pointer;
 	@apply border-2;
 
+	&:has(input:checked) {
+		@apply bg-pattern bg-opacity-light;
+
+		&:has(input:disabled) {
+			@apply border-common text-common bg-transparent;
+			@apply hover:bg-transparent;
+		}
+	}
+
+	&:has(input:disabled) {
+		@apply cursor-default;
+	}
+
 	&-- {
 		&checked {
 			@apply bg-pattern bg-opacity-light;

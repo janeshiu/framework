@@ -17,8 +17,6 @@ export interface InputToggleProps extends InputToggleIconProps {
 	defaultChecked?: boolean;
 
 	className?: string;
-	/** className for checked component */
-	checkedClassName?: string;
 	/** className for disabled component */
 	disablededClassName?: string;
 
@@ -37,7 +35,6 @@ export interface InputToggleProps extends InputToggleIconProps {
  * @param checked - input checked
  * @param defaultChecked - input defaultChecked
  * @param className - className
- * @param checkedClassName - className for checked component
  * @param disablededClassName - className for disabled component
  *
  * @param onChange - onChange
@@ -54,7 +51,6 @@ const InputToggle: React.FC<InputToggleProps> = ({
 	defaultChecked,
 
 	className,
-	checkedClassName,
 	disablededClassName,
 
 	onChange,
@@ -67,15 +63,25 @@ const InputToggle: React.FC<InputToggleProps> = ({
 	const [isChecked, setIsChecked] = useState<boolean>(initialChecked);
 
 	const baseClass = classNames({
-		[styles[`checkbox`]]: true,
-		[checkedClassName ?? '']: isChecked,
+		[styles['inputToggle']]: true,
 		[disablededClassName ?? '']: disabled,
 	});
 
 	const renderContent = () => {
 		return (
 			<>
-				<InputToggleIcon {...iconProps} checked={isChecked} />
+				<span>
+					<InputToggleIcon
+						{...iconProps}
+						checked={true}
+						className={styles[`icon--isChecked`]}
+					/>
+					<InputToggleIcon
+						{...iconProps}
+						checked={false}
+						className={styles[`icon--isNotChecked`]}
+					/>
+				</span>
 				<span>{content}</span>
 			</>
 		);
@@ -83,7 +89,7 @@ const InputToggle: React.FC<InputToggleProps> = ({
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		if (checked === undefined) {
-			setIsChecked((prev) => !prev);
+			setIsChecked(e.target.checked);
 		}
 
 		onChange && onChange(e);
@@ -111,14 +117,13 @@ const InputToggle: React.FC<InputToggleProps> = ({
 			row
 			size={size}>
 			<InputBase
-				className='hidden'
 				name={name}
 				innerRef={innerRef}
 				type={type}
 				size={size}
 				disabled={disabled}
-				checked={isChecked}
-				// defaultChecked={defaultChecked}
+				checked={checked}
+				defaultChecked={defaultChecked}
 				defaultValue={defaultValue ?? name}
 				onChange={handleChange}
 			/>

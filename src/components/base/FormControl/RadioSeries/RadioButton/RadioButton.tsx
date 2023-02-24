@@ -13,7 +13,6 @@ interface RadioButtonProps extends Omit<RadioProps, 'hideIcon' | 'fill'> {}
  * @param defaultChecked - input defaultChecked
 
  * @param className - className
- * @param checkedClassName - className for checked component
  * @param disablededClassName - className for disabled component
  *
  * @param size - component size
@@ -34,10 +33,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
 			className={`color--warning pattern--outline shape--round ${
 				styles.radioButton
 			} ${className ?? ''}`}
-			checkedClassName={styles[`radioButton--checked`]}
-			disablededClassName={`pattern--disabled ${
-				styles[`radioButton--disabled`]
-			}`}
+			disablededClassName={`pattern--disabled`}
 		/>
 	);
 };
