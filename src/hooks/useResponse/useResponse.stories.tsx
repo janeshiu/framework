@@ -72,7 +72,7 @@ export default {
 				},
 				successWithMessage: {
 					error: false,
-					message: 'Message',
+					message: 'Success Message',
 				},
 				successWithDestination: {
 					error: false,
