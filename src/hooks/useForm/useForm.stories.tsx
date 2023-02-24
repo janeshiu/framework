@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import useFormErr from './useFormErr';
+import useForm from './useForm';
 import Input from '@/components/base/FormControl/InputSeries/Input';
 import Label from '@/components/base/FormControl/Label/Label';
 import HintGroup from '@/components/base/Info/Hint/HintGroup/HintGroup';
@@ -15,12 +15,15 @@ type StorybookComponentProps = {};
 const StorybookComponent: React.FC<StorybookComponentProps> = ({}) => {
 	const {
 		isNoError,
+		formData,
+		setFormData,
+		resetFormData,
 		formErr,
 		setFormErr,
 		resetFormErr,
 		formErrorMsg,
 		setFormErrorMsg,
-	} = useFormErr({ account: false, password: false });
+	} = useForm({ account: '', password: '' });
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -43,6 +46,13 @@ const StorybookComponent: React.FC<StorybookComponentProps> = ({}) => {
 		setFormErr({ ...newErrState, global: isNoError(newErrState) });
 	};
 
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setFormData((prev) => ({
+			...prev,
+			[event.target.name]: event.target.value,
+		}));
+	};
+
 	useEffect(() => {
 		setFormErrorMsg({
 			account: '帳號為必填',
@@ -52,6 +62,7 @@ const StorybookComponent: React.FC<StorybookComponentProps> = ({}) => {
 	}, []);
 
 	const handleReset = (event: React.FormEvent<HTMLFormElement>) => {
+		resetFormData();
 		resetFormErr();
 	};
 
@@ -63,6 +74,8 @@ const StorybookComponent: React.FC<StorybookComponentProps> = ({}) => {
 						name='account'
 						placeholder='需填寫才不會跳錯'
 						autoComplete='username'
+						value={formData.account}
+						onChange={handleChange}
 					/>
 					{/* 若包住 input 會讓 input 被刷新，導致畫面上填寫的內容會消失 */}
 					<HintGroup error={formErr.account} errorMsg={formErrorMsg.account} />
@@ -74,6 +87,8 @@ const StorybookComponent: React.FC<StorybookComponentProps> = ({}) => {
 						placeholder='需填寫才不會跳錯'
 						autoComplete='current-password'
 						toggleMode='icon'
+						value={formData.password}
+						onChange={handleChange}
 					/>
 					<HintGroup
 						error={formErr.password}
