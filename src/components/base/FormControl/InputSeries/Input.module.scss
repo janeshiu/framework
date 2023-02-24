@@ -57,13 +57,14 @@
 	}
 }
 
-.inputPassword {
-	input {
-		&[value=''],
-		&:not([value]) {
-			+ button {
-				@apply opacity-0 scale-0;
-			}
-		}
-	}
-}
+//  css is not work with defaultValue
+// .inputPassword {
+// 	input {
+// 		&[value=''],
+// 		&:not([value]) {
+// 			+ button {
+// 				@apply opacity-0 scale-0;
+// 			}
+// 		}
+// 	}
+// }

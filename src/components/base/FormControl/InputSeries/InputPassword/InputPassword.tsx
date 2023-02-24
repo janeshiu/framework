@@ -1,6 +1,6 @@
 import { InputProps } from '../Input';
 import styles from '../Input.module.scss';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputIcon from '../InputIcon/InputIcon';
 import dynamic from 'next/dynamic';
 import Checkbox from '../../Checkbox/Checkbox';
@@ -26,24 +26,10 @@ const InputPassword: React.FC<InputPasswordProps> = ({
 	toggleMode,
 	...props
 }) => {
-	const { size, value, onChange, autoComplete = 'new-password' } = props;
-	const [password, setPassword] = useState('');
+	const { size, autoComplete = 'new-password' } = props;
 	const { icon, inputType, handleToggleVisible } = usePasswordVisible({
 		toggleMode,
 	});
-
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		onChange && onChange(e);
-
-		if (value !== undefined) return;
-		setPassword(e.target.value);
-	};
-
-	useEffect(() => {
-		if (value !== undefined) {
-			setPassword(value);
-		}
-	}, [value]);
 
 	if (toggleMode === 'checkbox') {
 		return (
@@ -51,11 +37,8 @@ const InputPassword: React.FC<InputPasswordProps> = ({
 				<InputIcon
 					{...props}
 					role='password'
-					value={password}
-					defaultValue={undefined}
 					type={inputType}
 					autoComplete={autoComplete}
-					onChange={handleChange}
 				/>
 				{toggleMode === 'checkbox' && (
 					<Checkbox
@@ -68,19 +51,16 @@ const InputPassword: React.FC<InputPasswordProps> = ({
 			</div>
 		);
 	}
+
 	return (
 		<InputIcon
 			{...props}
 			role='password'
-			className={`${styles.inputPassword} ${props.className ?? ''}`}
-			value={password}
-			defaultValue={undefined}
 			type={inputType}
+			autoComplete={autoComplete}
 			rightIconShow={toggleMode === 'icon'}
 			rightIcon={icon}
 			rightIconOnClick={handleToggleVisible}
-			autoComplete={autoComplete}
-			onChange={handleChange}
 		/>
 	);
 };

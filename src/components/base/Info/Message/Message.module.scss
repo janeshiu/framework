@@ -18,4 +18,8 @@
 // MessageGroup
 .group {
 	@apply flex flex-col py-1;
+
+	small {
+		@apply mt-1 pl-2;
+	}
 }
