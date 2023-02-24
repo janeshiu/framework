@@ -14,7 +14,6 @@ export interface CheckboxProps extends Omit<InputToggleProps, 'type'> {}
  * @param defaultChecked - input defaultChecked
 
  * @param className - className
- * @param checkedClassName - className for checked component
  * @param disablededClassName - className for disabled component
  *
  * @param size - component size
