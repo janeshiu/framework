@@ -11,6 +11,7 @@ export interface TabItemProps extends LinkItem {
 
 /**
  * TabItem
+ * component will detect whether href is as same as window.location.href or not
  */
 const TabItem: React.FC<TabItemProps> = ({
 	className,

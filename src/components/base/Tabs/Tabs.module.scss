@@ -22,7 +22,7 @@
 			@apply decoration-common-disabled;
 
 			& > * {
-				@apply text-common-disabled hover:text-common-disabled;
+				@apply hover:text-common-disabled;
 			}
 		}
 	}

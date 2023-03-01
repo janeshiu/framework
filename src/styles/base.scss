@@ -41,10 +41,10 @@ body {
 	}
 
 	a {
-		@apply text-info underline decoration-2 underline-offset-2;
+		@apply text-info underline decoration-2 underline-offset-2 transition-all;
 
 		&[aria-disabled='true'] {
-			@apply pointer-events-none;
+			@apply pointer-events-none text-common-disabled no-underline;
 		}
 	}
 
