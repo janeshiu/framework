@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 
-const usePath = (href: string) => {
+const usePath = (href?: string) => {
 	const [isCurrentPage, setIsCurrentPage] = useState(false);
 	const [isSameOrigin, setIsSameOrigin] = useState(false);
 
 	const handleCurrentPage = () => {
+		if (href === undefined) {
+			setIsCurrentPage(false);
+			return;
+		}
+
 		const a = document.createElement('a');
 		a.href = href.replace('#', '');
 		a.onclick = (event) => {
@@ -18,6 +23,11 @@ const usePath = (href: string) => {
 	};
 
 	const handleSameOrigin = () => {
+		if (href === undefined) {
+			setIsSameOrigin(false);
+			return;
+		}
+
 		const a = document.createElement('a');
 		a.href = href.replace('#', '');
 		a.onclick = (event) => {

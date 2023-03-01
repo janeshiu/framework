@@ -9,7 +9,7 @@ export interface TabItemProps extends LinkItem {
 	className?: string;
 	/** isActive will be set if you use this component with <Tabs></Tabs> correctly */
 	isActive?: boolean;
-	href: string;
+	href?: string;
 }
 
 /**
@@ -46,7 +46,7 @@ const TabItem: React.FC<TabItemProps> = ({
 			) : (
 				<LinkTo
 					className={styles[`item--content`]}
-					href={href}
+					href={href || '#'}
 					onClick={onClick}
 					disabled={disabled}>
 					{content}
