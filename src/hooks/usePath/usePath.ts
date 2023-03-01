@@ -16,7 +16,6 @@ const usePath = (href?: string) => {
 			event.preventDefault();
 			const hrefURL = new URL(a.href);
 			const pageURL = new URL(window.location.href);
-
 			setIsCurrentPage(hrefURL.href === pageURL.href);
 		};
 		a.click();
@@ -43,7 +42,7 @@ const usePath = (href?: string) => {
 	useEffect(() => {
 		handleCurrentPage();
 		handleSameOrigin();
-	}, []);
+	}, [href]);
 
 	return {
 		isCurrentPage,
