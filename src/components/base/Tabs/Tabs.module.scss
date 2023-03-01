@@ -3,10 +3,15 @@
 }
 
 .tabItem {
-	@apply flex text-center sm:w-44 w-full transition-all;
+	@apply flex text-center align-middle sm:w-44 w-full;
+
 	&,
 	& > * {
-		@apply hover:text-primary;
+		@apply hover:text-primary transition-none;
+	}
+
+	& > button {
+		@apply p-0 w-full h-auto #{!important};
 	}
 
 	&-- {

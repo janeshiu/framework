@@ -2,6 +2,7 @@ import usePath from '@/hooks/usePath/usePath';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import { HTMLAttributeAnchorTarget, MouseEvent, ReactNode } from 'react';
+import styles from './LinkTo.module.scss';
 
 export interface LinkToProps extends Omit<LinkProps, 'legacyBehavior'> {
 	className?: string;
@@ -48,11 +49,11 @@ const LinkTo: React.FC<LinkToProps> = ({
 				target={target}
 				aria-current={isCurrentPage ? 'page' : undefined}
 				aria-disabled={disabled}
-				className={`w-full h-full inline-block ${className ?? ''}`}
+				className={`${styles.linkTo} ${className ?? ''}`}
 				onClick={(e) => {
 					handleClick(e, href);
 				}}>
-				{children}
+				<span>{children}</span>
 			</a>
 		</Link>
 	);
