@@ -1,13 +1,16 @@
 .table {
-	@apply overflow-hidden;
+	@apply my-2 overflow-hidden;
 
 	[role='rowgroup'] {
-		@apply p-4;
+		@apply flex items-center;
+		@apply h-10 w-full bg-bg-primary px-4;
 	}
 }
 
 .thead {
-	@apply w-full h-14 bg-primary bg-opacity-lighter;
+	&[role='rowgroup'] {
+		@apply h-14 bg-primary bg-opacity-lighter #{!important};
+	}
 
 	&__ {
 		&item {
