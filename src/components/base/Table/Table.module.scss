@@ -1,0 +1,18 @@
+.table {
+	@apply overflow-hidden;
+
+	[role='rowgroup'] {
+		@apply p-4;
+	}
+}
+
+.thead {
+	@apply w-full h-14 bg-primary bg-opacity-lighter;
+
+	&__ {
+		&item {
+			@apply flex items-center justify-between;
+			@apply font-bold text-common-secondary;
+		}
+	}
+}
