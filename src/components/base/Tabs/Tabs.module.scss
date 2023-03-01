@@ -1,0 +1,29 @@
+.tabs {
+	@apply flex w-full justify-center;
+}
+
+.tabItem {
+	@apply flex text-center sm:w-44 w-full transition-all;
+	&,
+	& > * {
+		@apply hover:text-primary;
+	}
+
+	&-- {
+		&active {
+			@apply underline underline-offset-8 decoration-4 decoration-primary font-bold;
+
+			& > * {
+				@apply text-primary;
+			}
+		}
+
+		&disabled {
+			@apply decoration-common-disabled;
+
+			& > * {
+				@apply text-common-disabled hover:text-common-disabled;
+			}
+		}
+	}
+}
