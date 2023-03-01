@@ -1,12 +1,13 @@
 import { ReactElement } from 'react';
 import styles from '../Table.module.scss';
+import { TheadItemProps } from './TheadItem/TheadItem';
 
-export interface TheadProps {
-	children: ReactElement;
+export interface TheadProps<T = TheadItemProps> {
+	children: ReactElement<T> | ReactElement<T>[];
 }
 
 /**
- * TableHeader
+ * Thead
  */
 const Thead: React.FC<TheadProps> = ({ children }) => {
 	return (
