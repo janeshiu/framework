@@ -1,17 +1,10 @@
-import { TableHeaderItem } from '@/enums/tableHeader';
-import {
-	Children,
-	CSSProperties,
-	isValidElement,
-	ReactElement,
-	ReactNode,
-} from 'react';
+import { MathPower, TableHeaderItem } from '@/enums/tableHeader';
+import { MathPowerType } from '@/types/style';
+import { Children, CSSProperties, isValidElement, ReactElement } from 'react';
 import Tbody, { BodyItem, TbodyProps } from './Tbody/Tbody';
-import Tdata from './Tdata/Tdata';
 import { TfootProps } from './Tfoot/Tfoot';
 import Thead, { TheadProps } from './Thead/Thead';
 import { TheadItemProps } from './Thead/TheadItem/TheadItem';
-import Trow from './Trow/Trow';
 
 export interface TableProps<
 	// V extends string,
@@ -48,7 +41,8 @@ const Table: React.FC<TableProps> = ({
 	const hasContent = hasHeaderList && hasBodyList;
 
 	const childOrder = ['Tfoot', 'Tbody', 'Thead'];
-	const powerOrder = ['unsorted', 'decrease', 'raise'];
+	const powerOrder: MathPowerType[] = [MathPower.DECREASE, MathPower.RAISE];
+
 	const headerStyle =
 		hasHeaderList && headerList.map((headerItem) => headerItem.width).join(' ');
 	// sort children by Thead --> Tbody --> Tfooter
@@ -82,7 +76,7 @@ const Table: React.FC<TableProps> = ({
 				return true;
 			});
 
-	const handleSort = (id: string, mathPower: TheadItemProps['mathPower']) => {
+	const handleSort = (id: string, mathPower: MathPowerType) => {
 		onSort && onSort(id, mathPower);
 	};
 

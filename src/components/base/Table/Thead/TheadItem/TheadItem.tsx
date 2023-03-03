@@ -1,26 +1,23 @@
 import Button from '@/components/base/ButtonSeries/Button';
-import { AlignType } from '@/types/style';
-import { MouseEvent } from 'react';
+import { AlignType, MathPowerType } from '@/types/style';
 import styles from '../../Table.module.scss';
 import {
 	TiArrowSortedUp,
 	TiArrowSortedDown,
 	TiArrowUnsorted,
 } from 'react-icons/ti';
+import { MathPower } from '@/enums/tableHeader';
 
 export interface TheadItemProps<> {
 	id: string;
 	align?: AlignType;
 	sortable?: boolean;
 	/** 升冪 or 降冪 */
-	mathPower?: 'raise' | 'decrease' | 'unsorted';
+	mathPower?: MathPowerType;
 	className?: string;
 	children: string;
 
-	onSort?: (
-		id: TheadItemProps['id'],
-		mathPower: TheadItemProps['mathPower']
-	) => void;
+	onSort?: (id: TheadItemProps['id'], mathPower: MathPowerType) => void;
 }
 
 /**
@@ -29,7 +26,7 @@ export interface TheadItemProps<> {
 const TheadItem: React.FC<TheadItemProps> = ({
 	align = 'left',
 	sortable,
-	mathPower = 'unsorted',
+	mathPower = MathPower.UNSORTED,
 	className,
 	children,
 }) => {
@@ -45,11 +42,11 @@ const TheadItem: React.FC<TheadItemProps> = ({
 	);
 };
 
-function getMathPowerIcon(mathPower?: TheadItemProps['mathPower']) {
+function getMathPowerIcon(mathPower?: MathPowerType) {
 	switch (mathPower) {
-		case 'raise':
+		case MathPower.RAISE:
 			return <TiArrowSortedUp />;
-		case 'decrease':
+		case MathPower.DECREASE:
 			return <TiArrowSortedDown />;
 		default:
 			return <TiArrowUnsorted />;

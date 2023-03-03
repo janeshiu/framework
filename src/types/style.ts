@@ -9,6 +9,7 @@ import {
 	PatternBase,
 	Align,
 } from '@/enums/style';
+import { MathPower } from '@/enums/tableHeader';
 
 export type ColorType = `${Colors}`;
 
@@ -27,3 +28,5 @@ export type AlignType = `${Align}`;
 export type HorizontalType = `${Horizontal}`;
 
 export type VerticalType = `${Vertical}`;
+
+export type MathPowerType = `${MathPower}`;
