@@ -28,7 +28,6 @@ const Thead: React.FC<TheadProps> = ({
 			{hasHeaderItem
 				? headerItems.map((headerItem) => {
 						const { id, title, ...props } = headerItem;
-						console.log('here');
 						return (
 							<TheadItem key={id} {...props} id={id} onSort={onSort}>
 								{headerItem.title}

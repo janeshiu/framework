@@ -6,16 +6,12 @@ import {
 	ReactElement,
 	ReactNode,
 } from 'react';
-import Tbody, { TbodyProps } from './Tbody/Tbody';
+import Tbody, { BodyItem, TbodyProps } from './Tbody/Tbody';
 import Tdata from './Tdata/Tdata';
 import { TfootProps } from './Tfoot/Tfoot';
 import Thead, { TheadProps } from './Thead/Thead';
-import TheadItem, { TheadItemProps } from './Thead/TheadItem/TheadItem';
+import { TheadItemProps } from './Thead/TheadItem/TheadItem';
 import Trow from './Trow/Trow';
-
-export type DataItem<K extends string> = {
-	[key in K]: ReactNode | undefined;
-};
 
 export interface TableProps<
 	// V extends string,
@@ -25,9 +21,9 @@ export interface TableProps<
 	ariaLabel?: string;
 	ariaDescribedby?: string;
 
-	headerList: H[];
-	/** 這邊寫的有點混亂，是想讓你知道此處資料內的 key === headerList 那各筆 id 的 value，但 typescript 寫不出來Q_Q */
-	dataList: DataItem<string /** V */>[];
+	headerList?: H[];
+	/** 抱歉這邊寫的混亂，是想讓你知道此處資料內的 key === headerList 那各筆 id 的 value，但 typescript 寫不出來Q_Q */
+	bodyList: BodyItem<string /** V */>[];
 
 	className?: string;
 	/** please provide TabItem(s) as children */
@@ -42,13 +38,15 @@ const Table: React.FC<TableProps> = ({
 	ariaLabel,
 	ariaDescribedby,
 	headerList,
-	dataList,
+	bodyList,
 	className,
 	onSort = () => {},
 	children,
 }) => {
-	const hasHeaderList = headerList.length > 0;
-	const hasDataList = dataList.length > 0;
+	const hasHeaderList = headerList && headerList.length > 0;
+	const hasBodyList = bodyList.length > 0;
+	const hasContent = hasHeaderList && hasBodyList;
+
 	const childOrder = ['Tfoot', 'Tbody', 'Thead'];
 	const powerOrder = ['unsorted', 'decrease', 'raise'];
 	const headerStyle =
@@ -77,7 +75,7 @@ const Table: React.FC<TableProps> = ({
 					return false;
 				}
 
-				if (hasDataList && child.type.name === 'Tbody') {
+				if (hasContent && child.type.name === 'Tbody') {
 					return false;
 				}
 
@@ -96,32 +94,7 @@ const Table: React.FC<TableProps> = ({
 			aria-label={ariaLabel}
 			aria-describedby={ariaDescribedby}>
 			{hasHeaderList && <Thead headerItems={headerList} onSort={onSort} />}
-			{hasHeaderList && hasDataList && (
-				<Tbody>
-					{dataList.map((bodyItem) => {
-						const valueAsKey = Object.values(bodyItem)
-							.filter(
-								(value) =>
-									typeof value === 'string' || typeof value === 'number'
-							)
-							.join('');
-						return (
-							<Trow key={valueAsKey}>
-								{headerList.map((headerItem, index) => {
-									const { id, align } = headerItem;
-									return (
-										<Tdata
-											key={`${valueAsKey}_${bodyItem[id] ?? index}`}
-											align={align}>
-											{bodyItem[id] ?? ''}
-										</Tdata>
-									);
-								})}
-							</Trow>
-						);
-					})}
-				</Tbody>
-			)}
+			{hasContent && <Tbody headerItems={headerList} bodyItems={bodyList} />}
 			{sortedChildren}
 		</div>
 	);
