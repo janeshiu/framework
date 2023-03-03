@@ -1,5 +1,6 @@
 import { MathPower, TableHeaderItem } from '@/enums/tableHeader';
 import { Children, CSSProperties, isValidElement, ReactElement } from 'react';
+import Heading from '../Heading/Heading';
 import Tbody, { BodyItem, TbodyProps } from './Tbody/Tbody';
 import { TfootProps } from './Tfoot/Tfoot';
 import Thead, { TheadProps } from './Thead/Thead';
@@ -12,6 +13,9 @@ export interface TableProps<
 > {
 	ariaLabel?: string;
 	ariaDescribedby?: string;
+
+	isLoading?: boolean;
+	noDataMsg?: string;
 
 	headerItems?: H[];
 	/** 抱歉這邊寫的混亂，是想讓你知道此處資料內的 key === headerList 那各筆 id 的 value，但 typescript 寫不出來Q_Q */
@@ -29,6 +33,10 @@ export interface TableProps<
 const Table: React.FC<TableProps> = ({
 	ariaLabel,
 	ariaDescribedby,
+
+	isLoading,
+	noDataMsg = '無資料',
+
 	headerItems,
 	bodyItems,
 	className,
@@ -38,40 +46,23 @@ const Table: React.FC<TableProps> = ({
 	const hasHeaderList = headerItems && headerItems.length > 0;
 	const hasBodyList = bodyItems.length > 0;
 	const hasContent = hasHeaderList && hasBodyList;
-	const childOrder = ['Tfoot', 'Tbody', 'Thead'];
 	const headerStyle =
 		hasHeaderList &&
 		headerItems.map((headerItem) => headerItem.width).join(' ');
 	// sort children by Thead --> Tbody --> Tfooter
-	const sortedChildren =
-		children &&
-		Children.map(children, (child) => child)
-			.sort((childA, childB) => {
-				if (!isValidElement(childA) || typeof childA.type === 'string')
-					return 0;
-				if (!isValidElement(childB) || typeof childB.type === 'string')
-					return 0;
+	const theadChild = !hasHeaderList && getChildComponent('Thead');
+	const tbodyChild = !hasContent && getChildComponent('Tbody');
+	const tfootChild = getChildComponent('Tfoot');
 
-				return childOrder.indexOf(childA.type.name) >
-					childOrder.indexOf(childB.type.name)
-					? -1
-					: 1;
-			})
-			// 若有提供 headerList / dataList，將原先 children 內的 Thead / Tbody 剔除
-			.filter((child) => {
-				if (!isValidElement(child) || typeof child.type === 'string')
-					return true;
+	function getChildComponent(targetTag: string) {
+		if (!children) return;
 
-				if (hasHeaderList && child.type.name === 'Thead') {
-					return false;
-				}
-
-				if (hasContent && child.type.name === 'Tbody') {
-					return false;
-				}
-
-				return true;
-			});
+		return Children.map(children, (child) => child).find((child) => {
+			if (!isValidElement(child) || typeof child.type === 'string')
+				return false;
+			return child.type.name === targetTag;
+		});
+	}
 
 	return (
 		<div
@@ -81,8 +72,17 @@ const Table: React.FC<TableProps> = ({
 			aria-label={ariaLabel}
 			aria-describedby={ariaDescribedby}>
 			{hasHeaderList && <Thead headerItems={headerItems} onSort={onSort} />}
-			{hasContent && <Tbody headerItems={headerItems} bodyItems={bodyItems} />}
-			{sortedChildren}
+			{hasContent ? (
+				<Tbody headerItems={headerItems} bodyItems={bodyItems} />
+			) : (
+				<Heading type='quaternary' align='center' className='my-16'>
+					{noDataMsg}
+				</Heading>
+			)}
+
+			{theadChild}
+			{tbodyChild}
+			{tfootChild}
 		</div>
 	);
 };
