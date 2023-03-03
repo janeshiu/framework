@@ -1,6 +1,5 @@
 import { MathPower, TableHeaderItem } from '@/enums/tableHeader';
 import { CSSProperties, ReactElement } from 'react';
-import styles from '../Table.module.scss';
 import TheadItem, {
 	ExistMathPower,
 	TheadItemProps,

@@ -117,5 +117,5 @@ module.exports = {
 			backgroundOpacity: ['active'],
 		},
 	},
-	plugins: [],
+	plugins: [require('tailwindcss-animation-delay')],
 };

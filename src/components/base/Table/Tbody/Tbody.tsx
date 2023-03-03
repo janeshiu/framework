@@ -8,6 +8,7 @@ export type BodyItem<K extends string> = {
 };
 
 export interface TbodyProps<T = TrowProps> {
+	className?: string;
 	headerItems?: TheadProps['headerItems'];
 	bodyItems?: BodyItem<string>[];
 	children?: ReactElement<T> | ReactElement<T>[];
@@ -16,7 +17,12 @@ export interface TbodyProps<T = TrowProps> {
 /**
  * Tbody
  */
-const Tbody: React.FC<TbodyProps> = ({ headerItems, bodyItems, children }) => {
+const Tbody: React.FC<TbodyProps> = ({
+	className,
+	headerItems,
+	bodyItems,
+	children,
+}) => {
 	const hasHeaderItem = headerItems && headerItems.length > 0;
 	const hasBodyItem = bodyItems && bodyItems.length > 0;
 	const hasContent = hasHeaderItem && hasBodyItem;
@@ -24,7 +30,7 @@ const Tbody: React.FC<TbodyProps> = ({ headerItems, bodyItems, children }) => {
 	if (!hasContent && !children) return null;
 
 	return (
-		<div role='rowgroup'>
+		<div role='rowgroup' className={className}>
 			{hasContent
 				? bodyItems.map((bodyItem) => {
 						const valueAsKey = Object.values(bodyItem)

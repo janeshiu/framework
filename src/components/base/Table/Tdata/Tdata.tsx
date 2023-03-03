@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import styles from '../Table.module.scss';
 
 export interface TdataProps {
+	className?: string;
 	align?: AlignType;
 	children: ReactNode;
 }
@@ -10,9 +11,15 @@ export interface TdataProps {
 /**
  * Tdata
  */
-const Tdata: React.FC<TdataProps> = ({ align = 'left', children }) => {
+const Tdata: React.FC<TdataProps> = ({
+	className,
+	align = 'left',
+	children,
+}) => {
 	return (
-		<span role='cell' className={styles[`align--${align}`]}>
+		<span
+			role='cell'
+			className={`${styles[`align--${align}`]} ${className ?? ''}`}>
 			{children}
 		</span>
 	);
