@@ -258,4 +258,69 @@ input {
 	.heading {
 		@apply font-bold text-common-primary;
 	}
+
+	// table series
+	.Table {
+		@apply flex flex-col relative w-full min-w-full overflow-x-auto overflow-y-scroll;
+		@apply mb-4 pb-6;
+	}
+
+	.scrollbox {
+		&__ {
+			&hor {
+				background: /* Shadow covers */ linear-gradient(
+						to right,
+						white 70%,
+						rgba(0, 0, 0, 0)
+					),
+					linear-gradient(to right, rgba(0, 0, 0, 0), white 30%),
+					/* Shadows */
+						radial-gradient(
+							farthest-corner at 0% 50%,
+							rgba(0, 0, 0, 0.6),
+							rgba(0, 0, 0, 0)
+						),
+					radial-gradient(
+						farthest-corner at 100% 50%,
+						rgba(0, 0, 0, 0.6),
+						rgba(0, 0, 0, 0)
+					);
+
+				@apply bg-no-repeat bg-bg-primary;
+
+				background-position: left, right;
+				background-size: 40px 100%, 40px 100%, 4px 100%, 4px 100%;
+				/* Opera doesn't support this in the shorthand */
+				background-attachment: local, local, scroll, scroll;
+			}
+		}
+	}
+
+	.Thead,
+	.Trow {
+		@apply grid grid-cols-[var(--grid-cols)] items-center w-full;
+
+		> * {
+			@apply px-2 first:pl-6 last:pr-6 flex;
+		}
+	}
+
+	.Thead {
+		@apply h-14;
+		@apply font-bold text-common-secondary;
+
+		> * {
+			@apply flex items-center;
+			@apply h-full bg-primary bg-opacity-lighter;
+		}
+	}
+
+	.Trow {
+		@apply h-12;
+
+		> * {
+			@apply flex items-center h-full;
+			@apply border-b border-primary border-opacity-normal-dark;
+		}
+	}
 }

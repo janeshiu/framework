@@ -29,9 +29,7 @@ const TheadItem: React.FC<TheadItemProps> = ({
 	children,
 }) => {
 	return (
-		<div
-			role='columnheader'
-			className={`${styles[`thead__item`]} ${className ?? ''}`}>
+		<div role='columnheader' className={`Thead__item ${className ?? ''}`}>
 			<span>{children}</span>
 			{sortable && (
 				<Button pattern='ghost' icon={getMathPowerIcon(mathPower)} />
