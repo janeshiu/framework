@@ -8,7 +8,8 @@ import {
 	TiArrowUnsorted,
 } from 'react-icons/ti';
 
-export interface TheadItemProps {
+export interface TheadItemProps<> {
+	id: string;
 	align?: AlignType;
 	sortable?: boolean;
 	/** 升冪 or 降冪 */
@@ -16,7 +17,10 @@ export interface TheadItemProps {
 	className?: string;
 	children: string;
 
-	onSort?: (event: MouseEvent<HTMLElement>) => void;
+	onSort?: (
+		id: TheadItemProps['id'],
+		mathPower: TheadItemProps['mathPower']
+	) => void;
 }
 
 /**

@@ -10,7 +10,7 @@ import Tbody, { TbodyProps } from './Tbody/Tbody';
 import Tdata from './Tdata/Tdata';
 import { TfootProps } from './Tfoot/Tfoot';
 import Thead, { TheadProps } from './Thead/Thead';
-import TheadItem from './Thead/TheadItem/TheadItem';
+import TheadItem, { TheadItemProps } from './Thead/TheadItem/TheadItem';
 import Trow from './Trow/Trow';
 
 export type DataItem<K extends string> = {
@@ -32,6 +32,8 @@ export interface TableProps<
 	className?: string;
 	/** please provide TabItem(s) as children */
 	children?: ReactElement<T> | ReactElement<T>[];
+
+	onSort?: TheadItemProps['onSort'];
 }
 /**
  * Table
@@ -42,11 +44,13 @@ const Table: React.FC<TableProps> = ({
 	headerList,
 	dataList,
 	className,
+	onSort = () => {},
 	children,
 }) => {
 	const hasHeaderList = headerList.length > 0;
 	const hasDataList = dataList.length > 0;
 	const childOrder = ['Tfoot', 'Tbody', 'Thead'];
+	const powerOrder = ['unsorted', 'decrease', 'raise'];
 	const headerStyle =
 		hasHeaderList && headerList.map((headerItem) => headerItem.width).join(' ');
 	// sort children by Thead --> Tbody --> Tfooter
@@ -80,6 +84,10 @@ const Table: React.FC<TableProps> = ({
 				return true;
 			});
 
+	const handleSort = (id: string, mathPower: TheadItemProps['mathPower']) => {
+		onSort && onSort(id, mathPower);
+	};
+
 	return (
 		<div
 			role='table'
@@ -87,18 +95,7 @@ const Table: React.FC<TableProps> = ({
 			className={`Table scrollbox__hor shape--round ${className ?? ''}`}
 			aria-label={ariaLabel}
 			aria-describedby={ariaDescribedby}>
-			{hasHeaderList && (
-				<Thead>
-					{headerList.map((headerItem) => {
-						const { id, title, ...props } = headerItem;
-						return (
-							<TheadItem {...props} key={id}>
-								{headerItem.title}
-							</TheadItem>
-						);
-					})}
-				</Thead>
-			)}
+			{hasHeaderList && <Thead headerItems={headerList} onSort={onSort} />}
 			{hasHeaderList && hasDataList && (
 				<Tbody>
 					{dataList.map((bodyItem) => {
@@ -114,8 +111,8 @@ const Table: React.FC<TableProps> = ({
 									const { id, align } = headerItem;
 									return (
 										<Tdata
-											align={align}
-											key={`${valueAsKey}_${bodyItem[id] ?? index}`}>
+											key={`${valueAsKey}_${bodyItem[id] ?? index}`}
+											align={align}>
 											{bodyItem[id] ?? ''}
 										</Tdata>
 									);

@@ -277,19 +277,19 @@ input {
 					/* Shadows */
 						radial-gradient(
 							farthest-corner at 0% 50%,
-							rgba(0, 0, 0, 0.6),
+							rgba(0, 0, 0, 0.4),
 							rgba(0, 0, 0, 0)
 						),
 					radial-gradient(
 						farthest-corner at 100% 50%,
-						rgba(0, 0, 0, 0.6),
+						rgba(0, 0, 0, 0.4),
 						rgba(0, 0, 0, 0)
 					);
 
 				@apply bg-no-repeat bg-bg-primary;
 
 				background-position: left, right;
-				background-size: 40px 100%, 40px 100%, 4px 100%, 4px 100%;
+				background-size: 10px 100%, 10px 100%, 4px 100%, 4px 100%;
 				/* Opera doesn't support this in the shorthand */
 				background-attachment: local, local, scroll, scroll;
 			}
@@ -306,7 +306,7 @@ input {
 	}
 
 	.Thead {
-		@apply h-14;
+		@apply h-16;
 		@apply font-bold text-common-secondary;
 
 		> * {
@@ -316,7 +316,7 @@ input {
 	}
 
 	.Trow {
-		@apply h-12;
+		@apply h-14;
 
 		> * {
 			@apply flex items-center h-full;
