@@ -1,0 +1,13 @@
+.align {
+	&-- {
+		&left {
+			@apply justify-start;
+		}
+		&center {
+			@apply justify-center;
+		}
+		&right {
+			@apply justify-end;
+		}
+	}
+}

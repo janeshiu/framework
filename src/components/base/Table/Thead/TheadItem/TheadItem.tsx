@@ -23,13 +23,16 @@ export interface TheadItemProps {
  * TableHeader
  */
 const TheadItem: React.FC<TheadItemProps> = ({
+	align = 'left',
 	sortable,
 	mathPower = 'unsorted',
 	className,
 	children,
 }) => {
 	return (
-		<div role='columnheader' className={`Thead__item ${className ?? ''}`}>
+		<div
+			role='columnheader'
+			className={`Thead__item ${styles[`align--${align}`]} ${className ?? ''}`}>
 			<span>{children}</span>
 			{sortable && (
 				<Button pattern='ghost' icon={getMathPowerIcon(mathPower)} />

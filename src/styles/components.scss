@@ -301,7 +301,7 @@ input {
 		@apply grid grid-cols-[var(--grid-cols)] items-center w-full;
 
 		> * {
-			@apply px-2 first:pl-6 last:pr-6 flex;
+			@apply px-2 first:pl-6 last:pr-6 flex items-center;
 		}
 	}
 
