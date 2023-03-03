@@ -28,5 +28,3 @@ export type AlignType = `${Align}`;
 export type HorizontalType = `${Horizontal}`;
 
 export type VerticalType = `${Vertical}`;
-
-export type MathPowerType = `${MathPower}`;

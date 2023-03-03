@@ -1,13 +1,13 @@
 .align {
 	&-- {
 		&left {
-			@apply justify-start;
+			@apply justify-between;
 		}
 		&center {
-			@apply justify-center;
+			@apply justify-evenly;
 		}
 		&right {
-			@apply justify-end;
+			@apply justify-between flex-row-reverse;
 		}
 	}
 }

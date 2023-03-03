@@ -1,10 +1,9 @@
 import { MathPower, TableHeaderItem } from '@/enums/tableHeader';
-import { MathPowerType } from '@/types/style';
 import { Children, CSSProperties, isValidElement, ReactElement } from 'react';
 import Tbody, { BodyItem, TbodyProps } from './Tbody/Tbody';
 import { TfootProps } from './Tfoot/Tfoot';
 import Thead, { TheadProps } from './Thead/Thead';
-import { TheadItemProps } from './Thead/TheadItem/TheadItem';
+import { ExistMathPower, TheadItemProps } from './Thead/TheadItem/TheadItem';
 
 export interface TableProps<
 	// V extends string,
@@ -14,15 +13,19 @@ export interface TableProps<
 	ariaLabel?: string;
 	ariaDescribedby?: string;
 
-	headerList?: H[];
+	headerItems?: H[];
 	/** 抱歉這邊寫的混亂，是想讓你知道此處資料內的 key === headerList 那各筆 id 的 value，但 typescript 寫不出來Q_Q */
-	bodyList: BodyItem<string /** V */>[];
+	bodyItems: BodyItem<string /** V */>[];
 
 	className?: string;
 	/** please provide TabItem(s) as children */
 	children?: ReactElement<T> | ReactElement<T>[];
 
-	onSort?: TheadItemProps['onSort'];
+	onSort?: (
+		updatedheaderList: H[],
+		id: string,
+		mathPower: ExistMathPower
+	) => void;
 }
 /**
  * Table
@@ -30,21 +33,19 @@ export interface TableProps<
 const Table: React.FC<TableProps> = ({
 	ariaLabel,
 	ariaDescribedby,
-	headerList,
-	bodyList,
+	headerItems,
+	bodyItems,
 	className,
 	onSort = () => {},
 	children,
 }) => {
-	const hasHeaderList = headerList && headerList.length > 0;
-	const hasBodyList = bodyList.length > 0;
+	const hasHeaderList = headerItems && headerItems.length > 0;
+	const hasBodyList = bodyItems.length > 0;
 	const hasContent = hasHeaderList && hasBodyList;
-
 	const childOrder = ['Tfoot', 'Tbody', 'Thead'];
-	const powerOrder: MathPowerType[] = [MathPower.DECREASE, MathPower.RAISE];
-
 	const headerStyle =
-		hasHeaderList && headerList.map((headerItem) => headerItem.width).join(' ');
+		hasHeaderList &&
+		headerItems.map((headerItem) => headerItem.width).join(' ');
 	// sort children by Thead --> Tbody --> Tfooter
 	const sortedChildren =
 		children &&
@@ -76,8 +77,15 @@ const Table: React.FC<TableProps> = ({
 				return true;
 			});
 
-	const handleSort = (id: string, mathPower: MathPowerType) => {
-		onSort && onSort(id, mathPower);
+	const handleSort = (id: string, mathPower: ExistMathPower) => {
+		const updatedheaderList = headerItems!.map((headerItem) => {
+			return {
+				...headerItem,
+				mathPower: headerItem.id === id ? mathPower : MathPower.UNSORTED,
+			};
+		});
+
+		onSort && onSort(updatedheaderList, id, mathPower);
 	};
 
 	return (
@@ -87,8 +95,8 @@ const Table: React.FC<TableProps> = ({
 			className={`Table scrollbox__hor shape--round ${className ?? ''}`}
 			aria-label={ariaLabel}
 			aria-describedby={ariaDescribedby}>
-			{hasHeaderList && <Thead headerItems={headerList} onSort={onSort} />}
-			{hasContent && <Tbody headerItems={headerList} bodyItems={bodyList} />}
+			{hasHeaderList && <Thead headerItems={headerItems} onSort={handleSort} />}
+			{hasContent && <Tbody headerItems={headerItems} bodyItems={bodyItems} />}
 			{sortedChildren}
 		</div>
 	);
