@@ -1,13 +1,20 @@
-import { TableHeaderItem } from '@/enums/tableHeader';
+import { MathPower, TableHeaderItem } from '@/enums/tableHeader';
 import { CSSProperties, ReactElement } from 'react';
 import styles from '../Table.module.scss';
-import TheadItem, { TheadItemProps } from './TheadItem/TheadItem';
+import TheadItem, {
+	ExistMathPower,
+	TheadItemProps,
+} from './TheadItem/TheadItem';
 
-export interface TheadProps<T = TheadItemProps> {
+export interface TheadProps<T = TheadItemProps, H = TableHeaderItem> {
 	style?: CSSProperties;
-	headerItems?: TableHeaderItem[];
+	headerItems?: H[];
 	children?: ReactElement<T> | ReactElement<T>[];
-	onSort?: TheadItemProps['onSort'];
+	onSort?: (
+		updatedheaderList: H[],
+		id: string,
+		mathPower: ExistMathPower
+	) => void;
 }
 
 /**
@@ -23,13 +30,24 @@ const Thead: React.FC<TheadProps> = ({
 
 	if (!hasHeaderItem && !children) return null;
 
+	const handleSort = (id: string, mathPower: ExistMathPower) => {
+		const updatedheaderList = headerItems!.map((headerItem) => {
+			return {
+				...headerItem,
+				mathPower: headerItem.id === id ? mathPower : MathPower.UNSORTED,
+			};
+		});
+
+		onSort && onSort(updatedheaderList, id, mathPower);
+	};
+
 	return (
 		<div role='rowgroup' className={`Thead`} style={style}>
 			{hasHeaderItem
 				? headerItems.map((headerItem) => {
 						const { id, title, ...props } = headerItem;
 						return (
-							<TheadItem key={id} {...props} id={id} onSort={onSort}>
+							<TheadItem key={id} {...props} id={id} onSort={handleSort}>
 								{headerItem.title}
 							</TheadItem>
 						);

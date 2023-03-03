@@ -21,11 +21,7 @@ export interface TableProps<
 	/** please provide TabItem(s) as children */
 	children?: ReactElement<T> | ReactElement<T>[];
 
-	onSort?: (
-		updatedheaderList: H[],
-		id: string,
-		mathPower: ExistMathPower
-	) => void;
+	onSort?: TheadProps['onSort'];
 }
 /**
  * Table
@@ -77,17 +73,6 @@ const Table: React.FC<TableProps> = ({
 				return true;
 			});
 
-	const handleSort = (id: string, mathPower: ExistMathPower) => {
-		const updatedheaderList = headerItems!.map((headerItem) => {
-			return {
-				...headerItem,
-				mathPower: headerItem.id === id ? mathPower : MathPower.UNSORTED,
-			};
-		});
-
-		onSort && onSort(updatedheaderList, id, mathPower);
-	};
-
 	return (
 		<div
 			role='table'
@@ -95,7 +80,7 @@ const Table: React.FC<TableProps> = ({
 			className={`Table scrollbox__hor shape--round ${className ?? ''}`}
 			aria-label={ariaLabel}
 			aria-describedby={ariaDescribedby}>
-			{hasHeaderList && <Thead headerItems={headerItems} onSort={handleSort} />}
+			{hasHeaderList && <Thead headerItems={headerItems} onSort={onSort} />}
 			{hasContent && <Tbody headerItems={headerItems} bodyItems={bodyItems} />}
 			{sortedChildren}
 		</div>
