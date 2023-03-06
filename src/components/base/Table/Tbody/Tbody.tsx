@@ -1,13 +1,17 @@
-import { ReactElement, ReactNode } from 'react';
-import Tdata from '../Tdata/Tdata';
-import { TheadProps } from '../Thead/Thead';
+import classNames from 'classnames';
+import { Key, ReactElement, ReactNode } from 'react';
+import LabelTitle from '../../FormControl/Label/LabelTitle/LabelTitle';
+import Tdata, { TdataProps } from '../Tdata/Tdata';
 import Trow, { TrowProps } from '../Trow/Trow';
+import { TheadProps } from '../Thead/Thead';
+import { TableHeaderItem } from '@/enums/tableHeader';
 
 export type BodyItem<K extends string> = {
 	[key in K]: ReactNode | undefined;
 };
 
 export interface TbodyProps<T = TrowProps> {
+	unfixed?: boolean;
 	className?: string;
 	headerItems?: TheadProps['headerItems'];
 	bodyItems?: BodyItem<string>[];
@@ -18,6 +22,7 @@ export interface TbodyProps<T = TrowProps> {
  * Tbody
  */
 const Tbody: React.FC<TbodyProps> = ({
+	unfixed,
 	className,
 	headerItems,
 	bodyItems,
@@ -29,29 +34,115 @@ const Tbody: React.FC<TbodyProps> = ({
 
 	if (!hasContent && !children) return null;
 
+	function FixedTrow(props: { id: Key; bodyItem: BodyItem<string> }) {
+		const { bodyItem } = props;
+		const key = props.id;
+		return (
+			<Trow>
+				{headerItems!.map((headerItem, index) => {
+					const { id, align } = headerItem;
+					return (
+						<Tdata key={`${key}_${bodyItem![id] ?? index}`} align={align}>
+							{bodyItem[id] ?? ''}
+						</Tdata>
+					);
+				})}
+			</Trow>
+		);
+	}
+
+	function UnfixedTrow(props: { id: Key; bodyItem: BodyItem<string> }) {
+		const hasOperator = headerItems?.some((item) => item.id === 'operator');
+		const key = props.id;
+
+		return (
+			<Trow className='Trow__unfixed'>
+				{<UnfixedTdata {...props} hasOperator={hasOperator} />}
+				{<UnfixedTdataOperator {...props} hasOperator={hasOperator} />}
+			</Trow>
+		);
+	}
+
+	function UnfixedTdata(props: {
+		id: Key;
+		bodyItem: BodyItem<string>;
+		hasOperator?: boolean;
+	}) {
+		const { bodyItem, hasOperator = false } = props;
+		const key = props.id;
+
+		const baseClass = classNames({
+			'min-w-[49%]': !hasOperator,
+			'min-w-full': hasOperator,
+			'mb-4': true,
+		});
+		return (
+			<Tdata>
+				{headerItems!
+					.filter((headerItem) => headerItem.id !== 'operator')
+					.map((headerItem, index) => {
+						const { id } = headerItem;
+						return (
+							<div
+								key={`${key}_${bodyItem![id] ?? index}`}
+								className={baseClass}>
+								<LabelTitle
+									size='small'
+									content={headerItem.title}
+									className='text-common-disabled !my-0 text-small--small'
+								/>
+								<span className='text-small--normal'>{bodyItem[id] ?? ''}</span>
+							</div>
+						);
+					})}
+			</Tdata>
+		);
+	}
+
+	function UnfixedTdataOperator(props: {
+		id: Key;
+		bodyItem: BodyItem<string>;
+		hasOperator?: boolean;
+	}) {
+		const { bodyItem, hasOperator = false } = props;
+		const key = props.id;
+
+		if (!hasOperator) return null;
+
+		return (
+			<Tdata className='operator'>
+				{headerItems!
+					.filter((headerItem) => headerItem.id === 'operator')
+					.map((headerItem, index) => {
+						const { id } = headerItem;
+						return (
+							<div key={`${key}_${bodyItem![id] ?? index}`}>
+								{bodyItem[id] ?? ''}
+							</div>
+						);
+					})}
+			</Tdata>
+		);
+	}
+
 	return (
 		<div role='rowgroup' className={className}>
 			{hasContent
-				? bodyItems.map((bodyItem) => {
+				? bodyItems.map((bodyItem, bodyIndex) => {
 						const valueAsKey = Object.values(bodyItem)
 							.filter(
 								(value) =>
 									typeof value === 'string' || typeof value === 'number'
 							)
 							.join('');
-						return (
-							<Trow key={valueAsKey}>
-								{headerItems.map((headerItem, index) => {
-									const { id, align } = headerItem;
-									return (
-										<Tdata
-											key={`${valueAsKey}_${bodyItem[id] ?? index}`}
-											align={align}>
-											{bodyItem[id] ?? ''}
-										</Tdata>
-									);
-								})}
-							</Trow>
+						return unfixed ? (
+							<UnfixedTrow
+								id={valueAsKey}
+								key={valueAsKey}
+								bodyItem={bodyItem}
+							/>
+						) : (
+							<FixedTrow id={valueAsKey} key={valueAsKey} bodyItem={bodyItem} />
 						);
 				  })
 				: children}

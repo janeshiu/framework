@@ -1,4 +1,5 @@
 import { MathPower, TableHeaderItem } from '@/enums/tableHeader';
+import useBreakpoints from '@/hooks/useBreakpoint/useBreakpoint';
 import { Children, CSSProperties, isValidElement, ReactElement } from 'react';
 import Heading from '../Heading/Heading';
 import LoadingTbody from '../Loading/LoadingTbody/LoadingTbody';
@@ -18,11 +19,14 @@ export interface TableProps<
 	isLoading?: boolean;
 	noDataMsg?: string;
 
+	unfixed?: boolean;
+
 	headerItems?: H[];
 	/** 抱歉這邊寫的混亂，是想讓你知道此處資料內的 key === headerList 那各筆 id 的 value，但 typescript 寫不出來Q_Q */
 	bodyItems?: BodyItem<string /** V */>[];
 
 	className?: string;
+	gridTemplateCols?: string;
 	/** please provide TabItem(s) as children */
 	children?: ReactElement<T> | ReactElement<T>[];
 
@@ -38,19 +42,23 @@ const Table: React.FC<TableProps> = ({
 	isLoading,
 	noDataMsg = '無資料',
 
+	unfixed,
 	headerItems,
 	bodyItems,
 	className,
+	gridTemplateCols,
 	onSort = () => {},
 	children,
 }) => {
+	const { isMobile } = useBreakpoints();
 	const hasHeaderList = headerItems && headerItems.length > 0;
 	const hasBodyList = bodyItems && bodyItems.length > 0;
 	const hasContent = hasHeaderList && hasBodyList;
 	const headerStyle =
-		hasHeaderList &&
-		headerItems.map((headerItem) => headerItem.width).join(' ');
-	// sort children by Thead --> Tbody --> Tfooter
+		gridTemplateCols ??
+		(hasHeaderList &&
+			headerItems.map((headerItem) => headerItem.width).join(' '));
+
 	const theadChild = !hasHeaderList && getChildComponent('Thead');
 	const tbodyChild = !hasContent && getChildComponent('Tbody');
 	const tfootChild = getChildComponent('Tfoot');
@@ -93,25 +101,31 @@ const Table: React.FC<TableProps> = ({
 			aria-label={ariaLabel}
 			aria-describedby={ariaDescribedby}>
 			{hasHeaderList ? (
-				<Thead headerItems={headerItems} onSort={onSort} />
+				<Thead
+					headerItems={headerItems}
+					onSort={onSort}
+					unfixed={unfixed && isMobile}
+				/>
 			) : (
 				theadChild
 			)}
+
 			{isLoading ? (
 				<LoadingTbody length={loadingLength} />
+			) : hasContent ? (
+				<Tbody
+					headerItems={headerItems}
+					bodyItems={bodyItems}
+					unfixed={unfixed && isMobile}
+				/>
+			) : tbodyChild && tbodyChild.props.children ? (
+				tbodyChild
 			) : (
-				<>
-					{hasContent ? (
-						<Tbody headerItems={headerItems} bodyItems={bodyItems} />
-					) : tbodyChild && tbodyChild.props.children ? (
-						tbodyChild
-					) : (
-						<Heading type='quaternary' align='center' className='my-[4.125rem]'>
-							{noDataMsg}
-						</Heading>
-					)}
-				</>
+				<Heading type='quaternary' align='center' className='my-[4.125rem]'>
+					{noDataMsg}
+				</Heading>
 			)}
+
 			{tfootChild}
 		</div>
 	);

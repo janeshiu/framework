@@ -317,10 +317,33 @@ input {
 
 	.Trow {
 		@apply h-14;
+		@apply border-b border-primary border-opacity-normal-dark;
 
 		> * {
+			// Tdata
 			@apply flex items-center h-full;
-			@apply border-b border-primary border-opacity-normal-dark;
+		}
+
+		&__ {
+			&unfixed {
+				// Trow
+				@apply flex flex-nowrap max-w-full h-auto justify-between items-start py-4 first:border-t pb-0;
+
+				&:not(:has(.operator)) {
+					> * {
+						@apply flex-row flex-wrap w-full;
+					}
+				}
+
+				> * {
+					// Tdata
+					@apply flex flex-col justify-start items-start;
+
+					&:not(:first-child) {
+						@apply justify-end;
+					}
+				}
+			}
 		}
 	}
 }

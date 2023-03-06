@@ -5,11 +5,11 @@ const useBreakpoints = () => {
 	const { width } = useDimensions();
 
 	return {
-		isMobile: width && width < Breakpoints.sm,
-		isTablet: width && width < Breakpoints.md,
-		isNotebook: width && width < Breakpoints.lg,
-		isDesktop: width && width < Breakpoints.xl,
-		isDesktop_lg: width && width < Breakpoints.xxl,
+		isMobile: width ? width < Breakpoints.sm : false,
+		isTablet: width ? width < Breakpoints.md : false,
+		isNotebook: width ? width < Breakpoints.lg : false,
+		isDesktop: width ? width < Breakpoints.xl : false,
+		isDesktop_lg: width ? width < Breakpoints.xxl : false,
 	};
 };
 

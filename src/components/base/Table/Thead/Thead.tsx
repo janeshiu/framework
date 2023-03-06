@@ -6,6 +6,7 @@ import TheadItem, {
 } from './TheadItem/TheadItem';
 
 export interface TheadProps<T = TheadItemProps, H = TableHeaderItem> {
+	unfixed?: boolean;
 	style?: CSSProperties;
 	headerItems?: H[];
 	children?: ReactElement<T> | ReactElement<T>[];
@@ -20,6 +21,7 @@ export interface TheadProps<T = TheadItemProps, H = TableHeaderItem> {
  * Thead
  */
 const Thead: React.FC<TheadProps> = ({
+	unfixed,
 	style,
 	headerItems,
 	children,
@@ -27,7 +29,7 @@ const Thead: React.FC<TheadProps> = ({
 }) => {
 	const hasHeaderItem = headerItems && headerItems.length > 0;
 
-	if (!hasHeaderItem && !children) return null;
+	if (unfixed || (!hasHeaderItem && !children)) return null;
 
 	const handleSort = (id: string, mathPower: ExistMathPower) => {
 		const updatedheaderList = headerItems!.map((headerItem) => {
