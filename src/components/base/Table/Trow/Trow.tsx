@@ -11,7 +11,7 @@ export interface TrowProps<T = TdataProps> {
  */
 const Trow: React.FC<TrowProps> = ({ className, children }) => {
 	return (
-		<div role='row' className={`Trow ${className}`}>
+		<div role='row' className={`Trow ${className ?? ''}`}>
 			{children}
 		</div>
 	);

@@ -1,6 +1,7 @@
 import { MathPower, TableHeaderItem } from '@/enums/tableHeader';
 import { Children, CSSProperties, isValidElement, ReactElement } from 'react';
 import Heading from '../Heading/Heading';
+import LoadingTbody from '../Loading/LoadingTbody/LoadingTbody';
 import Tbody, { BodyItem, TbodyProps } from './Tbody/Tbody';
 import { TfootProps } from './Tfoot/Tfoot';
 import Thead, { TheadProps } from './Thead/Thead';
@@ -19,7 +20,7 @@ export interface TableProps<
 
 	headerItems?: H[];
 	/** 抱歉這邊寫的混亂，是想讓你知道此處資料內的 key === headerList 那各筆 id 的 value，但 typescript 寫不出來Q_Q */
-	bodyItems: BodyItem<string /** V */>[];
+	bodyItems?: BodyItem<string /** V */>[];
 
 	className?: string;
 	/** please provide TabItem(s) as children */
@@ -44,7 +45,7 @@ const Table: React.FC<TableProps> = ({
 	children,
 }) => {
 	const hasHeaderList = headerItems && headerItems.length > 0;
-	const hasBodyList = bodyItems.length > 0;
+	const hasBodyList = bodyItems && bodyItems.length > 0;
 	const hasContent = hasHeaderList && hasBodyList;
 	const headerStyle =
 		hasHeaderList &&
@@ -53,6 +54,8 @@ const Table: React.FC<TableProps> = ({
 	const theadChild = !hasHeaderList && getChildComponent('Thead');
 	const tbodyChild = !hasContent && getChildComponent('Tbody');
 	const tfootChild = getChildComponent('Tfoot');
+
+	const loadingLength = getLoadingLength();
 
 	function getChildComponent(targetTag: string) {
 		if (!children) return;
@@ -64,6 +67,24 @@ const Table: React.FC<TableProps> = ({
 		});
 	}
 
+	function getLoadingLength() {
+		// 若有提供表頭資料，直接抓表頭
+		if (hasHeaderList) return headerItems.length;
+		// 無表頭資料抓提供的 Thead component's children.length
+		if (theadChild) {
+			return Array.isArray(theadChild.props.children)
+				? theadChild.props.children.length
+				: 1;
+		}
+		// 無表頭 & Thead component 抓 Tbody component's children.length
+		if (tbodyChild) {
+			return Array.isArray(tbodyChild.props.children)
+				? tbodyChild.props.children.length
+				: 1;
+		}
+		return 1;
+	}
+
 	return (
 		<div
 			role='table'
@@ -71,17 +92,26 @@ const Table: React.FC<TableProps> = ({
 			className={`Table scrollbox__hor shape--round ${className ?? ''}`}
 			aria-label={ariaLabel}
 			aria-describedby={ariaDescribedby}>
-			{hasHeaderList && <Thead headerItems={headerItems} onSort={onSort} />}
-			{hasContent ? (
-				<Tbody headerItems={headerItems} bodyItems={bodyItems} />
+			{hasHeaderList ? (
+				<Thead headerItems={headerItems} onSort={onSort} />
 			) : (
-				<Heading type='quaternary' align='center' className='my-16'>
-					{noDataMsg}
-				</Heading>
+				theadChild
 			)}
-
-			{theadChild}
-			{tbodyChild}
+			{isLoading ? (
+				<LoadingTbody length={loadingLength} />
+			) : (
+				<>
+					{hasContent ? (
+						<Tbody headerItems={headerItems} bodyItems={bodyItems} />
+					) : tbodyChild && tbodyChild.props.children ? (
+						tbodyChild
+					) : (
+						<Heading type='quaternary' align='center' className='my-[4.125rem]'>
+							{noDataMsg}
+						</Heading>
+					)}
+				</>
+			)}
 			{tfootChild}
 		</div>
 	);
