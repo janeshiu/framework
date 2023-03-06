@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Key, ReactElement, ReactNode } from 'react';
+import { CSSProperties, Key, ReactElement, ReactNode } from 'react';
 import LabelTitle from '../../FormControl/Label/LabelTitle/LabelTitle';
 import Tdata, { TdataProps } from '../Tdata/Tdata';
 import Trow, { TrowProps } from '../Trow/Trow';
@@ -13,6 +13,7 @@ export type BodyItem<K extends string> = {
 export interface TbodyProps<T = TrowProps> {
 	unfixed?: boolean;
 	className?: string;
+	gridTemplateCols?: string;
 	headerItems?: TheadProps['headerItems'];
 	bodyItems?: BodyItem<string>[];
 	children?: ReactElement<T> | ReactElement<T>[];
@@ -24,6 +25,7 @@ export interface TbodyProps<T = TrowProps> {
 const Tbody: React.FC<TbodyProps> = ({
 	unfixed,
 	className,
+	gridTemplateCols,
 	headerItems,
 	bodyItems,
 	children,
@@ -126,7 +128,14 @@ const Tbody: React.FC<TbodyProps> = ({
 	}
 
 	return (
-		<div role='rowgroup' className={className}>
+		<div
+			role='rowgroup'
+			className={className}
+			style={
+				gridTemplateCols
+					? ({ '--grid-cols': gridTemplateCols } as CSSProperties)
+					: undefined
+			}>
 			{hasContent
 				? bodyItems.map((bodyItem, bodyIndex) => {
 						const valueAsKey = Object.values(bodyItem)
