@@ -339,7 +339,7 @@ input {
 
 				> * {
 					// Tdata
-					@apply flex flex-col justify-start items-start border-none;
+					@apply flex flex-col justify-start items-start border-none first:pl-0 last:pr-0;
 
 					&:not(:first-child) {
 						@apply justify-end;
