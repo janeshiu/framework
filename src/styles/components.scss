@@ -310,6 +310,7 @@ input {
 		@apply font-bold text-common-secondary;
 
 		> * {
+			// TheadItem
 			@apply flex items-center;
 			@apply h-full bg-primary bg-opacity-lighter;
 		}
@@ -317,17 +318,18 @@ input {
 
 	.Trow {
 		@apply h-14;
-		@apply border-b border-primary border-opacity-normal-dark;
 
 		> * {
 			// Tdata
 			@apply flex items-center h-full;
+			@apply border-b border-primary border-opacity-normal-dark;
 		}
 
 		&__ {
 			&unfixed {
 				// Trow
-				@apply flex flex-nowrap max-w-full h-auto justify-between items-start py-4 first:border-t pb-0;
+				@apply flex flex-nowrap max-w-full h-auto justify-between items-start py-4  pb-0;
+				@apply first:border-t border-b border-primary border-opacity-normal-dark;
 
 				&:not(:has(.operator)) {
 					> * {
@@ -337,7 +339,7 @@ input {
 
 				> * {
 					// Tdata
-					@apply flex flex-col justify-start items-start;
+					@apply flex flex-col justify-start items-start border-none;
 
 					&:not(:first-child) {
 						@apply justify-end;
