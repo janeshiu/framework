@@ -7,7 +7,7 @@ import TheadItem, {
 
 export interface TheadProps<T = TheadItemProps, H = TableHeaderItem> {
 	unfixed?: boolean;
-	style?: CSSProperties;
+	gridTemplateCols?: string;
 	headerItems?: H[];
 	children?: ReactElement<T> | ReactElement<T>[];
 	onSort?: (
@@ -22,7 +22,7 @@ export interface TheadProps<T = TheadItemProps, H = TableHeaderItem> {
  */
 const Thead: React.FC<TheadProps> = ({
 	unfixed,
-	style,
+	gridTemplateCols,
 	headerItems,
 	children,
 	onSort,
@@ -43,7 +43,14 @@ const Thead: React.FC<TheadProps> = ({
 	};
 
 	return (
-		<div role='rowgroup' className={`Thead`} style={style}>
+		<div
+			role='rowgroup'
+			className={`Thead`}
+			style={
+				gridTemplateCols
+					? ({ '--grid-cols': gridTemplateCols } as CSSProperties)
+					: undefined
+			}>
 			{hasHeaderItem
 				? headerItems.map((headerItem) => {
 						const { id, title, ...props } = headerItem;

@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import { CSSProperties, Key, ReactElement, ReactNode } from 'react';
 import LabelTitle from '../../FormControl/Label/LabelTitle/LabelTitle';
-import Tdata, { TdataProps } from '../Tdata/Tdata';
+import Tdata from '../Tdata/Tdata';
 import Trow, { TrowProps } from '../Trow/Trow';
 import { TheadProps } from '../Thead/Thead';
-import { TableHeaderItem } from '@/enums/tableHeader';
 
 export type BodyItem<K extends string> = {
 	[key in K]: ReactNode | undefined;
@@ -55,7 +54,6 @@ const Tbody: React.FC<TbodyProps> = ({
 
 	function UnfixedTrow(props: { id: Key; bodyItem: BodyItem<string> }) {
 		const hasOperator = headerItems?.some((item) => item.id === 'operator');
-		const key = props.id;
 
 		return (
 			<Trow className='Trow__unfixed'>
