@@ -25,20 +25,20 @@ const LoadingTbody: React.FC<LoadingTbodyProps> = ({ length }) => {
 	}
 
 	return (
-		<Tbody>
+		<Tbody className='animate-pulse'>
 			<Trow>
 				{Array.from({ length }, (v, iTdata) => (
-					<LoadingTdata row={0} key={`${0}_${iTdata}`} />
+					<LoadingTdata row={0} key={`LoadingTdata${length}_${0}_${iTdata}`} />
+				))}
+			</Trow>
+			<Trow className='animate-pulse animation-delay-500'>
+				{Array.from({ length }, (v, iTdata) => (
+					<LoadingTdata row={1} key={`LoadingTdata${length}_${1}_${iTdata}`} />
 				))}
 			</Trow>
 			<Trow>
 				{Array.from({ length }, (v, iTdata) => (
-					<LoadingTdata row={1} key={`${1}_${iTdata}`} />
-				))}
-			</Trow>
-			<Trow>
-				{Array.from({ length }, (v, iTdata) => (
-					<LoadingTdata row={2} key={`${2}_${iTdata}`} />
+					<LoadingTdata row={2} key={`LoadingTdata${length}_${2}_${iTdata}`} />
 				))}
 			</Trow>
 		</Tbody>

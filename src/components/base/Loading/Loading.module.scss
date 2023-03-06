@@ -3,7 +3,7 @@
 }
 
 .loadingTbody {
-	@apply bg-common-disabled bg-opacity-dark mx-2 border-none animate-pulse;
+	@apply bg-common-disabled bg-opacity-dark mx-2 border-none;
 	@apply h-1/2 #{!important};
 
 	&__ {
@@ -12,7 +12,6 @@
 		}
 		&style1 {
 			@apply bg-common-primary bg-opacity-normal-light;
-			animation-delay: -500ms;
 		}
 		&style2 {
 			@apply bg-common-secondary bg-opacity-light;
